@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "823142477498",
+    "project_id": "g-k-tbc",
+    "storage_bucket": "g-k-tbc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823142477498:android:eef25c12275b594fd15c83",
+        "android_client_info": {
+          "package_name": "com.gabo.gk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "823142477498-58u2bdfg2j4jgg4rr6lfo87kpj6spi3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPpQ1pgKsvPtoQSVmaFyjaw77xrLq-AK8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "823142477498-58u2bdfg2j4jgg4rr6lfo87kpj6spi3n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
