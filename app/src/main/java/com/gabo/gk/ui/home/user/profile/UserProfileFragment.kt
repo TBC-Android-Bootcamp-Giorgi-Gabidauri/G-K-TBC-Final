@@ -1,7 +1,14 @@
 package com.gabo.gk.ui.home.user.profile
 
-import androidx.fragment.app.Fragment
+import com.gabo.gk.base.BaseFragment
+import com.gabo.gk.databinding.FragmentUserProfileBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class UserProfileFragment : Fragment() {
+@AndroidEntryPoint
+class UserProfileFragment :
+    BaseFragment<FragmentUserProfileBinding>(FragmentUserProfileBinding::inflate) {
+    override fun setupView() {
+
+    }
 
 }

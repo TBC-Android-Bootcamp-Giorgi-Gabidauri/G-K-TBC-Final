@@ -1,6 +1,9 @@
 package com.gabo.gk.ui.home.products.categories
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class CategoriesViewModel : ViewModel() {
+@HiltViewModel
+class CategoriesViewModel@Inject constructor() : ViewModel() {
 }

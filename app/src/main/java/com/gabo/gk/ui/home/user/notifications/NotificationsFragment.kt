@@ -1,7 +1,14 @@
 package com.gabo.gk.ui.home.user.notifications
 
-import androidx.fragment.app.Fragment
+import com.gabo.gk.base.BaseFragment
+import com.gabo.gk.databinding.FragmentNotificationsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class NotificationsFragment : Fragment() {
+@AndroidEntryPoint
+class NotificationsFragment :
+    BaseFragment<FragmentNotificationsBinding>(FragmentNotificationsBinding::inflate) {
+    override fun setupView() {
+
+    }
 
 }

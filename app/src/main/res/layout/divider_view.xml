@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dividerView"
     android:layout_width="match_parent"
-    android:layout_height="3dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="10dp"
+    android:layout_height="@dimen/dimen_3dp"
+    android:layout_marginStart="@dimen/dimen_10dp"
+    android:layout_marginTop="@dimen/dimen_10dp"
+    android:layout_marginEnd="@dimen/dimen_10dp"
     app:dividerColor="@color/purple_500"/>

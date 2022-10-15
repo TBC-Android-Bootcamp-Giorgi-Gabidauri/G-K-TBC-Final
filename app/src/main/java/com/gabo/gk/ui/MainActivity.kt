@@ -1,57 +1,103 @@
 package com.gabo.gk.ui
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabo.gk.R
+import com.gabo.gk.comon.util.DrawerMenu
+import com.gabo.gk.comon.util.MenuListProvider.menuItemList
 import com.gabo.gk.databinding.ActivityMainBinding
 import com.gabo.gk.ui.adapters.NavDrawerAdapter
+import com.gabo.gk.ui.home.user.home.HomeFragmentDirections
 import com.gabo.gk.ui.model.navDrawer.MenuItemModel
-import com.gabo.gk.ui.model.navDrawer.NavDrawerModel
-import com.gabo.gk.ui.model.navDrawer.ViewType
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    lateinit var toggle: ActionBarDrawerToggle
     private lateinit var adapter: NavDrawerAdapter
+    private lateinit var nav: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupAdapter()
+        nav = findNavController(R.id.navHostFragment)
 
-        toggle = ActionBarDrawerToggle(this, binding.root, R.string.open, R.string.close)
-        binding.root.addDrawerListener(toggle)
-        toggle.syncState()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setupAdapter()
+        setupDrawerMenu()
+        changeDrawerIcon()
+        setupListeners()
+    }
+
+    private fun setupListeners() {
+        val listener =
+            NavController.OnDestinationChangedListener { controller, destination, arguments ->
+                changeDrawerIcon()
+            }
+        nav.addOnDestinationChangedListener(listener)
+    }
+
+    private fun setupDrawerMenu() {
+        binding.ivDrawerMenu.setOnClickListener { binding.root.open() }
+        binding.navLayout.ivArrowBack.setOnClickListener { binding.root.close() }
     }
 
     private fun setupAdapter() {
-        adapter = NavDrawerAdapter { Toast.makeText(this, it.title, Toast.LENGTH_SHORT).show() }
+        adapter = NavDrawerAdapter(
+            itemClick = { navigate(it) },
+            profileClick = { openUserProfile() })
         with(binding) {
-            navLayout.root.adapter = adapter
-            navLayout.root.layoutManager = LinearLayoutManager(this@MainActivity)
+            navLayout.rvMenu.adapter = adapter
+            navLayout.rvMenu.layoutManager = LinearLayoutManager(this@MainActivity)
         }
-        val menuItemList = listOf(
-            NavDrawerModel(ViewType.User),
-            NavDrawerModel(ViewType.Divider),
-            NavDrawerModel(ViewType.MenuItem, menuItem = MenuItemModel(title = "1 Item")),
-            NavDrawerModel(ViewType.MenuItem, menuItem = MenuItemModel(title = "2 Item")),
-            NavDrawerModel(ViewType.MenuItem, menuItem = MenuItemModel(title = "3 Item")),
-            NavDrawerModel(ViewType.MenuItem, menuItem = MenuItemModel(title = "4 Item")),
-            NavDrawerModel(ViewType.Divider),
-            NavDrawerModel(ViewType.MenuItem, menuItem = MenuItemModel(title = "6 Item")),
-            NavDrawerModel(ViewType.MenuItem, menuItem = MenuItemModel(title = "7 Item")),
-            NavDrawerModel(ViewType.MenuItem, menuItem = MenuItemModel(title = "8 Item")),
-            NavDrawerModel(ViewType.MenuItem, menuItem = MenuItemModel(title = "9 Item")),
-            NavDrawerModel(ViewType.Divider),
-            NavDrawerModel(ViewType.MenuItem, menuItem = MenuItemModel(title = "10 Item")),
-            NavDrawerModel(ViewType.MenuItem, menuItem = MenuItemModel(title = "11 Item")),
-        )
-
         adapter.submitList(menuItemList)
+
     }
+
+    private fun openUserProfile() {
+        if (nav.currentDestination == nav.findDestination(R.id.homeFragment)) {
+            nav.navigate(HomeFragmentDirections.actionHomeFragmentToUserProfileFragment())
+            changeDrawerIcon()
+            binding.root.close()
+        }
+    }
+
+    private fun changeDrawerIcon() {
+        with(binding) {
+            if (nav.currentDestination == nav.findDestination(R.id.homeFragment)) {
+                ivDrawerMenu.setImageResource(R.drawable.ic_drawer_menu)
+                ivDrawerMenu.setOnClickListener { binding.root.open() }
+            } else {
+                ivDrawerMenu.setImageResource(R.drawable.ic_arrow_back)
+                ivDrawerMenu.setOnClickListener {
+                    nav.navigateUp()
+                    changeDrawerIcon()
+                }
+            }
+        }
+    }
+
+    private fun navigate(model: MenuItemModel) {
+        binding.root.close()
+        if (nav.currentDestination == nav.findDestination(R.id.homeFragment)) {
+            when (model.title) {
+                DrawerMenu.Notifications.name -> nav.navigate(R.id.action_homeFragment_to_notificationsFragment)
+                DrawerMenu.Messages.name -> nav.navigate(R.id.action_homeFragment_to_messagesFragment)
+                DrawerMenu.Wallet.name -> nav.navigate(R.id.action_homeFragment_to_walletFragment)
+                DrawerMenu.Categories.name -> nav.navigate(R.id.action_homeFragment_to_categoriesFragment)
+                DrawerMenu.Saved.name -> nav.navigate(R.id.action_homeFragment_to_savedItemsFragment)
+                DrawerMenu.Purchases.name -> nav.navigate(R.id.action_homeFragment_to_purchasesFragment)
+                DrawerMenu.Selling.name -> nav.navigate(R.id.action_homeFragment_to_sellingFragment)
+                DrawerMenu.Hints.name -> nav.navigate(R.id.action_homeFragment_to_hintsFragment)
+                DrawerMenu.Settings.name -> nav.navigate(R.id.action_homeFragment_to_settingsFragment)
+            }
+            changeDrawerIcon()
+        }
+    }
+
 }

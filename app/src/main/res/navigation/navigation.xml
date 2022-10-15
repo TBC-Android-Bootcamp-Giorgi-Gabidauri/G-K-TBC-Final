@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.gabo.gk.ui.auth.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:popUpTo="@id/navigation"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/navigation"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.gabo.gk.ui.auth.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/navigation"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_registerFragment_to_accountSetupFragment"
+            app:destination="@id/accountSetupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountSetupFragment"
+        android:name="com.gabo.gk.ui.auth.accountSetup.AccountSetupFragment"
+        android:label="fragment_account_setup"
+        tools:layout="@layout/fragment_account_setup" >
+        <action
+            android:id="@+id/action_accountSetupFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/navigation"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.gabo.gk.ui.home.user.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_messagesFragment"
+            app:destination="@id/messagesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_walletFragment"
+            app:destination="@id/walletFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_savedItemsFragment"
+            app:destination="@id/savedItemsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_purchasesFragment"
+            app:destination="@id/purchasesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_sellingFragment"
+            app:destination="@id/sellingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_hintsFragment"
+            app:destination="@id/hintsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.gabo.gk.ui.home.user.notifications.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/messagesFragment"
+        android:name="com.gabo.gk.ui.home.user.messages.MessagesFragment"
+        android:label="fragment_messages"
+        tools:layout="@layout/fragment_messages" />
+    <fragment
+        android:id="@+id/walletFragment"
+        android:name="com.gabo.gk.ui.home.user.wallet.WalletFragment"
+        android:label="fragment_wallet"
+        tools:layout="@layout/fragment_wallet" />
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.gabo.gk.ui.home.products.categories.CategoriesFragment"
+        android:label="fragment_categories"
+        tools:layout="@layout/fragment_categories" />
+    <fragment
+        android:id="@+id/savedItemsFragment"
+        android:name="com.gabo.gk.ui.home.products.saved.SavedItemsFragment"
+        android:label="fragment_saved_items"
+        tools:layout="@layout/fragment_saved_items" />
+    <fragment
+        android:id="@+id/purchasesFragment"
+        android:name="com.gabo.gk.ui.home.products.purchases.PurchasesFragment"
+        android:label="fragment_purchases"
+        tools:layout="@layout/fragment_purchases" />
+    <fragment
+        android:id="@+id/sellingFragment"
+        android:name="com.gabo.gk.ui.home.products.selling.SellingFragment"
+        android:label="fragment_selling"
+        tools:layout="@layout/fragment_selling" />
+    <fragment
+        android:id="@+id/hintsFragment"
+        android:name="com.gabo.gk.ui.home.control.hints.HintsFragment"
+        android:label="fragment_hints"
+        tools:layout="@layout/fragment_hints" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.gabo.gk.ui.home.control.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.gabo.gk.ui.home.user.profile.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile" />
+</navigation>

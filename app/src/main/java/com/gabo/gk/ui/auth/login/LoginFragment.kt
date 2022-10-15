@@ -1,7 +1,13 @@
 package com.gabo.gk.ui.auth.login
 
-import androidx.fragment.app.Fragment
+import com.gabo.gk.base.BaseFragment
+import com.gabo.gk.databinding.FragmentLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class LoginFragment : Fragment() {
+@AndroidEntryPoint
+class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
+    override fun setupView() {
+
+    }
 
 }

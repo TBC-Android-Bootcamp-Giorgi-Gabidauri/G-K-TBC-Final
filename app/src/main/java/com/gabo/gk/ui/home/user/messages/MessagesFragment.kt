@@ -1,7 +1,13 @@
 package com.gabo.gk.ui.home.user.messages
 
-import androidx.fragment.app.Fragment
+import com.gabo.gk.base.BaseFragment
+import com.gabo.gk.databinding.FragmentMessagesBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class MessagesFragment : Fragment() {
+@AndroidEntryPoint
+class MessagesFragment : BaseFragment<FragmentMessagesBinding>(FragmentMessagesBinding::inflate) {
+    override fun setupView() {
+
+    }
 
 }

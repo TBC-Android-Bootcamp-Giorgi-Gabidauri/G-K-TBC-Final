@@ -1,7 +1,14 @@
 package com.gabo.gk.ui.home.products.categories
 
-import androidx.fragment.app.Fragment
+import com.gabo.gk.base.BaseFragment
+import com.gabo.gk.databinding.FragmentCategoriesBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class CategoriesFragment : Fragment() {
+@AndroidEntryPoint
+class CategoriesFragment :
+    BaseFragment<FragmentCategoriesBinding>(FragmentCategoriesBinding::inflate) {
+    override fun setupView() {
+
+    }
 
 }
