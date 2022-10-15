@@ -1,8 +1,13 @@
 package com.gabo.gk.ui.home.products.purchases
 
-import androidx.fragment.app.Fragment
+import com.gabo.gk.base.BaseFragment
+import com.gabo.gk.databinding.FragmentPurchasesBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class PurchasesFragment : Fragment() {
+@AndroidEntryPoint
+class PurchasesFragment : BaseFragment<FragmentPurchasesBinding>(FragmentPurchasesBinding::inflate) {
+    override fun setupView() {
 
+    }
 
 }

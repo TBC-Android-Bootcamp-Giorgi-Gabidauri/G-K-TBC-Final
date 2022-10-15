@@ -1,7 +1,13 @@
 package com.gabo.gk.ui.home.control.settings
 
-import androidx.fragment.app.Fragment
+import com.gabo.gk.base.BaseFragment
+import com.gabo.gk.databinding.FragmentSettingsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class SettingsFragment : Fragment() {
+@AndroidEntryPoint
+class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
+    override fun setupView() {
+
+    }
 
 }
