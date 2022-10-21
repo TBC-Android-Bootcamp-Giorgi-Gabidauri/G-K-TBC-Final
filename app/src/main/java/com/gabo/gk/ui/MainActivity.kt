@@ -1,6 +1,7 @@
 package com.gabo.gk.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -70,14 +71,16 @@ class MainActivity : AppCompatActivity() {
     private fun changeDrawerIcon() {
         with(binding) {
             if (nav.currentDestination == nav.findDestination(R.id.homeFragment)) {
+                ivDrawerMenu.visibility = View.VISIBLE
                 ivDrawerMenu.setImageResource(R.drawable.ic_drawer_menu)
                 ivDrawerMenu.setOnClickListener { binding.root.open() }
             } else {
-                ivDrawerMenu.setImageResource(R.drawable.ic_arrow_back)
-                ivDrawerMenu.setOnClickListener {
-                    nav.navigateUp()
-                    changeDrawerIcon()
-                }
+//                ivDrawerMenu.setImageResource(R.drawable.ic_arrow_back)
+//                ivDrawerMenu.setOnClickListener {
+//                    nav.navigateUp()
+//                    changeDrawerIcon()
+//                }
+                ivDrawerMenu.visibility = View.GONE
             }
         }
     }

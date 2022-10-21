@@ -1,17 +1,15 @@
 package com.gabo.gk.ui.home.user.home
 
-import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.viewModels
 import com.gabo.gk.base.BaseFragment
 import com.gabo.gk.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+    private val viewModel: HomeViewModel by viewModels()
+
     override fun setupView() {
 
-        binding.appBar.etSearch.doOnTextChanged { text, start, before, count ->
-            binding.tvHome.text = binding.appBar.etSearch.text.toString()
-        }
     }
-
 }

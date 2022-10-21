@@ -31,12 +31,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_drawer_menu" />
+
         <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glAppBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/glAppBar"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.095"/>
+            app:layout_constraintGuide_percent="0.095" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
