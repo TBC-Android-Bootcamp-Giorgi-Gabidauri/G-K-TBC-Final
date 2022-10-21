@@ -8,10 +8,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-fun LifecycleOwner.launchStarted(block: suspend (CoroutineScope) -> (Unit)): Job {
+fun LifecycleOwner.launchStarted(block: suspend CoroutineScope.() -> (Unit)): Job {
     return this.lifecycleScope.launch {
         repeatOnLifecycle(Lifecycle.State.STARTED) {
-            block.invoke(this@launch)
+            block.invoke(this)
         }
     }
 }

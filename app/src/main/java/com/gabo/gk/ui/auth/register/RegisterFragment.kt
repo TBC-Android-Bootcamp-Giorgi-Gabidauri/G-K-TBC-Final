@@ -2,6 +2,8 @@ package com.gabo.gk.ui.auth.register
 
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
 import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.databinding.FragmentRegisterBinding
@@ -22,6 +24,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             viewModel.state.collect{
                 if (it.registerOk.isNotEmpty()){
                     Toast.makeText(requireContext(), it.registerOk, Toast.LENGTH_SHORT).show()
+                    if (it.registerOk =="Registered Successfully" ){
+                        findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
+                    }
                 }
             }
         }
@@ -30,6 +35,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private fun setUpListeners() {
         binding.btnRegister.setOnClickListener {
             register(binding.etEmail.text.toString(), binding.etPassword.text.toString())
+        }
+        binding.btnLogIn.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
 
