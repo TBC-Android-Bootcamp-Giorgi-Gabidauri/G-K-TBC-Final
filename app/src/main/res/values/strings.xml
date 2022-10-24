@@ -6,15 +6,18 @@
     <string name="close">close</string>
     <string name="icon">icon</string>
     <string name="search">Search</string>
-    <string name="log_in_with_google">Log In With Google</string>
-    <string name="log_in">Log In</string>
+    <string name="sign_in_with_google">Log In With Google</string>
+    <string name="sign_in">Sign In</string>
     <string name="type_your_email">Type Your Email</string>
     <string name="type_your_password">Type Your Password</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Sign Up</string>
     <string name="type_your_repeat_password">Type Your Repeat Password</string>
-    <string name="register">Register</string>
     <string name="type_your_firstname">Type Your FirstName</string>
     <string name="type_your_lastname">Type Your LastName</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="or_sign_up_as_company" />
+    <string name="retype_your_password">Retype Your Password</string>
+    <string name="already_registered_sign_in">Already Registered , Sign In !</string>
+    <string name="not_registered_yet_sign_up">Not Registered Yet , Sign Up !</string>
 </resources>

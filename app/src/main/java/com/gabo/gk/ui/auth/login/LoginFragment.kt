@@ -11,7 +11,9 @@ import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
+
     private val viewModel: LoginViewModel by viewModels()
+
     override fun setupView() {
         setUpListeners()
         setUpObservers()
@@ -28,10 +30,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun setUpListeners() {
-        binding.btnLogin.setOnClickListener {
+        binding.btnSignIn.setOnClickListener {
             logIn(binding.etEmail.text.toString(), binding.etPassword.text.toString())
         }
+
     }
+
 
     private fun logIn(email: String, password: String) {
         viewLifecycleOwner.launchStarted {

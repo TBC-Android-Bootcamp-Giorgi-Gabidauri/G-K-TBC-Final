@@ -28,7 +28,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     }
 
     private fun setUpListeners() {
-        binding.btnRegister.setOnClickListener {
+        binding.btnSignUp.setOnClickListener {
             register(binding.etEmail.text.toString(), binding.etPassword.text.toString())
         }
     }
@@ -40,4 +40,5 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             }
         }
     }
+
 }
