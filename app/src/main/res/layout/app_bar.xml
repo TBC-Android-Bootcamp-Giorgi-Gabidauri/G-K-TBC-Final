@@ -13,6 +13,8 @@
             android:id="@+id/toolBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dimen_40dp"
+            android:paddingEnd="@dimen/dimen_0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -28,7 +30,21 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_arrow_back" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:layout_marginStart="20dp"
+            android:text=""
+            android:textSize="@dimen/dimen_22sp"
+            android:id="@+id/tvTitle"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/divider"
+            app:layout_constraintStart_toEndOf="@id/ivArrowBack"
+            app:layout_constraintTop_toTopOf="@id/toolBar" />
+
         <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_half_of_dp"
             android:layout_marginBottom="@dimen/dimen_10dp"

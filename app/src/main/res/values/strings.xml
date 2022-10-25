@@ -45,6 +45,16 @@
     <string name="any">Any</string>
     <string name="selling">Selling</string>
     <string name="product_type">Product Type</string>
+    <string name="saved">Saved</string>
+    <string name="categories">Categories</string>
+    <string name="filter">Filter</string>
+    <string name="productCategory">productCategory</string>
+    <string name="Selling">Selling</string>
+    <string name="uid">uid</string>
+    <string name="sold">sold</string>
+    <string name="search_title">title</string>
+    <string name="image">image</string>
+    <string name="art">Art</string>
 
     <string-array name="ProductCategory">
         <item>All Categories</item>

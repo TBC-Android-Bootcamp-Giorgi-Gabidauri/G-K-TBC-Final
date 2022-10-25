@@ -2,6 +2,7 @@ package com.gabo.gk.di
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import dagger.Module
@@ -20,7 +21,10 @@ object FireBaseModule {
 
     @Provides
     @Singleton
-    fun provideFirebaseFireStore() = Firebase.storage
+    fun provideFirebaseStorage() = Firebase.storage
+    @Provides
+    @Singleton
+    fun provideFirebaseFireStore() = Firebase.firestore
 
     @Provides
     @Singleton

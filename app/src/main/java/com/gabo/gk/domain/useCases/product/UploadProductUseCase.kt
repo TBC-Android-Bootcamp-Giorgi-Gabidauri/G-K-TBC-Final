@@ -2,7 +2,7 @@ package com.gabo.gk.domain.useCases.product
 
 import android.net.Uri
 import com.gabo.gk.base.BaseUseCase
-import com.gabo.gk.comon.helpers.HashModelHelper
+import com.gabo.gk.comon.helpers.QueryHelper
 import com.gabo.gk.domain.model.ProductModelDomain
 import com.gabo.gk.domain.repository.ImagesRepository
 import com.gabo.gk.domain.repository.ProductRepository
@@ -15,7 +15,7 @@ class UploadProductUseCase @Inject constructor(
     private val productRepository: ProductRepository,
     private val imagesRepository: ImagesRepository,
     private val uploadImagesUseCase: UploadImagesUseCase,
-    private val hashModelHelper: HashModelHelper
+    private val queryHelper: QueryHelper
 ) : BaseUseCase<Pair<ProductModelDomain, List<Uri>?>, Flow<String>> {
     override suspend fun invoke(params: Pair<ProductModelDomain, List<Uri>?>): Flow<String> {
         return try {
@@ -26,10 +26,11 @@ class UploadProductUseCase @Inject constructor(
                 photosUploaded = it!!
             }
             val productModel = params.first.copy(// get and write list of photo Urls in model
-                photos = imagesRepository.getImageUrls(params.first.title, params.first.uid)
+                photos = imagesRepository.getImageUrls(params.first.title, params.first.uid),
+                searchList = queryHelper.createSearchSamples(params.first.title)
             )
             if (photosUploaded == "images uploaded successfully") { // upload product
-                return productRepository.uploadProduct(hashModelHelper.modelToHashMap(productModel))
+                return productRepository.uploadProduct(productModel)
             } else {
                 return flow { emit(photosUploaded) }
             }
