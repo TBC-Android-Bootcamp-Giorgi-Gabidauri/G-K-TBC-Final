@@ -1,21 +1,72 @@
 package com.gabo.gk.ui.home.products.selling.active
 
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
+import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.databinding.FragmentActiveSellingBinding
+import com.gabo.gk.ui.adapters.ProductsAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class ActiveSellingFragment :
     BaseFragment<FragmentActiveSellingBinding>(FragmentActiveSellingBinding::inflate) {
+    private val viewModel: ActiveSellingViewModel by viewModels()
+    private lateinit var productsAdapter: ProductsAdapter
     override fun setupView() {
+        getSortedProducts()
+        setupAdapters()
+        setupObservers()
         setupListeners()
     }
 
     private fun setupListeners() {
-        binding.btnAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_sellingFragment_to_addSellingProductFragment)
+        with(binding) {
+            swipeRl.setOnRefreshListener {
+                getSortedProducts()
+            }
+            btnAdd.setOnClickListener {
+                findNavController().navigate(R.id.action_sellingFragment_to_addSellingProductFragment)
+            }
         }
     }
+
+    private fun setupObservers() {
+        viewLifecycleOwner.launchStarted {
+            viewModel.state.collect {
+                binding.swipeRl.isRefreshing = it.loading
+                when {
+                    it.error.isNotEmpty() -> Toast.makeText(
+                        requireContext(),
+                        it.error,
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                    it.data.isNotEmpty() -> productsAdapter.submitList(it.data)
+                }
+            }
+        }
+    }
+
+    private fun getSortedProducts() {
+        viewLifecycleOwner.launchStarted {
+            withContext(Dispatchers.IO) {
+                viewModel.getSortedProducts(getString(R.string.uid))
+            }
+        }
+    }
+
+    private fun setupAdapters() {
+        productsAdapter = ProductsAdapter { }
+        with(binding) {
+            rvProducts.adapter = productsAdapter
+            rvProducts.layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
 }

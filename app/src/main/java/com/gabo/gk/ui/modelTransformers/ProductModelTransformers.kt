@@ -16,7 +16,9 @@ fun ProductModelUi.toDomain() = ProductModelDomain(
     negotiablePrice,
     sellerName,
     sellerPhoneNumber,
-    location
+    location,
+    sold,
+    searchList
 )
 fun ProductModelDomain.toUi() = ProductModelUi(
     uid,
@@ -31,5 +33,7 @@ fun ProductModelDomain.toUi() = ProductModelUi(
     negotiablePrice,
     sellerName,
     sellerPhoneNumber,
-    location
+    location,
+    sold,
+    searchList
 )

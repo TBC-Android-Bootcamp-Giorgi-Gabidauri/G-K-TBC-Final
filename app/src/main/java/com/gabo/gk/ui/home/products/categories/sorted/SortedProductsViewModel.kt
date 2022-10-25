@@ -1,11 +1,10 @@
-package com.gabo.gk.ui.home.products.selling.sold
+package com.gabo.gk.ui.home.products.categories.sorted
 
 import androidx.lifecycle.ViewModel
 import com.gabo.gk.comon.response.Resource
-import com.gabo.gk.domain.useCases.product.SortForCurrentUserUseCase
+import com.gabo.gk.domain.useCases.product.GetSortedProductsUseCase
 import com.gabo.gk.ui.model.product.ProductModelUi
 import com.gabo.gk.ui.modelTransformers.toUi
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,17 +13,15 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class SoldProductsViewModel @Inject constructor(
-    private val sortForCurrentUserUseCase: SortForCurrentUserUseCase,
-    private val auth: FirebaseAuth
-) : ViewModel() {
+class SortedProductsViewModel @Inject constructor(private val getSortedProductsUseCase: GetSortedProductsUseCase) :
+    ViewModel() {
     private val _state = MutableStateFlow(ViewState())
     val state = _state.asStateFlow()
 
-    suspend fun getSortedProducts(field: String, equalsTo: Any?) {
+    suspend fun getSortedProducts(field:String, equalsTo: String) {
         resetViewState()
         _state.value = _state.value.copy(loading = true)
-        sortForCurrentUserUseCase(Triple(auth.currentUser?.uid ?: "", field, equalsTo)).collect {
+        getSortedProductsUseCase(Pair(field,equalsTo)).collect {
             withContext(Dispatchers.Main) {
                 when (it) {
                     is Resource.Success -> _state.value =

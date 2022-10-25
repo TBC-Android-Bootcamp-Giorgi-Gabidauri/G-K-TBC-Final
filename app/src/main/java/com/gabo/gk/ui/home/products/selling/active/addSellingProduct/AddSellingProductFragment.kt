@@ -1,4 +1,4 @@
-package com.gabo.gk.ui.home.products.selling.addSellingProduct
+package com.gabo.gk.ui.home.products.selling.active.addSellingProduct
 
 import android.net.Uri
 import android.view.View

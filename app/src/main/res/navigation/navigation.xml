@@ -104,7 +104,11 @@
         android:id="@+id/categoriesFragment"
         android:name="com.gabo.gk.ui.home.products.categories.CategoriesFragment"
         android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_sortedProductsFragment"
+            app:destination="@id/sortedProductsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/savedItemsFragment"
         android:name="com.gabo.gk.ui.home.products.saved.SavedItemsFragment"
@@ -141,7 +145,16 @@
         tools:layout="@layout/fragment_user_profile" />
     <fragment
         android:id="@+id/addSellingProductFragment"
-        android:name="com.gabo.gk.ui.home.products.selling.addSellingProduct.AddSellingProductFragment"
+        android:name="com.gabo.gk.ui.home.products.selling.active.addSellingProduct.AddSellingProductFragment"
         android:label="fragment_add_selling_product"
         tools:layout="@layout/fragment_add_selling_product" />
+    <fragment
+        android:id="@+id/sortedProductsFragment"
+        android:name="com.gabo.gk.ui.home.products.categories.sorted.SortedProductsFragment"
+        android:label="fragment_sorted_products"
+        tools:layout="@layout/fragment_sorted_products" >
+        <argument
+            android:name="category"
+            app:argType="string" />
+    </fragment>
 </navigation>

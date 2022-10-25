@@ -16,7 +16,9 @@ fun ProductDto.toDomain() = ProductModelDomain(
     negotiablePrice,
     sellerName,
     sellerPhoneNumber,
-    location
+    location,
+    sold,
+    searchList
 )
 
 fun ProductModelDomain.toDto() = ProductDto(
@@ -32,5 +34,7 @@ fun ProductModelDomain.toDto() = ProductDto(
     negotiablePrice,
     sellerName,
     sellerPhoneNumber,
-    location
+    location,
+    sold,
+    searchList
 )
