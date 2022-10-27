@@ -71,7 +71,6 @@
             android:layout_height="@dimen/dimen_half_of_dp"
             android:layout_marginTop="@dimen/dimen_15dp"
             android:orientation="horizontal"
-            app:dividerColor="@color/purple_500"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tilCategory" />
@@ -143,7 +142,6 @@
             android:layout_height="@dimen/dimen_half_of_dp"
             android:layout_marginTop="@dimen/dimen_10dp"
             android:orientation="horizontal"
-            app:dividerColor="@color/purple_500"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chip_group" />
@@ -169,7 +167,6 @@
             android:layout_height="@dimen/dimen_half_of_dp"
             android:layout_marginTop="@dimen/dimen_10dp"
             android:orientation="horizontal"
-            app:dividerColor="@color/purple_500"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/swSellOnline" />
@@ -205,7 +202,6 @@
             android:layout_height="@dimen/dimen_half_of_dp"
             android:layout_marginTop="@dimen/dimen_10dp"
             android:orientation="horizontal"
-            app:dividerColor="@color/purple_500"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvImages" />
@@ -236,7 +232,6 @@
             android:layout_height="@dimen/dimen_half_of_dp"
             android:layout_marginTop="@dimen/dimen_10dp"
             android:orientation="horizontal"
-            app:dividerColor="@color/purple_500"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tilTitle" />
@@ -267,7 +262,6 @@
             android:layout_height="@dimen/dimen_half_of_dp"
             android:layout_marginTop="@dimen/dimen_10dp"
             android:orientation="horizontal"
-            app:dividerColor="@color/purple_500"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tilDescription" />
@@ -289,6 +283,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_20dp"
+            android:textSize="@dimen/dimen_18sp"
+            android:paddingStart="@dimen/dimen_15dp"
+            android:paddingEnd="@dimen/dimen_0dp"
+            android:textStyle="bold"
             android:layout_marginEnd="@dimen/dimen_20dp"
             android:text="@string/negotiable_price"
             app:layout_constraintEnd_toEndOf="parent"
@@ -321,7 +319,6 @@
             android:layout_height="@dimen/dimen_half_of_dp"
             android:layout_marginTop="@dimen/dimen_10dp"
             android:orientation="horizontal"
-            app:dividerColor="@color/purple_500"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tilPrice" />
@@ -406,7 +403,6 @@
             android:layout_height="@dimen/dimen_half_of_dp"
             android:layout_marginTop="@dimen/dimen_10dp"
             android:orientation="horizontal"
-            app:dividerColor="@color/purple_500"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tilLocation" />

@@ -8,8 +8,6 @@ import com.gabo.gk.base.BaseFragment
 import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
@@ -21,11 +19,15 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
     private fun setUpObservers() {
         viewLifecycleOwner.launchStarted {
-            viewModel.state.collect{
-                if (it.registerOk.isNotEmpty()){
-                    Toast.makeText(requireContext(), it.registerOk, Toast.LENGTH_SHORT).show()
-                    if (it.registerOk =="Registered Successfully" ){
-                        findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
+            viewModel.state.collect {
+                when {
+                    (it.registeredSuccessfully.isNotEmpty()) -> {
+                        Toast.makeText(
+                            requireContext(), it.registeredSuccessfully, Toast.LENGTH_SHORT
+                        ).show()
+                        if (it.registeredSuccessfully == getString(R.string.registered_successfully)) {
+                            findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
+                        }
                     }
                 }
             }
@@ -42,10 +44,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     }
 
     private fun register(email: String, password: String) {
-        viewLifecycleOwner.launchStarted {
-            withContext(Dispatchers.IO){
-                viewModel.registerUser(email, password)
-            }
-        }
+        viewModel.registerUser(email, password)
     }
 }

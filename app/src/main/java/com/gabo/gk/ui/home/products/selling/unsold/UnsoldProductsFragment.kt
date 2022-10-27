@@ -9,8 +9,6 @@ import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.databinding.FragmentUnsoldProductsBinding
 import com.gabo.gk.ui.adapters.ProductsAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class UnsoldProductsFragment :
@@ -34,7 +32,7 @@ class UnsoldProductsFragment :
 
     private fun setupObservers() {
         viewLifecycleOwner.launchStarted {
-            viewModel.state.collect {
+            viewModel.defaultState.collect {
                 binding.swipeRl.isRefreshing = it.loading
                 when {
                     it.error.isNotEmpty() -> Toast.makeText(
@@ -43,18 +41,14 @@ class UnsoldProductsFragment :
                         Toast.LENGTH_SHORT
                     )
                         .show()
-                    it.data.isNotEmpty() -> productsAdapter.submitList(it.data)
+                    !it.data.isNullOrEmpty() -> productsAdapter.submitList(it.data)
                 }
             }
         }
     }
 
     private fun getSortedProducts() {
-        viewLifecycleOwner.launchStarted {
-            withContext(Dispatchers.IO) {
-                viewModel.getSortedProducts(getString(R.string.sold), false)
-            }
-        }
+        viewModel.getSortedProducts(getString(R.string.sold), false)
     }
 
     private fun setupAdapters() {

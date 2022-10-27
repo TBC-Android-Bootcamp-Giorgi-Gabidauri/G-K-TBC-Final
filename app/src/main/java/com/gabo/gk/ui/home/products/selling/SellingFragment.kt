@@ -1,7 +1,7 @@
 package com.gabo.gk.ui.home.products.selling
 
+import android.view.View
 import androidx.core.view.GravityCompat
-import androidx.navigation.fragment.findNavController
 import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
 import com.gabo.gk.databinding.FragmentSellingBinding
@@ -17,11 +17,13 @@ class SellingFragment : BaseFragment<FragmentSellingBinding>(FragmentSellingBind
         setupAppBar()
     }
     private fun setupAppBar() {
-        binding.appBar.tvTitle.text = getString(R.string.Selling)
+        with(binding){
+            appBar.ivArrowBack.visibility = View.GONE
+            appBar.tvTitle.text = getString(R.string.Selling)
+        }
     }
     private fun setupListeners() {
         with(binding){
-            appBar.ivArrowBack.setOnClickListener { findNavController().navigateUp() }
             tvFilter.setOnClickListener { drawerLayout.openDrawer(GravityCompat.END) }
         }
     }

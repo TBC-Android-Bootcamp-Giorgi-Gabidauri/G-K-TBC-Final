@@ -11,7 +11,6 @@ import com.gabo.gk.comon.util.DrawerMenu
 import com.gabo.gk.comon.util.MenuListProvider.menuItemList
 import com.gabo.gk.databinding.ActivityMainBinding
 import com.gabo.gk.ui.adapters.NavDrawerAdapter
-import com.gabo.gk.ui.home.user.home.HomeFragmentDirections
 import com.gabo.gk.ui.model.navDrawer.MenuItemModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -63,46 +62,40 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openUserProfile() {
-        if (nav.currentDestination == nav.findDestination(R.id.homeFragment)) {
-            nav.navigate(HomeFragmentDirections.actionHomeFragmentToUserProfileFragment())
+            nav.navigate(R.id.userProfileFragment)
             changeDrawerIcon()
             binding.root.close()
-        }
     }
 
     private fun changeDrawerIcon() {
         with(binding) {
-            if (nav.currentDestination == nav.findDestination(R.id.homeFragment)) {
+            if (nav.currentDestination == nav.findDestination(R.id.categoriesFragment) ||
+                nav.currentDestination == nav.findDestination(R.id.addSellingProductFragment)
+            ) {
+                ivDrawerMenu.visibility = View.GONE
+            } else {
                 ivDrawerMenu.visibility = View.VISIBLE
                 ivDrawerMenu.setImageResource(R.drawable.ic_drawer_menu)
                 ivDrawerMenu.setOnClickListener { binding.root.open() }
-            } else {
-//                ivDrawerMenu.setImageResource(R.drawable.ic_arrow_back)
-//                ivDrawerMenu.setOnClickListener {
-//                    nav.navigateUp()
-//                    changeDrawerIcon()
-//                }
-                ivDrawerMenu.visibility = View.GONE
             }
         }
     }
 
     private fun navigate(model: MenuItemModel) {
         binding.root.close()
-        if (nav.currentDestination == nav.findDestination(R.id.homeFragment)) {
-            when (model.title) {
-                DrawerMenu.Notifications.name -> nav.navigate(R.id.action_homeFragment_to_notificationsFragment)
-                DrawerMenu.Messages.name -> nav.navigate(R.id.action_homeFragment_to_messagesFragment)
-                DrawerMenu.Wallet.name -> nav.navigate(R.id.action_homeFragment_to_walletFragment)
-                DrawerMenu.Categories.name -> nav.navigate(R.id.action_homeFragment_to_categoriesFragment)
-                DrawerMenu.Saved.name -> nav.navigate(R.id.action_homeFragment_to_savedItemsFragment)
-                DrawerMenu.Purchases.name -> nav.navigate(R.id.action_homeFragment_to_purchasesFragment)
-                DrawerMenu.Selling.name -> nav.navigate(R.id.action_homeFragment_to_sellingFragment)
-                DrawerMenu.Hints.name -> nav.navigate(R.id.action_homeFragment_to_hintsFragment)
-                DrawerMenu.Settings.name -> nav.navigate(R.id.action_homeFragment_to_settingsFragment)
-            }
-            changeDrawerIcon()
+        nav.popBackStack(R.id.homeFragment, false)
+        when (model.title) {
+            DrawerMenu.Notifications.name -> nav.navigate(R.id.notificationsFragment)
+            DrawerMenu.Messages.name -> nav.navigate(R.id.messagesFragment)
+            DrawerMenu.Wallet.name -> nav.navigate(R.id.walletFragment)
+            DrawerMenu.Categories.name -> nav.navigate(R.id.categoriesFragment)
+            DrawerMenu.Saved.name -> nav.navigate(R.id.savedItemsFragment)
+            DrawerMenu.Purchases.name -> nav.navigate(R.id.purchasesFragment)
+            DrawerMenu.Selling.name -> nav.navigate(R.id.sellingFragment)
+            DrawerMenu.Hints.name -> nav.navigate(R.id.hintsFragment)
+            DrawerMenu.Settings.name -> nav.navigate(R.id.settingsFragment)
         }
+        changeDrawerIcon()
     }
 
 }

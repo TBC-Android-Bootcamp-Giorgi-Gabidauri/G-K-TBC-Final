@@ -1,13 +1,13 @@
 package com.gabo.gk.ui.adapters
 
-import com.gabo.gk.databinding.CategoryItemViewBinding
-import com.gabo.gk.ui.model.category.CategoryModel
-
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.gabo.gk.comon.extensions.loadImageDecreasedQuality
+import com.gabo.gk.databinding.CategoryItemViewBinding
+import com.gabo.gk.ui.model.category.CategoryModel
 
 class CategoriesAdapter(private val click: (CategoryModel) -> Unit) :
     RecyclerView.Adapter<CategoriesAdapter.CategoryVH>() {
@@ -24,7 +24,7 @@ class CategoriesAdapter(private val click: (CategoryModel) -> Unit) :
 
         fun bind(model: CategoryModel, click: (CategoryModel) -> Unit) {
             with(binding){
-                ivImage.setImageResource(model.img)
+                ivImage.loadImageDecreasedQuality(model.img)
                 tvTitle.text = model.title
                 if (adapterPosition == list.size-1){
                     divider.visibility = View.GONE

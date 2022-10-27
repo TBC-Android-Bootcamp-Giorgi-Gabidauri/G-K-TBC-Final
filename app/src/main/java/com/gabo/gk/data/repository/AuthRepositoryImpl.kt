@@ -1,13 +1,17 @@
 package com.gabo.gk.data.repository
 
+import android.content.Context
+import com.gabo.gk.R
 import com.gabo.gk.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
-    private val auth: FirebaseAuth
+    private val auth: FirebaseAuth,
+    @ApplicationContext private val context: Context
 ) : AuthRepository {
 
     override suspend fun logIn(email: String, password: String) = flow {
@@ -15,9 +19,9 @@ class AuthRepositoryImpl @Inject constructor(
             auth.signInWithEmailAndPassword(email, password)
                 .await()
             if (auth.currentUser == null) {
-                emit("something went wrong")
+                emit(context.getString(R.string.something_went_wrong))
             } else {
-                emit("LoggedIn Successfully")
+                emit(context.getString(R.string.logged_in_successfully))
             }
         } catch (e: Exception) {
             emit(e.message.toString())
@@ -29,9 +33,9 @@ class AuthRepositoryImpl @Inject constructor(
             auth.createUserWithEmailAndPassword(email, password)
                 .await()
             if (auth.currentUser == null) {
-                emit("something went wrong")
+                emit(context.getString(R.string.something_went_wrong))
             } else {
-                emit("Registered Successfully")
+                emit(context.getString(R.string.registered_successfully))
             }
         } catch (e: Exception) {
             emit(e.message.toString())

@@ -1,5 +1,6 @@
 package com.gabo.gk.ui.home.products.categories.sorted
 
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -11,8 +12,6 @@ import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.databinding.FragmentSortedProductsBinding
 import com.gabo.gk.ui.adapters.ProductsAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class SortedProductsFragment :
@@ -38,7 +37,10 @@ class SortedProductsFragment :
     }
 
     private fun setupAppBar() {
-        binding.appBar.tvTitle.text = args.category
+        with(binding) {
+            appBar.ivArrowBack.visibility = View.GONE
+            appBar.tvTitle.text = args.category
+        }
     }
 
     private fun setupObservers() {
@@ -46,7 +48,11 @@ class SortedProductsFragment :
             viewModel.state.collect {
                 binding.swipeRl.isRefreshing = it.loading
                 when {
-                    it.error.isNotEmpty() -> Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT)
+                    it.error.isNotEmpty() -> Toast.makeText(
+                        requireContext(),
+                        it.error,
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                     it.data.isNotEmpty() -> productsAdapter.submitList(it.data)
                 }
@@ -55,11 +61,7 @@ class SortedProductsFragment :
     }
 
     private fun getSortedProducts() {
-        viewLifecycleOwner.launchStarted {
-            withContext(Dispatchers.IO) {
-                viewModel.getSortedProducts(getString(R.string.productCategory), args.category)
-            }
-        }
+        viewModel.getSortedProducts(getString(R.string.productCategory), args.category)
     }
 
     private fun setupAdapters() {

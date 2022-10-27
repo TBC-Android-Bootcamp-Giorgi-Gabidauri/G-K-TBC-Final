@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:title="" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/ivArrowBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,19 +28,20 @@
             app:layout_constraintBottom_toBottomOf="@id/toolBar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_arrow_back" />
+            app:srcCompat="@drawable/ic_arrow_back"
+            android:contentDescription="@string/icon" />
 
         <TextView
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_5dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
             android:text=""
             android:textSize="@dimen/dimen_22sp"
-            android:id="@+id/tvTitle"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/divider"
-            app:layout_constraintStart_toEndOf="@id/ivArrowBack"
+            app:layout_constraintStart_toEndOf="@id/glStart"
             app:layout_constraintTop_toTopOf="@id/toolBar" />
 
         <com.google.android.material.divider.MaterialDivider
@@ -48,10 +49,16 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_half_of_dp"
             android:layout_marginBottom="@dimen/dimen_10dp"
-            app:dividerColor="@color/purple_500"
             app:layout_constraintBottom_toBottomOf="@id/toolBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/glStart"
+            app:layout_constraintGuide_percent="0.085"
+            android:orientation="vertical"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.appbar.AppBarLayout>
