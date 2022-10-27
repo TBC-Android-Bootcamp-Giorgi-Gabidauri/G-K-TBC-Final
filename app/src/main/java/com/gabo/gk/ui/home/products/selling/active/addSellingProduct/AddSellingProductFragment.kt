@@ -18,8 +18,6 @@ import com.gabo.gk.ui.model.addImage.ImageModel
 import com.gabo.gk.ui.model.product.ProductModelUi
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -126,11 +124,7 @@ class AddSellingProductFragment :
                 sellerPhoneNumber = etPhoneNumber.text.toString(),
                 location = autoCTvLocation.text.toString()
             )
-            viewLifecycleOwner.launchStarted {
-                withContext(Dispatchers.Main) {
-                    viewModel.uploadProduct(product, uriList)
-                }
-            }
+            viewModel.uploadProduct(product, uriList)
         }
     }
 

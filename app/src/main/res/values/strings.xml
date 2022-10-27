@@ -24,7 +24,7 @@
     <string name="add_button">Add Button</string>
     <string name="all_categories">All categories</string>
     <string name="category">Category</string>
-    <string name="sell_online">sell online</string>
+    <string name="sell_online">Sell online</string>
     <string name="make_easy_to_find">make it easy for clients to find your product</string>
     <string name="show_us_your_product">show us your product</string>
     <string name="upload_pictures">Upload pictures</string>
@@ -55,6 +55,12 @@
     <string name="search_title">title</string>
     <string name="image">image</string>
     <string name="art">Art</string>
+    <string name="server_error">server error</string>
+    <string name="something_went_wrong">something went wrong</string>
+    <string name="logged_in_successfully">LoggedIn Successfully</string>
+    <string name="registered_successfully">Registered Successfully</string>
+    <string name="images_uploaded_successfully">images uploaded successfully</string>
+    <string name="uploaded_successfully">Uploaded Successfully</string>
 
     <string-array name="ProductCategory">
         <item>All Categories</item>

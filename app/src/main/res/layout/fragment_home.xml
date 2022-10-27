@@ -30,30 +30,30 @@
             app:singleLine="true">
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/chipCategories"
                 style="@style/Widget.Material3.Chip.Filter"
                 android:layout_width="wrap_content"
-                android:layout_marginStart="@dimen/dimen_50dp"
-                android:id="@+id/chipCategories"
-                android:checkable="false"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_50dp"
+                android:checkable="false"
                 android:text="@string/categories" />
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Filter"
-                android:checkable="false"
-                android:layout_width="wrap_content"
                 android:id="@+id/chipSelling"
-                android:layout_marginStart="@dimen/dimen_20dp"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_20dp"
+                android:checkable="false"
                 android:text="@string/selling" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/chipSaved"
                 style="@style/Widget.Material3.Chip.Filter"
                 android:layout_width="wrap_content"
-                android:checkable="false"
-                android:id="@+id/chipSaved"
-                android:layout_marginStart="@dimen/dimen_20dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_20dp"
+                android:checkable="false"
                 android:text="@string/saved" />
         </com.google.android.material.chip.ChipGroup>
 

@@ -2,6 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <stroke
         android:width="@dimen/dimen_2dp"
-        android:color="@color/purple_500" />
+        android:color="@color/md_theme_dark_outlineVariant"
+        />
     <corners android:radius="@dimen/dimen_20dp" />
 </shape>

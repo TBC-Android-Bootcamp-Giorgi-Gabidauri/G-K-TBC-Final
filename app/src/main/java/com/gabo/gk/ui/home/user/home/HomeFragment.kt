@@ -7,46 +7,45 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
+import com.gabo.gk.comon.constants.FIELD_TITLE
 import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.databinding.FragmentHomeBinding
 import com.gabo.gk.ui.adapters.ProductsAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
     private val viewModel: HomeViewModel by viewModels()
-    private lateinit var productsAdapter : ProductsAdapter
+    private lateinit var productsAdapter: ProductsAdapter
     override fun setupView() {
+        setupAdapters()
         setupListeners()
         getProducts()
-        setupAdapters()
         setupObservers()
     }
 
     private fun setupListeners() {
-        with(binding){
+        with(binding) {
             swipeRl.setOnRefreshListener {
-                if(appBar.etSearch.text.toString().isEmpty()){
+                if (appBar.etSearch.text.toString().isEmpty()) {
                     getProducts()
-                }else{
+                } else {
                     search(appBar.etSearch.text.toString())
                 }
             }
             chipCategories.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_categoriesFragment)
+                findNavController().navigate(R.id.categoriesFragment)
             }
             chipSaved.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_savedItemsFragment)
+                findNavController().navigate(R.id.savedItemsFragment)
             }
             chipSelling.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_sellingFragment)
+                findNavController().navigate(R.id.sellingFragment)
             }
             appBar.etSearch.doOnTextChanged { text, start, before, count ->
-                if(appBar.etSearch.text.toString().isEmpty()){
+                if (appBar.etSearch.text.toString().isEmpty()) {
                     getProducts()
-                }else{
+                } else {
                     search(appBar.etSearch.text.toString())
                 }
             }
@@ -54,40 +53,36 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun search(query: String) {
-        launchStarted {
-            withContext(Dispatchers.IO){
-                viewModel.searchProducts("title",query)
-            }
-        }
+        viewModel.searchProducts(FIELD_TITLE, query)
     }
 
     private fun setupObservers() {
         viewLifecycleOwner.launchStarted {
-            viewModel.state.collect{
-                binding.swipeRl.isRefreshing = it.loading
-                when{
-                    it.error.isNotEmpty() -> Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT)
-                        .show()
-//                    it.data.isNotEmpty() -> productsAdapter.submitList(it.data)
+            viewModel.defaultState.collect {
+                if (binding.swipeRl.isRefreshing) {
+                    binding.swipeRl.isRefreshing = false
                 }
-                productsAdapter.submitList(it.data)
+                when {
+                    it.error.isNotEmpty() -> Toast.makeText(
+                        requireContext(), it.error, Toast.LENGTH_SHORT
+                    ).show()
+                }
+                if (it.data != null) {
+                    productsAdapter.submitList(it.data)
+                } else productsAdapter.submitList(emptyList())
             }
         }
     }
 
     private fun setupAdapters() {
-        productsAdapter = ProductsAdapter {  }
-        with(binding){
+        productsAdapter = ProductsAdapter { }
+        with(binding) {
             rvProducts.adapter = productsAdapter
             rvProducts.layoutManager = LinearLayoutManager(requireContext())
         }
     }
 
     private fun getProducts() {
-        viewLifecycleOwner.launchStarted {
-            withContext(Dispatchers.IO){
-                viewModel.getProducts()
-            }
-        }
+        viewModel.getProducts()
     }
 }

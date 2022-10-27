@@ -36,7 +36,6 @@
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_half_of_dp"
-            app:dividerColor="@color/purple_500"
             app:layout_constraintBottom_toBottomOf="@id/tlSelling"
             app:layout_constraintEnd_toEndOf="parent" />
 

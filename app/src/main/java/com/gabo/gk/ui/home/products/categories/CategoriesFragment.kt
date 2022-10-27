@@ -2,6 +2,7 @@ package com.gabo.gk.ui.home.products.categories
 
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
 import com.gabo.gk.comon.util.CategoriesListProvider.CategoriesList
 import com.gabo.gk.databinding.FragmentCategoriesBinding
@@ -15,6 +16,11 @@ class CategoriesFragment :
     override fun setupView() {
         setupAdapters()
         setupListeners()
+        setupAppBar()
+    }
+
+    private fun setupAppBar() {
+        binding.appBar.tvTitle.text = getString(R.string.categories)
     }
 
     private fun setupListeners() {

@@ -53,38 +53,7 @@
         android:id="@+id/homeFragment"
         android:name="com.gabo.gk.ui.home.user.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_notificationsFragment"
-            app:destination="@id/notificationsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_messagesFragment"
-            app:destination="@id/messagesFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_walletFragment"
-            app:destination="@id/walletFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_categoriesFragment"
-            app:destination="@id/categoriesFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_savedItemsFragment"
-            app:destination="@id/savedItemsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_purchasesFragment"
-            app:destination="@id/purchasesFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_sellingFragment"
-            app:destination="@id/sellingFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_hintsFragment"
-            app:destination="@id/hintsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_userProfileFragment"
-            app:destination="@id/userProfileFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/notificationsFragment"
         android:name="com.gabo.gk.ui.home.user.notifications.NotificationsFragment"

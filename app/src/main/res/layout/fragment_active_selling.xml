@@ -31,9 +31,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_20dp"
-        android:backgroundTint="@color/purple_200"
         android:contentDescription="@string/add_button"
         android:src="@drawable/ic_plus"
+        android:backgroundTint="@color/md_theme_dark_tertiaryContainer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
