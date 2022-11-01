@@ -1,7 +1,7 @@
 package com.gabo.gk.comon.helpers
 
 import com.gabo.gk.comon.response.Resource
-import com.gabo.gk.data.dto.ProductDto
+import com.gabo.gk.data.global.dto.ProductDto
 import com.gabo.gk.data.transformers.toDomain
 import com.gabo.gk.domain.model.ProductModelDomain
 import com.google.firebase.firestore.QuerySnapshot

@@ -1,6 +1,6 @@
 package com.gabo.gk.data.transformers
 
-import com.gabo.gk.data.dto.ProductDto
+import com.gabo.gk.data.global.dto.ProductDto
 import com.gabo.gk.data.local.entity.ProductEntity
 import com.gabo.gk.domain.model.ProductModelDomain
 

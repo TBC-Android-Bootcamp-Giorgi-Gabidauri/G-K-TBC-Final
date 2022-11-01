@@ -109,24 +109,24 @@ class AddSellingProductFragment :
         with(binding) {
             val product = ProductModelUi(
                 uid = auth.currentUser?.uid ?: "",
-                title = etTitle.text.toString(),
+                title = etTitle.txt(),
                 productCondition = when {
-                    chipDetails.isChecked -> chipDetails.text.toString()
-                    chipBrandNew.isChecked -> chipBrandNew.text.toString()
-                    chipSecondHand.isChecked -> chipSecondHand.text.toString()
-                    chipLikeANew.isChecked -> chipLikeANew.text.toString()
-                    else -> chipAny.text.toString()
+                    chipDetails.isChecked -> chipDetails.txt()
+                    chipBrandNew.isChecked -> chipBrandNew.txt()
+                    chipSecondHand.isChecked -> chipSecondHand.txt()
+                    chipLikeANew.isChecked -> chipLikeANew.txt()
+                    else -> chipAny.txt()
                 },
-                description = etDescription.text.toString(),
-                productType = autoCTvType.text.toString(),
-                productCategory = autoCTvCategory.text.toString(),
+                description = etDescription.txt(),
+                productType = autoCTvType.txt(),
+                productCategory = autoCTvCategory.txt(),
                 canBeSoldOnline = swSellOnline.isChecked,
                 price = etPrice.txt().replace(" ","").replace("$","").toIntOrNull()?:0,
                 negotiablePrice = swNegotiablePrice.isChecked,
                 photos = null,
-                sellerName = etSellerName.text.toString(),
-                sellerPhoneNumber = etPhoneNumber.text.toString(),
-                location = autoCTvLocation.text.toString()
+                sellerName = etSellerName.txt(),
+                sellerPhoneNumber = etPhoneNumber.txt(),
+                location = autoCTvLocation.txt()
             )
             viewModel.uploadProduct(product, uriList)
         }

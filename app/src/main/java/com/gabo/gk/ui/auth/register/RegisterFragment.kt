@@ -1,11 +1,12 @@
 package com.gabo.gk.ui.auth.register
 
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
 import com.gabo.gk.comon.extensions.launchStarted
+import com.gabo.gk.comon.extensions.snackBar
+import com.gabo.gk.comon.extensions.txt
 import com.gabo.gk.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,15 +20,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
     private fun setUpObservers() {
         viewLifecycleOwner.launchStarted {
-            viewModel.state.collect {
-                when {
-                    (it.registeredSuccessfully.isNotEmpty()) -> {
-                        Toast.makeText(
-                            requireContext(), it.registeredSuccessfully, Toast.LENGTH_SHORT
-                        ).show()
-                        if (it.registeredSuccessfully == getString(R.string.registered_successfully)) {
-                            findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
-                        }
+            viewModel.defaultState.collect {
+                if (it.msg.isNotEmpty()) {
+                    binding.root.snackBar(it.msg)
+                    if (it.msg == getString(R.string.registered_successfully)) {
+                        findNavController().navigate(R.id.homeFragment)
                     }
                 }
             }
@@ -35,15 +32,21 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     }
 
     private fun setUpListeners() {
-        binding.btnRegister.setOnClickListener {
-            register(binding.etEmail.text.toString(), binding.etPassword.text.toString())
-        }
-        binding.btnLogIn.setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        with(binding) {
+            btnSignUp.setOnClickListener {
+                register(etEmail.txt(), etPassword.txt(), etRepeatPassword.txt())
+            }
+            tvAlreadyReg.setOnClickListener {
+                with(findNavController()){
+                    popBackStack(R.id.registerFragment, true)
+                    navigate(R.id.loginFragment)
+                }
+            }
+
         }
     }
 
-    private fun register(email: String, password: String) {
-        viewModel.registerUser(email, password)
+    private fun register(email: String, password: String, repeatPassword: String) {
+        viewModel.registerUser(email, password, repeatPassword)
     }
 }

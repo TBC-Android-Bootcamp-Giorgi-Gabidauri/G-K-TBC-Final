@@ -12,8 +12,8 @@ abstract class BaseViewModel<Ui : Any> : ViewModel() {
     open suspend fun <T : Any> getData(
         flow: Flow<Resource<T>>,
         mapper: ((T) -> Ui),
-        success: ((Resource.Success<T>) -> (Unit))?,
-        error: ((Resource.Error<T>) -> (Unit))?
+        success: ((Resource.Success<T>) -> (Unit))? = null,
+        error: ((Resource.Error<T>) -> (Unit))? = null
     ) {
         flow.collect {
             resetDefaultViewState()
@@ -29,7 +29,7 @@ abstract class BaseViewModel<Ui : Any> : ViewModel() {
                 is Resource.Error -> {
                     _defaultState.value = _defaultState.value.copy(
                         loading = false,
-                        error = it.errorMsg ?: "Something went wrong"
+                        msg = it.errorMsg ?: "Something went wrong"
                     )
                     error?.invoke(it)
                 }
@@ -37,13 +37,13 @@ abstract class BaseViewModel<Ui : Any> : ViewModel() {
         }
     }
 
-    private fun resetDefaultViewState() {
+    protected fun resetDefaultViewState() {
         _defaultState.value = DefaultViewState()
     }
 
     data class DefaultViewState<Ui : Any>(
         val loading: Boolean = false,
         val data: Ui? = null,
-        val error: String = ""
+        val msg: String = ""
     )
 }

@@ -1,5 +1,6 @@
 package com.gabo.gk.ui.home.products.categories.sorted
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -125,8 +126,8 @@ class SortedProductsFragment :
         viewLifecycleOwner.launchStarted {
             viewModel.defaultState.collect {
                 binding.swipeRl.isRefreshing = it.loading
-                if (it.error.isNotEmpty())
-                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
+                if (it.msg.isNotEmpty())
+                    Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
                 it.data?.let { list -> productsAdapter.submitList(list) }
             }
         }
@@ -136,6 +137,7 @@ class SortedProductsFragment :
         viewModel.getSortedProducts(getString(R.string.productCategory), args.category)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setupAdapters() {
         productsAdapter = ProductsAdapter(itemClick =  {
             findNavController().navigate(

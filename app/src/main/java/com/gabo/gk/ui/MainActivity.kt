@@ -63,9 +63,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openUserProfile() {
-            nav.navigate(R.id.userProfileFragment)
-            changeDrawerIcon()
-            binding.root.close()
+        nav.navigate(R.id.userProfileFragment)
+        changeDrawerIcon()
+        binding.root.close()
     }
 
     private fun changeDrawerIcon() {
@@ -75,7 +75,8 @@ class MainActivity : AppCompatActivity() {
                 nav.findDestination(R.id.addSellingProductFragment),
                 nav.findDestination(R.id.loginFragment),
                 nav.findDestination(R.id.registerFragment),
-                nav.findDestination(R.id.productDetailsFragment)-> {
+                nav.findDestination(R.id.productDetailsFragment),
+                nav.findDestination(R.id.splashScreenFragment) -> {
                     ivDrawerMenu.visibility = View.GONE
                     root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
@@ -87,6 +88,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onBackPressed() {
+        if (nav.currentDestination == nav.findDestination(R.id.homeFragment)) {
+            finish()
+        } else {
+            onBackPressedDispatcher.onBackPressed()
+        }
+    }
+
 
     private fun navigate(model: MenuItemModel) {
         binding.root.close()

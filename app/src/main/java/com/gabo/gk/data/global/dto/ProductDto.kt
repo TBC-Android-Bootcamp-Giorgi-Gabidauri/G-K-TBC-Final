@@ -1,4 +1,4 @@
-package com.gabo.gk.data.dto
+package com.gabo.gk.data.global.dto
 
 data class ProductDto(
     val id: String = "",

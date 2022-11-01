@@ -11,12 +11,13 @@
     <string name="_400">$ 400</string>
     <string name="log_in_with_google">Log In With Google</string>
     <string name="log_in">Log In</string>
+    <string name="sign_in_with_google">Log In With Google</string>
+    <string name="sign_in">Sign In</string>
     <string name="type_your_email">Type Your Email</string>
     <string name="type_your_password">Type Your Password</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Sign Up</string>
     <string name="type_your_repeat_password">Type Your Repeat Password</string>
-    <string name="register">Register</string>
     <string name="type_your_firstname">Type Your FirstName</string>
     <string name="type_your_lastname">Type Your LastName</string>
     <string name="already_have_an_account">Already have an account?</string>
@@ -148,4 +149,21 @@
         <item>Low Price</item>
         <item>High Price</item>
     </string-array>
+    <string name="or_sign_up_as_company" />
+    <string name="retype_your_password">Retype Your Password</string>
+    <string name="already_registered_sign_in">Already Registered , Sign In !</string>
+    <string name="not_registered_yet_sign_up">Not Registered Yet , Sign Up !</string>
+    <string name="job_success" />
+    <string name="ratings" />
+    <string name="about_me" />
+    <string name="my_desc" />
+    <string name="contact" />
+    <string name="skills" />
+    <string name="samplereview" />
+    <string name="twitterUsername">\@joeytribbiani</string>
+    <string name="welcome">welcome</string>
+    <string name="passwords_dont_match">passwords do not match</string>
+    <string name="product_update_successfully">Product updated successfully</string>
+    <string name="userprofile">UserProfile</string>
+
 </resources>
