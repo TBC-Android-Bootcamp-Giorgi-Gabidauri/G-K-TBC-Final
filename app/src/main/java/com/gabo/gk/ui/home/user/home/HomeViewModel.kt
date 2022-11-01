@@ -2,9 +2,9 @@ package com.gabo.gk.ui.home.user.home
 
 import androidx.lifecycle.viewModelScope
 import com.gabo.gk.base.BaseViewModel
-import com.gabo.gk.domain.useCases.product.GetProductsUseCase
-import com.gabo.gk.domain.useCases.product.SearchProductsUseCase
+import com.gabo.gk.domain.useCases.product.*
 import com.gabo.gk.ui.model.product.ProductModelUi
+import com.gabo.gk.ui.modelTransformers.toDomain
 import com.gabo.gk.ui.modelTransformers.toUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -13,9 +13,34 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getProductsUseCase: GetProductsUseCase,
-    private val searchProductsUseCase: SearchProductsUseCase
-) :
-    BaseViewModel<List<ProductModelUi>>() {
+    private val searchProductsUseCase: SearchProductsUseCase,
+    private val saveProductUseCase: SaveProductUseCase,
+    private val deleteProductUseCase: DeleteProductUseCase,
+    private val updateProductUseCase: UpdateProductUseCase
+) : BaseViewModel<List<ProductModelUi>>() {
+
+    fun updateProduct(newProduct: ProductModelUi) {
+        viewModelScope.launch {
+            updateProductUseCase(newProduct.toDomain()).collect {
+                it?.let { _defaultState.value = _defaultState.value.copy(error = it) }
+            }
+        }.invokeOnCompletion {
+//            getProducts()
+        }
+    }
+
+    fun saveProduct(product: ProductModelUi) {
+        viewModelScope.launch {
+            saveProductUseCase(product.toDomain())
+        }
+    }
+
+    fun deleteProduct(id: String) {
+        viewModelScope.launch {
+            deleteProductUseCase(id)
+        }
+    }
+
     fun getProducts() {
         viewModelScope.launch {
             getData(

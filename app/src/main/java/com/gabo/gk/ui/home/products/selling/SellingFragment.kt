@@ -1,7 +1,6 @@
 package com.gabo.gk.ui.home.products.selling
 
 import android.view.View
-import androidx.core.view.GravityCompat
 import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
 import com.gabo.gk.databinding.FragmentSellingBinding
@@ -13,32 +12,33 @@ import dagger.hilt.android.AndroidEntryPoint
 class SellingFragment : BaseFragment<FragmentSellingBinding>(FragmentSellingBinding::inflate) {
     override fun setupView() {
         setupTabLayout()
-        setupListeners()
         setupAppBar()
     }
+
+
     private fun setupAppBar() {
-        with(binding){
+        with(binding) {
             appBar.ivArrowBack.visibility = View.GONE
             appBar.tvTitle.text = getString(R.string.Selling)
         }
     }
-    private fun setupListeners() {
-        with(binding){
-            tvFilter.setOnClickListener { drawerLayout.openDrawer(GravityCompat.END) }
-        }
-    }
 
     private fun setupTabLayout() {
-        with(binding){
+        with(binding) {
             vpSelling.adapter = SellingPagerAdapter(requireActivity())
-            TabLayoutMediator(tlSelling,vpSelling){tab, index ->
-                tab.text = when(index){
-                    0-> "Active"
-                    1-> "Sold"
-                    else -> "Unsold"
+            TabLayoutMediator(tlSelling, vpSelling) { tab, index ->
+                tab.text = when (index) {
+                    0 -> ACTIVE
+                    1 -> SOLD
+                    else -> UNSOLD
                 }
             }.attach()
         }
     }
 
+    companion object {
+        const val ACTIVE = "Active"
+        const val SOLD = "Sold"
+        const val UNSOLD = "Unsold"
+    }
 }

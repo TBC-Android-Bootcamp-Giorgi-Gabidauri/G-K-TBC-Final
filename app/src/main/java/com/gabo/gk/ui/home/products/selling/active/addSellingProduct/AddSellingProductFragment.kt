@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
 import com.gabo.gk.comon.extensions.launchStarted
+import com.gabo.gk.comon.extensions.txt
 import com.gabo.gk.databinding.FragmentAddSellingProductBinding
 import com.gabo.gk.ui.adapters.AddImagesAdapter
 import com.gabo.gk.ui.model.addImage.ImageModel
@@ -42,7 +43,10 @@ class AddSellingProductFragment :
     private fun setupListeners() {
         with(binding) {
             swNegotiablePrice.setOnCheckedChangeListener { _, _ ->
-                if (swNegotiablePrice.isChecked) tilPrice.visibility = View.GONE
+                if (swNegotiablePrice.isChecked) {
+                    tilPrice.visibility = View.GONE
+                    etPrice.setText("")
+                }
                 else tilPrice.visibility = View.VISIBLE
             }
             btnUpload.setOnClickListener { uploadProduct() }
@@ -117,7 +121,7 @@ class AddSellingProductFragment :
                 productType = autoCTvType.text.toString(),
                 productCategory = autoCTvCategory.text.toString(),
                 canBeSoldOnline = swSellOnline.isChecked,
-                price = tvPrice.text.toString(),
+                price = etPrice.txt().replace(" ","").replace("$","").toIntOrNull()?:0,
                 negotiablePrice = swNegotiablePrice.isChecked,
                 photos = null,
                 sellerName = etSellerName.text.toString(),

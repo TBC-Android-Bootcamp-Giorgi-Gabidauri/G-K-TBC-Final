@@ -94,4 +94,7 @@
     <dimen name="dimen_half_of_dp">0.5dp</dimen>
     <dimen name="dimen_100dp">100dp</dimen>
     <dimen name="dimen_110dp">110dp</dimen>
+    <dimen name="dimen_300dp">300dp</dimen>
+    <dimen name="dimen_320dp">320dp</dimen>
+    <dimen name="dimen_310dp">310dp</dimen>
 </resources>

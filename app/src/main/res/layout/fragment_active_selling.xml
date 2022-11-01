@@ -23,7 +23,7 @@
             android:id="@+id/rvProducts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/product_item_view" />
+            tools:listitem="@layout/product_item_list_view" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

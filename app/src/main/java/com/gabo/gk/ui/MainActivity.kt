@@ -3,6 +3,7 @@ package com.gabo.gk.ui
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -69,14 +70,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun changeDrawerIcon() {
         with(binding) {
-            if (nav.currentDestination == nav.findDestination(R.id.categoriesFragment) ||
-                nav.currentDestination == nav.findDestination(R.id.addSellingProductFragment)
-            ) {
-                ivDrawerMenu.visibility = View.GONE
-            } else {
-                ivDrawerMenu.visibility = View.VISIBLE
-                ivDrawerMenu.setImageResource(R.drawable.ic_drawer_menu)
-                ivDrawerMenu.setOnClickListener { binding.root.open() }
+            when (nav.currentDestination) {
+                nav.findDestination(R.id.categoriesFragment),
+                nav.findDestination(R.id.addSellingProductFragment),
+                nav.findDestination(R.id.loginFragment),
+                nav.findDestination(R.id.registerFragment),
+                nav.findDestination(R.id.productDetailsFragment)-> {
+                    ivDrawerMenu.visibility = View.GONE
+                    root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                }
+                else -> {
+                    ivDrawerMenu.visibility = View.VISIBLE
+                    ivDrawerMenu.setImageResource(R.drawable.ic_drawer_menu)
+                    ivDrawerMenu.setOnClickListener { binding.root.open() }
+                }
             }
         }
     }
@@ -85,6 +92,7 @@ class MainActivity : AppCompatActivity() {
         binding.root.close()
         nav.popBackStack(R.id.homeFragment, false)
         when (model.title) {
+            DrawerMenu.Home.name -> nav.navigate(R.id.homeFragment)
             DrawerMenu.Notifications.name -> nav.navigate(R.id.notificationsFragment)
             DrawerMenu.Messages.name -> nav.navigate(R.id.messagesFragment)
             DrawerMenu.Wallet.name -> nav.navigate(R.id.walletFragment)
