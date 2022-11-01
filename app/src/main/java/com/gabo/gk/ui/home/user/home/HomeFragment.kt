@@ -69,13 +69,35 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 }
                 if (it.data != null) {
                     productsAdapter.submitList(it.data)
-                } else productsAdapter.submitList(emptyList())
+                } else {
+                    productsAdapter.submitList(emptyList())
+                }
             }
         }
     }
 
     private fun setupAdapters() {
-        productsAdapter = ProductsAdapter { }
+        productsAdapter = ProductsAdapter(itemClick = {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToProductDetailsFragment(it)
+            )
+        }, heartClick = {
+            if (it.isSaved.contains(it.uid)) {
+                viewModel.deleteProduct(it.id)
+                it.isSaved = it.isSaved.toMutableList()
+                (it.isSaved as MutableList<String>).remove(it.uid)
+                it.isSaved = it.isSaved.toList()
+                viewModel.updateProduct(it)
+                productsAdapter.notifyDataSetChanged()
+            } else {
+                it.isSaved = it.isSaved.toMutableList()
+                (it.isSaved as MutableList<String>).add(it.uid)
+                it.isSaved = it.isSaved.toList()
+                viewModel.saveProduct(it)
+                viewModel.updateProduct(it)
+                productsAdapter.notifyDataSetChanged()
+            }
+        })
         with(binding) {
             rvProducts.adapter = productsAdapter
             rvProducts.layoutManager = LinearLayoutManager(requireContext())

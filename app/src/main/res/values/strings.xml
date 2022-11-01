@@ -28,7 +28,7 @@
     <string name="make_easy_to_find">make it easy for clients to find your product</string>
     <string name="show_us_your_product">show us your product</string>
     <string name="upload_pictures">Upload pictures</string>
-    <string name="details">details</string>
+    <string name="details">Details</string>
     <string name="second_hand">Second-hand</string>
     <string name="like_a_new">Like a new</string>
     <string name="brand_new">Brand New</string>
@@ -61,6 +61,35 @@
     <string name="registered_successfully">Registered Successfully</string>
     <string name="images_uploaded_successfully">images uploaded successfully</string>
     <string name="uploaded_successfully">Uploaded Successfully</string>
+    <string name="low_price">Low Price</string>
+    <string name="show_first">Show First</string>
+    <string name="view">View</string>
+    <string name="all">All</string>
+    <string name="only_seller">Only Seller</string>
+    <string name="only_shop">Only Shop</string>
+    <string name="type">Type</string>
+    <string name="status">Status</string>
+    <string name="almost_new">Almost New</string>
+    <string name="only_with_price">Only with price</string>
+    <string name="from">From</string>
+    <string name="till">Till</string>
+    <string name="poti">Poti</string>
+    <string name="gori">Gori</string>
+    <string name="batumi">Batumi</string>
+    <string name="kutaisi">Kutaisi</string>
+    <string name="tbilisi">Tbilisi</string>
+    <string name="high_price">High Price</string>
+    <string name="adjust_filter">Adjust Filter</string>
+    <string name="any_price">Any Price</string>
+    <string name="product_description">Product Description</string>
+    <string name="choose_correct_price_range">Choose correct price range</string>
+    <string name="similar_products">Similar Products</string>
+    <string name="location_not_defined">Location Not Defined</string>
+    <string name="condition_not_defined">Condition Not Defined</string>
+    <string name="saved_products">Saved Products</string>
+    <string name="_72_00">72.00 $</string>
+    <string name="text_seller">Text Seller</string>
+    <string name="buy_now">Buy Now</string>
 
     <string-array name="ProductCategory">
         <item>All Categories</item>
@@ -100,7 +129,7 @@
     </string-array>
 
     <string-array name="Location">
-        <item>Any</item>
+        <item>Any Location</item>
         <item>Tbilisi</item>
         <item>Rustavi</item>
         <item>Kutaisi</item>
@@ -112,5 +141,11 @@
         <item>Selling</item>
         <item>Rent</item>
         <item>Service</item>
+    </string-array>
+
+    <string-array name="ShowFirst">
+        <item>Any</item>
+        <item>Low Price</item>
+        <item>High Price</item>
     </string-array>
 </resources>

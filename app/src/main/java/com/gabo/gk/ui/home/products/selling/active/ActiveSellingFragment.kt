@@ -56,7 +56,7 @@ class ActiveSellingFragment :
     }
 
     private fun setupAdapters() {
-        productsAdapter = ProductsAdapter { }
+        productsAdapter = ProductsAdapter({},{})
         with(binding) {
             rvProducts.adapter = productsAdapter
             rvProducts.layoutManager = LinearLayoutManager(requireContext())

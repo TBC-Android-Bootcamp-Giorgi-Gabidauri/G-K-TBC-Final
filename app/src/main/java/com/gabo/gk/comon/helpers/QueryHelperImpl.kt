@@ -18,7 +18,8 @@ class QueryHelperImpl @Inject constructor() : QueryHelper {
             val list = mutableListOf<ProductModelDomain>()
             val result = query?.invoke()
             result?.documents?.forEach {
-                val product = it.toObject<ProductDto>()
+                 var product = it.toObject<ProductDto>()
+                product = product?.copy(id = it.id)
                 product?.let { dto -> list.add(dto.toDomain()) }
             }
             if (list.isNotEmpty()) {
