@@ -39,4 +39,4 @@ object CategoriesListProvider {
         CategoryModel("Travel",R.drawable.travel),
         CategoryModel("Video Games",R.drawable.video_games),
     )
-}
+}// todo

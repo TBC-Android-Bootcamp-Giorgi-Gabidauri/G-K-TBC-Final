@@ -1,4 +1,4 @@
-package com.gabo.gk.data.dto
+package com.gabo.gk.data.global.dto
 
 //data class FilterDto(
 //    val showFirst: String = "",
@@ -7,5 +7,5 @@ package com.gabo.gk.data.dto
 //    val negotiablePrice: Boolean = false,
 //    val priceFrom: String = "",
 //    val priceTill: String = "",
-//    val location: String = "",
+//    val location: String = "", //todo
 //)

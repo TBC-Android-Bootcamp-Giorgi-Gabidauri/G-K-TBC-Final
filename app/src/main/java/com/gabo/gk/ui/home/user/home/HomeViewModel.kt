@@ -22,7 +22,7 @@ class HomeViewModel @Inject constructor(
     fun updateProduct(newProduct: ProductModelUi) {
         viewModelScope.launch {
             updateProductUseCase(newProduct.toDomain()).collect {
-                it?.let { _defaultState.value = _defaultState.value.copy(error = it) }
+                it?.let { _defaultState.value = _defaultState.value.copy(msg = it) }
             }
         }.invokeOnCompletion {
 //            getProducts()

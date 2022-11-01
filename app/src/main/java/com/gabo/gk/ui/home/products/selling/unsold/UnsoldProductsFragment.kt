@@ -35,9 +35,9 @@ class UnsoldProductsFragment :
             viewModel.defaultState.collect {
                 binding.swipeRl.isRefreshing = it.loading
                 when {
-                    it.error.isNotEmpty() -> Toast.makeText(
+                    it.msg.isNotEmpty() -> Toast.makeText(
                         requireContext(),
-                        it.error,
+                        it.msg,
                         Toast.LENGTH_SHORT
                     )
                         .show()

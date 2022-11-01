@@ -1,5 +1,6 @@
 package com.gabo.gk.ui.home.user.home
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
@@ -9,6 +10,7 @@ import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
 import com.gabo.gk.comon.constants.FIELD_TITLE
 import com.gabo.gk.comon.extensions.launchStarted
+import com.gabo.gk.comon.extensions.txt
 import com.gabo.gk.databinding.FragmentHomeBinding
 import com.gabo.gk.ui.adapters.ProductsAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,10 +29,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun setupListeners() {
         with(binding) {
             swipeRl.setOnRefreshListener {
-                if (appBar.etSearch.text.toString().isEmpty()) {
+                if (appBar.etSearch.txt().isEmpty()) {
                     getProducts()
                 } else {
-                    search(appBar.etSearch.text.toString())
+                    search(appBar.etSearch.txt())
                 }
             }
             chipCategories.setOnClickListener {
@@ -43,10 +45,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 findNavController().navigate(R.id.sellingFragment)
             }
             appBar.etSearch.doOnTextChanged { text, start, before, count ->
-                if (appBar.etSearch.text.toString().isEmpty()) {
+                if (appBar.etSearch.txt().isEmpty()) {
                     getProducts()
                 } else {
-                    search(appBar.etSearch.text.toString())
+                    search(appBar.etSearch.txt())
                 }
             }
         }
@@ -63,8 +65,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     binding.swipeRl.isRefreshing = false
                 }
                 when {
-                    it.error.isNotEmpty() -> Toast.makeText(
-                        requireContext(), it.error, Toast.LENGTH_SHORT
+                    it.msg.isNotEmpty() -> Toast.makeText(
+                        requireContext(), it.msg, Toast.LENGTH_SHORT
                     ).show()
                 }
                 if (it.data != null) {
@@ -76,6 +78,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setupAdapters() {
         productsAdapter = ProductsAdapter(itemClick = {
             findNavController().navigate(

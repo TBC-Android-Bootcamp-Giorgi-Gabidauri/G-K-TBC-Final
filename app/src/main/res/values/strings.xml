@@ -161,5 +161,9 @@
     <string name="skills" />
     <string name="samplereview" />
     <string name="twitterUsername">\@joeytribbiani</string>
+    <string name="welcome">welcome</string>
+    <string name="passwords_dont_match">passwords do not match</string>
+    <string name="product_update_successfully">Product updated successfully</string>
+    <string name="userprofile">UserProfile</string>
 
 </resources>
