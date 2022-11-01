@@ -8,7 +8,6 @@
         android:layout_width="@dimen/dimen_40dp"
         android:layout_height="@dimen/dimen_40dp"
         android:layout_margin="@dimen/dimen_20dp"
-        app:cardBackgroundColor="@color/design_default_color_primary"
         app:cardCornerRadius="@dimen/dimen_50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -28,6 +27,7 @@
         android:layout_marginTop="@dimen/dimen_8dp"
         android:id="@+id/tvUserName"
         android:layout_height="wrap_content"
+        android:textColor="@color/md_theme_light_onPrimaryContainer"
         android:layout_marginStart="@dimen/dimen_20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cvUserImage" />

@@ -11,19 +11,23 @@ import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
-
     private val viewModel: LoginViewModel by viewModels()
-
     override fun setupView() {
         setUpListeners()
         setUpObservers()
     }
 
     private fun setUpObservers() {
+        auth.currentUser?.uid?.let {
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        }
         viewLifecycleOwner.launchStarted {
-            viewModel.state.collect{
-                if (it.loginOk.isNotEmpty()){
+            viewModel.state.collect {
+                if (it.loginOk.isNotEmpty()) {
                     Toast.makeText(requireContext(), it.loginOk, Toast.LENGTH_SHORT).show()
+                    if (it.loginOk == getString(R.string.logged_in_successfully)) {
+                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    }
                 }
             }
         }
@@ -33,16 +37,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.btnSignIn.setOnClickListener {
             logIn(binding.etEmail.text.toString(), binding.etPassword.text.toString())
         }
-
+        binding.btnSignUp.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
     }
 
-
     private fun logIn(email: String, password: String) {
-        viewLifecycleOwner.launchStarted {
-            withContext(Dispatchers.IO){
-
-                viewModel.loginUser(email, password)
-            }
-        }
+        viewModel.loginUser(email, password)
     }
 }

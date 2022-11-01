@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_registerFragment_to_accountSetupFragment"
             app:destination="@id/accountSetupFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountSetupFragment"
@@ -52,35 +55,8 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_notificationsFragment"
-            app:destination="@id/notificationsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_messagesFragment"
-            app:destination="@id/messagesFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_walletFragment"
-            app:destination="@id/walletFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_categoriesFragment"
-            app:destination="@id/categoriesFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_savedItemsFragment"
-            app:destination="@id/savedItemsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_purchasesFragment"
-            app:destination="@id/purchasesFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_sellingFragment"
-            app:destination="@id/sellingFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_hintsFragment"
-            app:destination="@id/hintsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_userProfileFragment"
-            app:destination="@id/userProfileFragment" />
+            android:id="@+id/action_homeFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/notificationsFragment"
@@ -101,12 +77,20 @@
         android:id="@+id/categoriesFragment"
         android:name="com.gabo.gk.ui.home.products.categories.CategoriesFragment"
         android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_sortedProductsFragment"
+            app:destination="@id/sortedProductsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/savedItemsFragment"
         android:name="com.gabo.gk.ui.home.products.saved.SavedItemsFragment"
         android:label="fragment_saved_items"
-        tools:layout="@layout/fragment_saved_items" />
+        tools:layout="@layout/fragment_saved_items" >
+        <action
+            android:id="@+id/action_savedItemsFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/purchasesFragment"
         android:name="com.gabo.gk.ui.home.products.purchases.PurchasesFragment"
@@ -116,7 +100,11 @@
         android:id="@+id/sellingFragment"
         android:name="com.gabo.gk.ui.home.products.selling.SellingFragment"
         android:label="fragment_selling"
-        tools:layout="@layout/fragment_selling" />
+        tools:layout="@layout/fragment_selling" >
+        <action
+            android:id="@+id/action_sellingFragment_to_addSellingProductFragment"
+            app:destination="@id/addSellingProductFragment" />
+    </fragment>
     <fragment
         android:id="@+id/hintsFragment"
         android:name="com.gabo.gk.ui.home.control.hints.HintsFragment"
@@ -132,4 +120,33 @@
         android:name="com.gabo.gk.ui.home.user.profile.UserProfileFragment"
         android:label="fragment_user_profile"
         tools:layout="@layout/fragment_user_profile" />
+    <fragment
+        android:id="@+id/addSellingProductFragment"
+        android:name="com.gabo.gk.ui.home.products.selling.active.addSellingProduct.AddSellingProductFragment"
+        android:label="fragment_add_selling_product"
+        tools:layout="@layout/fragment_add_selling_product" />
+    <fragment
+        android:id="@+id/sortedProductsFragment"
+        android:name="com.gabo.gk.ui.home.products.categories.sorted.SortedProductsFragment"
+        android:label="fragment_sorted_products"
+        tools:layout="@layout/fragment_sorted_products" >
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_sortedProductsFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.gabo.gk.ui.home.products.productDetails.ProductDetailsFragment"
+        android:label="fragment_product_details"
+        tools:layout="@layout/fragment_product_details" >
+        <argument
+            android:name="productModel"
+            app:argType="com.gabo.gk.ui.model.product.ProductModelUi" />
+        <action
+            android:id="@+id/action_productDetailsFragment_to_sortedProductsFragment"
+            app:destination="@id/sortedProductsFragment" />
+    </fragment>
 </navigation>
