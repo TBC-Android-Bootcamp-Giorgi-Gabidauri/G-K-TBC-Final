@@ -2,12 +2,12 @@ package com.gabo.gk.ui.auth.register
 
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
 import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
@@ -21,13 +21,20 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         viewLifecycleOwner.launchStarted {
             viewModel.state.collect {
                 when {
-                    (it.registeredSuccessfully.isNotEmpty()) -> {
+                    it.repeatedPasswordValidation.isNotEmpty() -> {
                         Toast.makeText(
-                            requireContext(), it.registeredSuccessfully, Toast.LENGTH_SHORT
+                            requireContext(),
+                            it.repeatedPasswordValidation,
+                            Toast.LENGTH_SHORT
                         ).show()
-                        if (it.registeredSuccessfully == getString(R.string.registered_successfully)) {
-                            findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
-                        }
+                    }
+                }
+                if (it.registeredSuccessfully.isNotEmpty()) {
+                    Toast.makeText(requireContext(), it.registeredSuccessfully, Toast.LENGTH_SHORT)
+                        .show()
+                    if (it.registeredSuccessfully == "Registered Successfully") {
+                        findNavController()
+                            .navigate(R.id.action_registerFragment_to_homeFragment)
                     }
                 }
             }
@@ -35,6 +42,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     }
 
     private fun setUpListeners() {
+        with(binding) {
+
+            btnSignUp.setOnClickListener {
         binding.btnSignUp.setOnClickListener {
             register(binding.etEmail.text.toString(), binding.etPassword.text.toString())
         }
@@ -44,7 +54,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     }
 
     private fun register(email: String, password: String) {
-        viewModel.registerUser(email, password)
+        viewLifecycleOwner.launchStarted {
+            withContext(Dispatchers.IO){
+                viewModel.registerUser(email, password)
+            }
+        }
     }
+
+    private fun register(email: String, password: String, repeatPassword: String) {
+        viewModel.registerUser(email, password, repeatPassword)
 
 }
