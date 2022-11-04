@@ -75,8 +75,7 @@ class MainActivity : AppCompatActivity() {
                 nav.findDestination(R.id.addSellingProductFragment),
                 nav.findDestination(R.id.loginFragment),
                 nav.findDestination(R.id.registerFragment),
-                nav.findDestination(R.id.productDetailsFragment),
-                nav.findDestination(R.id.splashScreenFragment) -> {
+                nav.findDestination(R.id.productDetailsFragment)-> {
                     ivDrawerMenu.visibility = View.GONE
                     root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
