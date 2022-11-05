@@ -8,7 +8,7 @@ import com.gabo.gk.domain.repository.ProductRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class SortForCurrentUserUseCase @Inject constructor(private val productRepository: ProductRepository) :
+class SortProductsForCurrentUserUseCase @Inject constructor(private val productRepository: ProductRepository) :
     BaseUseCase<CurrentUserSortModelDomain, Flow<Resource<List<ProductModelDomain>>>> {
     override suspend fun invoke(params: CurrentUserSortModelDomain): Flow<Resource<List<ProductModelDomain>>> {
         return productRepository.sortForCurrentUser(params.uid, params.field, params.equalsTo)

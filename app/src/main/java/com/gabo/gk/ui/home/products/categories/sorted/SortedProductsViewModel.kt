@@ -16,25 +16,31 @@ class SortedProductsViewModel @Inject constructor(
     private val getSortedProductsUseCase: GetSortedProductsUseCase,
     private val getFilteredProductsUseCase: GetFilteredProductsUseCase,
     private val saveProductUseCase: SaveProductUseCase,
-    private val deleteProductUseCase: DeleteProductUseCase,
-    private val updateProductUseCase: UpdateProductUseCase
+    private val deleteProductFromDbUseCase: DeleteProductFromDbUseCase,
+    private val updateProductUseCase: UpdateProductUseCase,
 ) : BaseViewModel<List<ProductModelUi>>() {
-    fun updateProduct(newProduct: ProductModelUi) {
-        viewModelScope.launch {
-            updateProductUseCase(newProduct.toDomain())
-        }
-    }
-
     fun saveProduct(product: ProductModelUi) {
         viewModelScope.launch {
-            saveProductUseCase(product.toDomain())
+            resetDefaultViewState()
+            val result = updateProductUseCase(product.toDomain())
+            if (result == "Product updated successfully") {
+                saveProductUseCase(product.toDomain())
+            }
+            _defaultState.value = _defaultState.value.copy(msg = result)
+
         }
     }
 
-    fun deleteProduct(id: String) {
+    fun deleteProduct(product: ProductModelUi) {
         viewModelScope.launch {
-            deleteProductUseCase(id)
+            resetDefaultViewState()
+            val result = updateProductUseCase(product.toDomain())
+            if (result == "Product updated successfully") {
+                deleteProductFromDbUseCase(product.id)
+            }
+            _defaultState.value = _defaultState.value.copy(msg = result)
         }
+
     }
 
     fun getSortedProducts(field: String, equalsTo: String) {
@@ -51,25 +57,15 @@ class SortedProductsViewModel @Inject constructor(
         viewModelScope.launch {
             getData(
                 flow = (getSortedProductsUseCase(
-                    Pair(
-                        model.categoryField,
-                        model.categoryEqualsTo
-                    )
+                    Pair(model.categoryField, model.categoryEqualsTo)
                 )),
                 mapper = { it.map { domain -> domain.toUi() } },
                 success = null, error = null
             )
             getData(
-                flow = (getFilteredProductsUseCase(
-                    Pair(
-                        model.toDomain(),
-                        _defaultState.value.data?.map { it.toDomain() } ?: emptyList()
-                    )
-                )),
-                mapper = {
-
-                    it.map { domain -> domain.toUi() }
-                },
+                flow = (getFilteredProductsUseCase(Pair(model.toDomain(),
+                    _defaultState.value.data?.map { it.toDomain() } ?: emptyList()))),
+                mapper = { it.map { domain -> domain.toUi() } },
                 success = null, error = null
             )
         }

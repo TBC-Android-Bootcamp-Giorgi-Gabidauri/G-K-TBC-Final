@@ -20,53 +20,74 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.chip.ChipGroup
-
-            android:id="@+id/CGFilter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/tvCategories"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_0dp"
+            android:layout_marginStart="@dimen/dimen_25dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginEnd="@dimen/dimen_20dp"
+            android:background="@drawable/bg_search"
+            android:drawablePadding="@dimen/dimen_5dp"
+            android:gravity="center"
+            android:paddingEnd="@dimen/dimen_15dp"
+            android:paddingStart="@dimen/dimen_10dp"
+            android:paddingVertical="@dimen/dimen_5dp"
+            android:text="@string/categories"
+            android:textColor="?colorOnBackground"
+            android:textSize="@dimen/dimen_14sp"
+            app:drawableStartCompat="@drawable/ic_grid_view"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBar"
-            app:singleLine="true">
+            app:layout_constraintTop_toBottomOf="@id/appBar" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipCategories"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_50dp"
-                android:checkable="false"
-                android:text="@string/categories" />
+        <TextView
+            android:id="@+id/tvSelling"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_0dp"
+            android:layout_marginStart="@dimen/dimen_23dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginEnd="@dimen/dimen_20dp"
+            android:background="@drawable/bg_search"
+            android:drawablePadding="@dimen/dimen_5dp"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/dimen_15dp"
+            android:paddingVertical="@dimen/dimen_5dp"
+            android:text="@string/selling"
+            android:textColor="?colorOnBackground"
+            android:textSize="@dimen/dimen_14sp"
+            app:drawableStartCompat="@drawable/ic_sell"
+            app:layout_constraintStart_toEndOf="@id/tvCategories"
+            app:layout_constraintTop_toBottomOf="@id/appBar" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipSelling"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_20dp"
-                android:checkable="false"
-                android:text="@string/selling" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipSaved"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_20dp"
-                android:checkable="false"
-                android:text="@string/saved" />
-        </com.google.android.material.chip.ChipGroup>
+        <TextView
+            android:id="@+id/tvSaved"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_0dp"
+            android:layout_marginStart="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginEnd="@dimen/dimen_20dp"
+            android:background="@drawable/bg_search"
+            android:drawablePadding="@dimen/dimen_5dp"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/dimen_15dp"
+            android:paddingVertical="@dimen/dimen_5dp"
+            android:text="@string/saved"
+            android:textColor="?colorOnBackground"
+            android:textSize="@dimen/dimen_14sp"
+            app:drawableStartCompat="@drawable/ic_heart_filled"
+            app:layout_constraintStart_toEndOf="@id/tvSelling"
+            app:layout_constraintTop_toBottomOf="@id/appBar" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvProducts"
             android:layout_width="@dimen/dimen_0dp"
             android:layout_height="@dimen/dimen_0dp"
-            android:paddingStart="@dimen/dimen_10dp"
-            android:paddingEnd="@dimen/dimen_10dp"
+            android:layout_marginHorizontal="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/CGFilter"
+            app:layout_constraintTop_toBottomOf="@id/tvCategories"
             tools:listitem="@layout/product_item_list_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

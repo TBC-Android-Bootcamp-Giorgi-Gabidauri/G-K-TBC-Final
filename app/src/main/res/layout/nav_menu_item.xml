@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/ivIcon"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dimen_24dp"
         android:layout_height="@dimen/dimen_0dp"
         android:adjustViewBounds="true"
         android:src="@drawable/ic_launcher_background"
@@ -16,13 +16,15 @@
         android:layout_marginEnd="@dimen/dimen_20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/icon" />
+        android:contentDescription="@string/icon"
+        app:tint="?colorTertiary" />
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:text="@string/nav_home"
+        android:textColor="?colorPrimary"
         android:textSize="@dimen/dimen_20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ivIcon"

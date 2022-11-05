@@ -9,6 +9,6 @@ import javax.inject.Inject
 class GetSavedProductsUseCase @Inject constructor(private val productRepository: ProductRepository) :
     BaseUseCase<Unit, Flow<List<ProductModelDomain>>> {
     override suspend fun invoke(params: Unit): Flow<List<ProductModelDomain>> {
-        return productRepository.getSavedProducts()
+        return productRepository.getSavedProductsFromDb()
     }
 }

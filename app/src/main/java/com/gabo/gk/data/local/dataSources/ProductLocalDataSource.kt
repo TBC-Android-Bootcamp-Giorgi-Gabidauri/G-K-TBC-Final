@@ -11,7 +11,7 @@ import javax.inject.Inject
 class ProductLocalDataSource @Inject constructor(
     private val database: ProductsDatabase
 ) {
-    suspend fun getSavedProducts(): Flow<List<ProductModelDomain>> {
+    fun getSavedProducts(): Flow<List<ProductModelDomain>> {
         return database.getPurchaseDao.getItems().map { it.map { entity -> entity.toDomain() } }
     }
 

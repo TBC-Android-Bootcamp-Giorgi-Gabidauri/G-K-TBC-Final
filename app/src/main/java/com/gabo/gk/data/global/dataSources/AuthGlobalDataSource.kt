@@ -26,4 +26,8 @@ class AuthGlobalDataSource @Inject constructor(
             else emit(context.getString(R.string.registered_successfully))
         } catch (e: Exception) { emit(e.message.toString()) }
     }
+
+    fun logOut(){
+        auth.signOut()
+    }
 }
