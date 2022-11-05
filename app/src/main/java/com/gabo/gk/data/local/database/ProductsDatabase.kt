@@ -8,7 +8,7 @@ import com.gabo.gk.data.local.dao.ProductsDao
 import com.gabo.gk.data.local.entity.ProductEntity
 
 
-@Database(entities = [ProductEntity::class], version = 8)
+@Database(entities = [ProductEntity::class], version = 10)
 @TypeConverters(ListOfStingsTypeConverter::class)
 abstract class ProductsDatabase : RoomDatabase() {
     abstract val getPurchaseDao: ProductsDao

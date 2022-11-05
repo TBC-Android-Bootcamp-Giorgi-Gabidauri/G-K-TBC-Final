@@ -1,4 +1,4 @@
-package com.gabo.gk.domain.useCases.product
+package com.gabo.gk.domain.useCases.images
 
 import com.gabo.gk.base.BaseUseCase
 import com.gabo.gk.domain.repository.ImagesRepository

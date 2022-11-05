@@ -19,8 +19,9 @@ interface ProductRepository {
     ): Flow<Resource<List<ProductModelDomain>>>
 
     suspend fun searchProducts(field: String, query: String): Flow<Resource<List<ProductModelDomain>>>
-    suspend fun getSavedProducts(): Flow<List<ProductModelDomain>>
-    suspend fun saveProduct(product: ProductModelDomain)
-    suspend fun deleteProduct(id: String)
-    suspend fun updateProduct(newProduct: ProductModelDomain): Flow<String?>
+    suspend fun getSavedProductsFromDb(): Flow<List<ProductModelDomain>>
+    suspend fun saveProductToDb(product: ProductModelDomain)
+    suspend fun deleteProductFromDb(id: String)
+    suspend fun updateProduct(newProduct: ProductModelDomain): String
+    suspend fun deleteProduct(newProduct: ProductModelDomain): String
 }

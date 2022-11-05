@@ -1,5 +1,6 @@
 package com.gabo.gk.ui.home.products.saved
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ArrayAdapter
 import androidx.core.view.GravityCompat
@@ -16,7 +17,9 @@ import com.gabo.gk.comon.extensions.txt
 import com.gabo.gk.databinding.FragmentSavedItemsBinding
 import com.gabo.gk.ui.adapters.ProductsAdapter
 import com.gabo.gk.ui.model.filter.FilterModelUi
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SavedItemsFragment :
@@ -24,6 +27,9 @@ class SavedItemsFragment :
     private val viewModel: SavedItemsViewModel by viewModels()
     private lateinit var productsAdapter: ProductsAdapter
     private var viewControl = true
+
+    @Inject
+    lateinit var auth: FirebaseAuth
     override fun setupView() {
         setupObservers()
         setupAppBar()
@@ -40,29 +46,20 @@ class SavedItemsFragment :
         binding.navLayoutFilter.autoCTvShowFirst.setAdapter(languagesAdapter)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setupAdapters() {
-        productsAdapter = ProductsAdapter(itemClick = {
+        productsAdapter = ProductsAdapter(auth.currentUser!!.uid, itemClick = {
             findNavController().navigate(
                 SavedItemsFragmentDirections.actionSavedItemsFragmentToProductDetailsFragment(
                     it
                 )
             )
         }, heartClick = {
-            if (it.isSaved.contains(it.uid)) {
-                viewModel.deleteProduct(it.id)
-                it.isSaved = it.isSaved.toMutableList()
-                (it.isSaved as MutableList<String>).remove(it.uid)
-                it.isSaved = it.isSaved.toList()
-                viewModel.updateProduct(it)
-                productsAdapter.notifyDataSetChanged()
-            } else {
-                it.isSaved = it.isSaved.toMutableList()
-                (it.isSaved as MutableList<String>).add(it.uid)
-                it.isSaved = it.isSaved.toList()
-                viewModel.saveProduct(it)
-                viewModel.updateProduct(it)
-                productsAdapter.notifyDataSetChanged()
-            }
+            val list = it.isSaved.toMutableList()
+            list.remove(auth.currentUser!!.uid)
+            it.isSaved = list
+            viewModel.deleteProduct(it)
+            productsAdapter.notifyDataSetChanged()
         })
         with(binding) {
             rvProducts.adapter = productsAdapter
@@ -109,7 +106,7 @@ class SavedItemsFragment :
     }
 
     private fun filter() {
-        with(binding.navLayoutFilter){
+        with(binding.navLayoutFilter) {
             val model = FilterModelUi(
                 autoCTvShowFirst.txt(),
                 type = when {
@@ -137,7 +134,7 @@ class SavedItemsFragment :
                     else -> chipLocationAll.txt()
                 }
             )
-             viewModel.getFilteredProducts(model)
+            viewModel.getFilteredProducts(model)
         }
     }
 
@@ -148,11 +145,12 @@ class SavedItemsFragment :
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setupObservers() {
         viewLifecycleOwner.launchStarted {
             viewModel.defaultState.collect {
                 binding.swipeRl.isRefreshing = it.loading
-                if(!it.data.isNullOrEmpty()){
+                if (it.data != null) {
                     productsAdapter.submitList(it.data)
                     productsAdapter.notifyDataSetChanged()
                 }

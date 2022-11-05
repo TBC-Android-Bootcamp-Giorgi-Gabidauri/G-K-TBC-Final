@@ -2,17 +2,21 @@ package com.gabo.gk.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabo.gk.R
+import com.gabo.gk.comon.extensions.launchStarted
+import com.gabo.gk.comon.extensions.snackBar
 import com.gabo.gk.comon.util.DrawerMenu
 import com.gabo.gk.comon.util.MenuListProvider.menuItemList
 import com.gabo.gk.databinding.ActivityMainBinding
 import com.gabo.gk.ui.adapters.NavDrawerAdapter
 import com.gabo.gk.ui.model.navDrawer.MenuItemModel
+import com.gabo.gk.ui.model.user.UserModelUi
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -21,20 +25,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: NavDrawerAdapter
     private lateinit var nav: NavController
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-
         nav = findNavController(R.id.navHostFragment)
-
         setupAdapter()
         setupDrawerMenu()
         changeDrawerIcon()
         setupListeners()
+        setupObservers()
     }
 
     private fun setupListeners() {
@@ -76,7 +78,10 @@ class MainActivity : AppCompatActivity() {
                 nav.findDestination(R.id.loginFragment),
                 nav.findDestination(R.id.registerFragment),
                 nav.findDestination(R.id.productDetailsFragment),
-                nav.findDestination(R.id.splashScreenFragment) -> {
+                nav.findDestination(R.id.splashScreenFragment),
+                nav.findDestination(R.id.walletFragment),
+                nav.findDestination(R.id.fillBalanceFragment),
+                nav.findDestination(R.id.editProfileFragment) -> {
                     ivDrawerMenu.visibility = View.GONE
                     root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
@@ -116,4 +121,24 @@ class MainActivity : AppCompatActivity() {
         changeDrawerIcon()
     }
 
+    private fun setInfo(user: UserModelUi) {
+        val list = menuItemList.toMutableList()
+        list[0].userProfile =
+            list[0].userProfile?.copy(icon = user.profileImg, userName = user.userName)
+        adapter.submitList(list)
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun setupObservers() {
+        launchStarted {
+            viewModel.defaultState.collect {
+                with(binding) {
+                    when {
+                        it.data != null ->  setInfo(it.data)
+                        it.msg.isNotEmpty() -> root.snackBar(it.msg)
+                    }
+                }
+            }
+        }
+    }
 }

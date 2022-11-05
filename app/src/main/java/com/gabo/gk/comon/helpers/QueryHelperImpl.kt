@@ -25,6 +25,7 @@ class QueryHelperImpl @Inject constructor() : QueryHelper {
             if (list.isNotEmpty()) {
                 emit(Resource.Success(list.toList()))
             } else {
+                emit(Resource.Success(emptyList()))
                 if (error.isNotEmpty()) emit(Resource.Error(error))
             }
         } catch (e: Exception) {

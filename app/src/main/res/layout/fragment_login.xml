@@ -15,10 +15,8 @@
         android:id="@+id/tilEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="350dp"
-        app:boxStrokeColor="?colorPrimary"
-        app:hintTextColor="?colorSecondary"
+        android:layout_marginHorizontal="@dimen/dimen_16dp"
+        android:layout_marginTop="@dimen/dimen_350dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -35,10 +33,8 @@
         android:id="@+id/passwordLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="24dp"
-        app:boxStrokeColor="?colorPrimary"
-        app:hintTextColor="?colorSecondary"
+        android:layout_marginHorizontal="@dimen/dimen_16dp"
+        android:layout_marginTop="@dimen/dimen_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilEmail"
@@ -69,13 +65,10 @@
         android:id="@+id/tvNotRegistered"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="?colorOnPrimarySurface"
         android:text="@string/not_registered_yet_sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

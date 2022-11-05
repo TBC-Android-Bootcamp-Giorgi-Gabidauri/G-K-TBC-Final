@@ -15,7 +15,8 @@ data class ProductModelDomain(
     val sellerName: String = "",
     val sellerPhoneNumber: String = "",
     val location: String,
-    val sold: Boolean = false,
+    var sold: Boolean = false,
     val searchList: List<String> = emptyList(),
-    var isSaved: List<String> = emptyList()
+    var isSaved: MutableList<String> = mutableListOf(),
+    var purchasedBy: String = ""
 )

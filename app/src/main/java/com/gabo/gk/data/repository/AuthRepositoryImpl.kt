@@ -9,4 +9,5 @@ class AuthRepositoryImpl @Inject constructor(
 ) : AuthRepository {
     override suspend fun logIn(email: String, password: String) = authGlobalDataSource.logIn(email, password)
     override suspend fun register(email: String, password: String) = authGlobalDataSource.register(email, password)
+    override suspend fun logOut(){ authGlobalDataSource.logOut() }
 }

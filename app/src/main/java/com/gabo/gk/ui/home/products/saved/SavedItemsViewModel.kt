@@ -2,7 +2,10 @@ package com.gabo.gk.ui.home.products.saved
 
 import androidx.lifecycle.viewModelScope
 import com.gabo.gk.base.BaseViewModel
-import com.gabo.gk.domain.useCases.product.*
+import com.gabo.gk.domain.useCases.product.DeleteProductFromDbUseCase
+import com.gabo.gk.domain.useCases.product.GetFilteredProductsUseCase
+import com.gabo.gk.domain.useCases.product.GetSavedProductsUseCase
+import com.gabo.gk.domain.useCases.product.UpdateProductUseCase
 import com.gabo.gk.ui.model.filter.FilterModelUi
 import com.gabo.gk.ui.model.product.ProductModelUi
 import com.gabo.gk.ui.modelTransformers.toDomain
@@ -15,29 +18,23 @@ import javax.inject.Inject
 class SavedItemsViewModel @Inject constructor(
     private val getSavedProductsUseCase: GetSavedProductsUseCase,
     private var getFilteredProductsUseCase: GetFilteredProductsUseCase,
-    private val saveProductUseCase: SaveProductUseCase,
-    private val deleteProductUseCase: DeleteProductUseCase,
-    private val updateProductUseCase: UpdateProductUseCase
-) :
-    BaseViewModel<List<ProductModelUi>>() {
+    private val deleteProductFromDbUseCase: DeleteProductFromDbUseCase,
+    private val updateProductUseCase: UpdateProductUseCase,
+) : BaseViewModel<List<ProductModelUi>>() {
     init {
         getSavedProducts()
     }
-    fun updateProduct(newProduct: ProductModelUi){
-        viewModelScope.launch {
-            updateProductUseCase(newProduct.toDomain())
-        }
-    }
 
-    fun saveProduct(product: ProductModelUi){
+    fun deleteProduct(product: ProductModelUi) {
         viewModelScope.launch {
-            saveProductUseCase(product.toDomain())
+            resetDefaultViewState()
+            val result = updateProductUseCase(product.toDomain())
+            if (result == "Product updated successfully") {
+                deleteProductFromDbUseCase(product.id)
+            }
+            _defaultState.value = _defaultState.value.copy(msg = result)
         }
-    }
-    fun deleteProduct(id:String){
-        viewModelScope.launch {
-            deleteProductUseCase(id)
-        }
+
     }
 
     fun getSavedProducts() {

@@ -8,6 +8,6 @@ import javax.inject.Inject
 class SaveProductUseCase @Inject constructor(private val productRepository: ProductRepository) :
     BaseUseCase<ProductModelDomain, Unit> {
     override suspend fun invoke(params: ProductModelDomain) {
-        return productRepository.saveProduct(params)
+        return productRepository.saveProductToDb(params)
     }
 }

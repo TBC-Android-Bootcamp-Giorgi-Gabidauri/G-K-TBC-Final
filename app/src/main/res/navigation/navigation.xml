@@ -14,16 +14,7 @@
         android:id="@+id/registerFragment"
         android:name="com.gabo.gk.ui.auth.register.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
-        <action
-            android:id="@+id/action_registerFragment_to_accountSetupFragment"
-            app:destination="@id/accountSetupFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/accountSetupFragment"
-        android:name="com.gabo.gk.ui.auth.accountSetup.AccountSetupFragment"
-        android:label="fragment_account_setup"
-        tools:layout="@layout/fragment_account_setup" />
+        tools:layout="@layout/fragment_register" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.gabo.gk.ui.home.user.home.HomeFragment"
@@ -70,12 +61,20 @@
         android:id="@+id/purchasesFragment"
         android:name="com.gabo.gk.ui.home.products.purchases.PurchasesFragment"
         android:label="fragment_purchases"
-        tools:layout="@layout/fragment_purchases" />
+        tools:layout="@layout/fragment_purchases" >
+        <action
+            android:id="@+id/action_purchasesFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/sellingFragment"
         android:name="com.gabo.gk.ui.home.products.selling.SellingFragment"
         android:label="fragment_selling"
-        tools:layout="@layout/fragment_selling" />
+        tools:layout="@layout/fragment_selling" >
+        <action
+            android:id="@+id/action_sellingFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/hintsFragment"
         android:name="com.gabo.gk.ui.home.control.hints.HintsFragment"
@@ -90,7 +89,11 @@
         android:id="@+id/userProfileFragment"
         android:name="com.gabo.gk.ui.home.user.profile.UserProfileFragment"
         android:label="fragment_user_profile"
-        tools:layout="@layout/fragment_user_profile" />
+        tools:layout="@layout/fragment_user_profile" >
+        <action
+            android:id="@+id/action_userProfileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addSellingProductFragment"
         android:name="com.gabo.gk.ui.home.products.selling.active.addSellingProduct.AddSellingProductFragment"
@@ -119,9 +122,26 @@
         <action
             android:id="@+id/action_productDetailsFragment_to_sortedProductsFragment"
             app:destination="@id/sortedProductsFragment" />
+        <action
+            android:id="@+id/action_productDetailsFragment_self"
+            app:destination="@id/productDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
         android:name="com.gabo.gk.ui.splash.SplashScreenFragment"
         android:label="SplashScreenFragment" />
+    <dialog
+        android:id="@+id/fillBalanceFragment"
+        android:name="com.gabo.gk.ui.home.user.wallet.fillBalance.FillBalanceFragment"
+        android:label="fragment_fill_balance"
+        tools:layout="@layout/fragment_fill_balance" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.gabo.gk.ui.home.user.profile.editProfile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <argument
+            android:name="user"
+            app:argType="com.gabo.gk.ui.model.user.UserModelUi" />
+    </fragment>
 </navigation>

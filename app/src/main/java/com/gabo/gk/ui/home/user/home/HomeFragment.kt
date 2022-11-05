@@ -1,7 +1,6 @@
 package com.gabo.gk.ui.home.user.home
 
 import android.annotation.SuppressLint
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -10,15 +9,20 @@ import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
 import com.gabo.gk.comon.constants.FIELD_TITLE
 import com.gabo.gk.comon.extensions.launchStarted
+import com.gabo.gk.comon.extensions.snackBar
 import com.gabo.gk.comon.extensions.txt
 import com.gabo.gk.databinding.FragmentHomeBinding
 import com.gabo.gk.ui.adapters.ProductsAdapter
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var productsAdapter: ProductsAdapter
+    @Inject
+    lateinit var auth: FirebaseAuth
     override fun setupView() {
         setupAdapters()
         setupListeners()
@@ -35,13 +39,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     search(appBar.etSearch.txt())
                 }
             }
-            chipCategories.setOnClickListener {
+            tvCategories.setOnClickListener {
                 findNavController().navigate(R.id.categoriesFragment)
             }
-            chipSaved.setOnClickListener {
+            tvSaved.setOnClickListener {
                 findNavController().navigate(R.id.savedItemsFragment)
             }
-            chipSelling.setOnClickListener {
+            tvSelling.setOnClickListener {
                 findNavController().navigate(R.id.sellingFragment)
             }
             appBar.etSearch.doOnTextChanged { text, start, before, count ->
@@ -65,14 +69,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     binding.swipeRl.isRefreshing = false
                 }
                 when {
-                    it.msg.isNotEmpty() -> Toast.makeText(
-                        requireContext(), it.msg, Toast.LENGTH_SHORT
-                    ).show()
-                }
-                if (it.data != null) {
-                    productsAdapter.submitList(it.data)
-                } else {
-                    productsAdapter.submitList(emptyList())
+                    it.msg.isNotEmpty() -> binding.root.snackBar(it.msg)
+                    !it.data.isNullOrEmpty() -> productsAdapter.submitList(it.data)
                 }
             }
         }
@@ -80,24 +78,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setupAdapters() {
-        productsAdapter = ProductsAdapter(itemClick = {
+        productsAdapter = ProductsAdapter(auth.currentUser!!.uid, itemClick = {
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToProductDetailsFragment(it)
             )
         }, heartClick = {
-            if (it.isSaved.contains(it.uid)) {
-                viewModel.deleteProduct(it.id)
-                it.isSaved = it.isSaved.toMutableList()
-                (it.isSaved as MutableList<String>).remove(it.uid)
-                it.isSaved = it.isSaved.toList()
-                viewModel.updateProduct(it)
+            if (it.isSaved.contains(auth.currentUser!!.uid)) {
+                it.isSaved.remove(auth.currentUser!!.uid)
+                viewModel.deleteProduct(it)
                 productsAdapter.notifyDataSetChanged()
             } else {
-                it.isSaved = it.isSaved.toMutableList()
-                (it.isSaved as MutableList<String>).add(it.uid)
-                it.isSaved = it.isSaved.toList()
+                it.isSaved.add(auth.currentUser!!.uid)
                 viewModel.saveProduct(it)
-                viewModel.updateProduct(it)
                 productsAdapter.notifyDataSetChanged()
             }
         })

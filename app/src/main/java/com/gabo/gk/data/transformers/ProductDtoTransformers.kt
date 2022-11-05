@@ -7,13 +7,13 @@ import com.gabo.gk.domain.model.ProductModelDomain
 fun ProductDto.toDomain() = ProductModelDomain(
     id, uid, title, productCondition, description, productType, productCategory, canBeSoldOnline,
     photos, price, negotiablePrice, sellerName, sellerPhoneNumber, location, sold, searchList,
-    isSaved
+    isSaved,purchasedBy
 )
 
 fun ProductModelDomain.toDto() = ProductDto(
     id, uid, title, productCondition, description, productType, productCategory, canBeSoldOnline,
     photos, price, negotiablePrice, sellerName, sellerPhoneNumber, location, sold, searchList,
-    isSaved
+    isSaved,purchasedBy
 )
 
 fun ProductModelDomain.toEntity() = ProductEntity(
@@ -33,11 +33,12 @@ fun ProductModelDomain.toEntity() = ProductEntity(
     location = location,
     sold = sold,
     searchList = searchList,
-    isSaved = isSaved
+    isSaved = isSaved,
+    purchasedBy
 )
 
 fun ProductEntity.toDomain() = ProductModelDomain(
     id, uid, title, productCondition, description, productType, productCategory, canBeSoldOnline,
     photos, price, negotiablePrice, sellerName, sellerPhoneNumber, location, sold, searchList,
-    isSaved
+    isSaved, purchasedBy
 )

@@ -27,8 +27,8 @@
         android:layout_marginTop="@dimen/dimen_8dp"
         android:id="@+id/tvUserName"
         android:layout_height="wrap_content"
-        android:textColor="@color/md_theme_light_onPrimaryContainer"
         android:layout_marginStart="@dimen/dimen_20dp"
+        android:textColor="?colorTertiary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cvUserImage" />
 </androidx.constraintlayout.widget.ConstraintLayout>
