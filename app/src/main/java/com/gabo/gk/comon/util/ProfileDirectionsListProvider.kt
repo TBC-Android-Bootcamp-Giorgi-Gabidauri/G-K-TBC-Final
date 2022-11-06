@@ -9,7 +9,7 @@ object ProfileDirectionsListProvider {
         ProfileDirectionModel(img = R.drawable.ic_wallet,title = "Wallet"),
         ProfileDirectionModel(img = R.drawable.ic_cart,title = "Purchases",),
         ProfileDirectionModel(img = R.drawable.ic_sell,title = "Selling"),
-        ProfileDirectionModel(img = R.drawable.ic_email,title = "Messages"),
+        ProfileDirectionModel(img = R.drawable.ic_notifications,title = "Notifications"),
         ProfileDirectionModel(img = R.drawable.ic_grid_view,title = "Categories")
     )
 }

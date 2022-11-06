@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.gabo.gk.base.BaseViewModel
 import com.gabo.gk.domain.useCases.product.DeleteProductFromDbUseCase
 import com.gabo.gk.domain.useCases.product.GetFilteredProductsUseCase
-import com.gabo.gk.domain.useCases.product.GetSavedProductsUseCase
+import com.gabo.gk.domain.useCases.product.GetSavedProductsScenario
 import com.gabo.gk.domain.useCases.product.UpdateProductUseCase
 import com.gabo.gk.ui.model.filter.FilterModelUi
 import com.gabo.gk.ui.model.product.ProductModelUi
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SavedItemsViewModel @Inject constructor(
-    private val getSavedProductsUseCase: GetSavedProductsUseCase,
+    private val getSavedProductsScenario: GetSavedProductsScenario,
     private var getFilteredProductsUseCase: GetFilteredProductsUseCase,
     private val deleteProductFromDbUseCase: DeleteProductFromDbUseCase,
     private val updateProductUseCase: UpdateProductUseCase,
@@ -39,7 +39,7 @@ class SavedItemsViewModel @Inject constructor(
 
     fun getSavedProducts() {
         viewModelScope.launch {
-            getSavedProductsUseCase(Unit).collect {
+            getSavedProductsScenario(Unit).collect {
                 _defaultState.value =
                     _defaultState.value.copy(data = it.map { domain -> domain.toUi() })
             }
@@ -48,7 +48,7 @@ class SavedItemsViewModel @Inject constructor(
 
     fun getFilteredProducts(model: FilterModelUi) {
         viewModelScope.launch {
-            getSavedProductsUseCase(Unit).collect {
+            getSavedProductsScenario(Unit).collect {
                 getData(
                     flow = (getFilteredProductsUseCase(Pair(model.toDomain(), it))),
                     mapper = { list -> list.map { productModelDomain -> productModelDomain.toUi() } },

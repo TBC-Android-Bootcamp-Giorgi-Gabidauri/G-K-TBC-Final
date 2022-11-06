@@ -1,15 +1,17 @@
 package com.gabo.gk.ui.home.user.profile
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
+import android.util.Log.d
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
+import com.gabo.gk.comon.constants.TAG
 import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.comon.extensions.loadImage
-import com.gabo.gk.comon.extensions.snackBar
 import com.gabo.gk.comon.util.ProfileDirectionsListProvider.profileDirections
 import com.gabo.gk.databinding.FragmentUserProfileBinding
 import com.gabo.gk.ui.adapters.ProfileDirectionsAdapter
@@ -26,6 +28,21 @@ class UserProfileFragment :
         setupListeners()
         setupAdapters()
         setupObservers()
+        setupCard()
+
+    }
+
+    private fun setupCard() {
+        with(binding) {
+            ivWalletBg.setImageResource(
+                if (isDarkMode()) R.drawable.bg_wallet_card else R.drawable.bg_wallet_card_light
+            )
+        }
+    }
+
+    private fun isDarkMode(): Boolean {
+        val darkModeFlag = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        return darkModeFlag == Configuration.UI_MODE_NIGHT_YES
     }
 
     private fun setupObservers() {
@@ -41,7 +58,7 @@ class UserProfileFragment :
                             clProfile.visibility = View.VISIBLE
                             progressBar.visibility = View.GONE
                         }
-                        it.msg.isNotEmpty() -> binding.root.snackBar(it.msg)
+                        it.msg.isNotEmpty() -> d(TAG, it.msg)
                     }
                 }
             }
@@ -69,7 +86,7 @@ class UserProfileFragment :
                     "Wallet" -> navigate(R.id.walletFragment)
                     "Purchases" -> navigate(R.id.purchasesFragment)
                     "Selling" -> navigate(R.id.sellingFragment)
-                    "Messages" -> navigate(R.id.messagesFragment)
+                    "Notifications" -> navigate(R.id.notificationsFragment)
                     "Categories" -> navigate(R.id.categoriesFragment)
                 }
             }

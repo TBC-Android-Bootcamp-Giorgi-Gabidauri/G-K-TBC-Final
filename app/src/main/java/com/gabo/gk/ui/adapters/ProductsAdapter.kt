@@ -9,6 +9,7 @@ import com.gabo.gk.R
 import com.gabo.gk.comon.constants.PRODUCT_GRID_VIEW
 import com.gabo.gk.comon.constants.PRODUCT_LIST_VIEW
 import com.gabo.gk.comon.extensions.loadImage
+import com.gabo.gk.comon.extensions.loadImageDecreasedQuality
 import com.gabo.gk.databinding.ProductItemGridViewBinding
 import com.gabo.gk.databinding.ProductItemListViewBinding
 import com.gabo.gk.ui.model.product.ProductModelUi
@@ -40,7 +41,7 @@ class ProductsAdapter(
             heartClick: (ProductModelUi) -> Unit
         ) {
             with(binding) {
-                if (model.photos!!.isNotEmpty()) ivPoster.loadImage(model.photos[0])
+                if (model.photos!!.isNotEmpty()) ivPoster.loadImageDecreasedQuality(model.photos[0])
                 tvTitle.text = model.title
                 tvCondition.text = model.productCondition
                 tvPrice.text =

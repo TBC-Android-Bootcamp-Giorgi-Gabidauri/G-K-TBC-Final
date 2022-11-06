@@ -5,6 +5,7 @@ import com.gabo.gk.data.local.dataSources.ProductLocalDataSource
 import com.gabo.gk.data.transformers.toDto
 import com.gabo.gk.domain.model.ProductModelDomain
 import com.gabo.gk.domain.repository.ProductRepository
+import com.gabo.gk.notification.model.product.ProductPushNotification
 import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(
@@ -40,5 +41,11 @@ class ProductRepositoryImpl @Inject constructor(
     override suspend fun deleteProductFromDb(id: String) {
         productLocalDataSource.deleteProduct(id)
     }
+
+    override suspend fun sendNotification(notification: ProductPushNotification) {
+        productGlobalDataSource.sendNotification(notification)
+    }
+
+    override suspend fun deleteAllProductsFromDb(){ productLocalDataSource.deleteAll() }
 }
 

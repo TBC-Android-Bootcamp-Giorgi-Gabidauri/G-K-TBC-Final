@@ -55,16 +55,16 @@
             android:id="@+id/tvSold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginEnd="@dimen/dimen_10dp"
             android:background="@drawable/bg_search"
             android:paddingHorizontal="@dimen/dimen_15dp"
-            android:layout_marginEnd="@dimen/dimen_10dp"
             android:paddingStart="@dimen/dimen_20dp"
             android:paddingEnd="@dimen/dimen_20dp"
             android:text="@string/sold"
             android:textSize="@dimen/dimen_18sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/chipCondition"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/chipCondition" />
@@ -77,6 +77,7 @@
             android:layout_marginEnd="@dimen/dimen_10dp"
             android:paddingStart="@dimen/dimen_20dp"
             android:paddingEnd="@dimen/dimen_20dp"
+            android:text="@string/product_title"
             android:textSize="@dimen/dimen_18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -127,14 +128,6 @@
             app:layout_constraintStart_toStartOf="@id/tvPrice"
             app:layout_constraintTop_toBottomOf="@id/tvPrice" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:text="@string/art"
-            app:layout_constraintStart_toStartOf="@id/tvDescriptionTitle"
-            app:layout_constraintTop_toBottomOf="@id/tvDescriptionTitle" />
 
         <TextView
             android:id="@+id/tvDescription"
@@ -142,9 +135,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_10dp"
             android:layout_marginEnd="@dimen/dimen_20dp"
+            android:text="@string/descriptionText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tvPrice"
-            app:layout_constraintTop_toBottomOf="@id/chipCategory" />
+            app:layout_constraintTop_toBottomOf="@id/tvDescriptionTitle" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:text="@string/art"
+            app:layout_constraintStart_toStartOf="@id/tvDescription"
+            app:layout_constraintTop_toBottomOf="@id/tvDescription" />
 
         <TextView
             android:id="@+id/tvSellerName"
@@ -154,8 +157,8 @@
             android:text="@string/seller_name"
             android:textSize="@dimen/dimen_18sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/tvDescription"
-            app:layout_constraintTop_toBottomOf="@id/tvDescription" />
+            app:layout_constraintStart_toStartOf="@id/tvDescriptionTitle"
+            app:layout_constraintTop_toBottomOf="@id/chipCategory" />
 
         <Button
             android:id="@+id/btnTextSeller"

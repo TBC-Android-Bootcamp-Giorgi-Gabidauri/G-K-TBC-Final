@@ -15,13 +15,5 @@ class FormatCardNumberUseCase @Inject constructor() {
             }
             params.replace(0, params.length, current, 0, current.length)
         }
-        if (params.toString() != current) {
-            val userInput = params.toString().replace(Regex("[^\\d]"), "")
-            if (userInput.length <= 4) {
-                current = userInput.chunked(2).joinToString("/")
-                params.filters = arrayOfNulls<InputFilter>(0)
-            }
-            params.replace(0, params.length, current, 0, current.length)
-        }
     }
 }

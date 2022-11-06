@@ -5,7 +5,7 @@ import com.gabo.gk.domain.model.ProductModelDomain
 import com.gabo.gk.domain.repository.ProductRepository
 import javax.inject.Inject
 
-class SaveProductUseCase @Inject constructor(private val productRepository: ProductRepository) :
+class SaveProductToDbUseCase @Inject constructor(private val productRepository: ProductRepository) :
     BaseUseCase<ProductModelDomain, Unit> {
     override suspend fun invoke(params: ProductModelDomain) {
         return productRepository.saveProductToDb(params)

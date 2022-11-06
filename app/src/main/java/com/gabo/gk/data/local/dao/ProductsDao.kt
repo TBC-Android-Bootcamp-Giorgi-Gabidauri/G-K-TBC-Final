@@ -18,4 +18,7 @@ interface ProductsDao {
 
     @Query("SELECT * FROM $TABLE_NAME")
     fun getItems(): Flow<List<ProductEntity>>
+
+    @Query("DELETE FROM $TABLE_NAME")
+    suspend fun deleteAll()
 }

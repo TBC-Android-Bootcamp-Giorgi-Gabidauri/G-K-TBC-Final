@@ -18,4 +18,6 @@ class ProductLocalDataSource @Inject constructor(
     suspend fun saveProduct(product: ProductModelDomain) { database.getPurchaseDao.saveItem(product.toEntity()) }
 
     suspend fun deleteProduct(id: String) { database.getPurchaseDao.deleteItem(id) }
+
+    suspend fun deleteAll(){ database.getPurchaseDao.deleteAll() }
 }

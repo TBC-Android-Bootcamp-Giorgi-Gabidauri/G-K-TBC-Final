@@ -12,5 +12,8 @@ data class UserModelDomain(
     var availableAmount: Int,
     val searchList: List<String>,
     val soldProducts: MutableList<ProductModelDomain> = mutableListOf(),
-    val purchasedProducts: MutableList<ProductModelDomain> = mutableListOf()
+    val purchasedProducts: MutableList<ProductModelDomain> = mutableListOf(),
+    val token:String = "",
+    val savedProducts: MutableList<ProductModelDomain> = mutableListOf(),
+    val notifications: MutableList<NotificationModel> = mutableListOf(),
 )

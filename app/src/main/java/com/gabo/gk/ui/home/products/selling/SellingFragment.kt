@@ -29,8 +29,7 @@ class SellingFragment : BaseFragment<FragmentSellingBinding>(FragmentSellingBind
             TabLayoutMediator(tlSelling, vpSelling) { tab, index ->
                 tab.text = when (index) {
                     0 -> ACTIVE
-                    1 -> SOLD
-                    else -> UNSOLD
+                    else -> SOLD
                 }
             }.attach()
         }
@@ -39,6 +38,5 @@ class SellingFragment : BaseFragment<FragmentSellingBinding>(FragmentSellingBind
     companion object {
         const val ACTIVE = "Active"
         const val SOLD = "Sold"
-        const val UNSOLD = "Unsold"
     }
 }

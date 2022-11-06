@@ -4,10 +4,13 @@ import android.content.Context
 import com.gabo.gk.R
 import com.gabo.gk.base.BaseUseCase
 import com.gabo.gk.comon.response.Resource
+import com.gabo.gk.domain.model.NotificationModel
 import com.gabo.gk.domain.model.ProductModelDomain
 import com.gabo.gk.domain.model.UserModelDomain
 import com.gabo.gk.domain.useCases.user.GetUserUseCase
 import com.gabo.gk.domain.useCases.user.UpdateUserUseCase
+import com.gabo.gk.notification.model.product.ProductNotificationData
+import com.gabo.gk.notification.model.product.ProductPushNotification
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -17,6 +20,7 @@ class BuyProductScenario @Inject constructor(
     private val updateUserUseCase: UpdateUserUseCase,
     private val updateProductUseCase: UpdateProductUseCase,
     private val auth: FirebaseAuth,
+    private val sendProductNotificationUseCase: SendProductNotificationUseCase,
     @ApplicationContext private val context: Context
 ) : BaseUseCase<ProductModelDomain, String> {
     override suspend fun invoke(params: ProductModelDomain): String {
@@ -40,10 +44,24 @@ class BuyProductScenario @Inject constructor(
             sellerUser?.let { seller ->
                 seller.availableAmount = seller.availableAmount + params.price
                 seller.soldProducts.add(params)
+                seller.notifications.add(NotificationModel(
+                    imgProduct = params.photos!![0],info = "${params.title} has been sold",
+                    imgClient = clientUser!!.profileImg
+                ))
             }
             updateProductUseCase(params)
+
+            ProductPushNotification(
+                ProductNotificationData(
+                    "${params.title} has been sold",
+                    "Click to see all notifications"
+                ), sellerUser!!.token
+            ).also {
+                sendProductNotificationUseCase(it)
+            }
+
             val updatedClient = updateUserUseCase(clientUser!!)
-            val updatedSeller = updateUserUseCase(sellerUser!!)
+            val updatedSeller = updateUserUseCase(sellerUser)
             return context.getString(
                 if (updatedClient == context.getString(R.string.user_updated_successfully) &&
                     updatedSeller == context.getString(R.string.user_updated_successfully)

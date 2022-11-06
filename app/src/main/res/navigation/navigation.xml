@@ -3,13 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/splashScreenFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.gabo.gk.ui.auth.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment"
+            app:popUpTo="@id/navigation" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.gabo.gk.ui.auth.register.RegisterFragment"
@@ -28,12 +33,11 @@
         android:id="@+id/notificationsFragment"
         android:name="com.gabo.gk.ui.home.user.notifications.NotificationsFragment"
         android:label="fragment_notifications"
-        tools:layout="@layout/fragment_notifications" />
-    <fragment
-        android:id="@+id/messagesFragment"
-        android:name="com.gabo.gk.ui.home.user.messages.MessagesFragment"
-        android:label="fragment_messages"
-        tools:layout="@layout/fragment_messages" />
+        tools:layout="@layout/fragment_notifications" >
+        <argument
+            android:name="notification"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/walletFragment"
         android:name="com.gabo.gk.ui.home.user.wallet.WalletFragment"
@@ -76,16 +80,6 @@
             app:destination="@id/productDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/hintsFragment"
-        android:name="com.gabo.gk.ui.home.control.hints.HintsFragment"
-        android:label="fragment_hints"
-        tools:layout="@layout/fragment_hints" />
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.gabo.gk.ui.home.control.settings.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
-    <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.gabo.gk.ui.home.user.profile.UserProfileFragment"
         android:label="fragment_user_profile"
@@ -126,10 +120,6 @@
             android:id="@+id/action_productDetailsFragment_self"
             app:destination="@id/productDetailsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/splashScreenFragment"
-        android:name="com.gabo.gk.ui.splash.SplashScreenFragment"
-        android:label="SplashScreenFragment" />
     <dialog
         android:id="@+id/fillBalanceFragment"
         android:name="com.gabo.gk.ui.home.user.wallet.fillBalance.FillBalanceFragment"

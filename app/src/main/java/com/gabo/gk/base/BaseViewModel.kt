@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 abstract class BaseViewModel<Ui : Any> : ViewModel() {
     protected val _defaultState =MutableStateFlow(DefaultViewState<Ui>())
     open val defaultState = _defaultState.asStateFlow()
+
     open suspend fun <T : Any> getData(
         flow: Flow<Resource<T>>,
         mapper: ((T) -> Ui),

@@ -9,7 +9,7 @@ interface QueryHelper {
 
     fun createSearchSamples(query: String): List<String>
 
-    suspend fun queryHelper(
+    suspend fun productQueryHelper(
         error: String = "",
         query: (suspend () -> QuerySnapshot)?
     ): Flow<Resource<List<ProductModelDomain>>>

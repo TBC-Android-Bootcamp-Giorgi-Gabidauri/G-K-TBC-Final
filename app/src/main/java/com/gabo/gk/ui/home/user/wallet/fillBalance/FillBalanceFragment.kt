@@ -1,6 +1,7 @@
 package com.gabo.gk.ui.home.user.wallet.fillBalance
 
 import android.os.Bundle
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.gabo.gk.R
+import com.gabo.gk.comon.constants.TAG
 import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.comon.extensions.snackBar
 import com.gabo.gk.comon.extensions.txt
@@ -33,7 +35,10 @@ class FillBalanceFragment : BottomSheetDialogFragment() {
         viewLifecycleOwner.launchStarted {
             viewModel.defaultState.collect {
                 binding!!.progressBar.isVisible = it.loading
-                if (it.msg.isNotEmpty()) binding!!.root.snackBar(it.msg)
+                if (it.msg.isNotEmpty()) {
+                    d(TAG, it.msg)
+                    binding!!.root.snackBar(it.msg)
+                }
                 if (it.msg == getString(R.string.balance_filled_successfully)) {
                     findNavController().popBackStack(R.id.walletFragment, true)
                     findNavController().navigate(R.id.walletFragment)
@@ -47,6 +52,16 @@ class FillBalanceFragment : BottomSheetDialogFragment() {
             etCardNumber.text?.let {
                 etCardNumber.doOnTextChanged { text, start, before, count ->
                     viewModel.formatCardNumber(it)
+                }
+            }
+            etExpirationDate.text?.let {
+                etExpirationDate.doOnTextChanged { text, start, before, count ->
+                    viewModel.formatDate(it)
+                }
+            }
+            etCVC.text?.let {
+                etCVC.doOnTextChanged { text, start, before, count ->
+                    viewModel.formatCVC(it)
                 }
             }
             btnPay.setOnClickListener {

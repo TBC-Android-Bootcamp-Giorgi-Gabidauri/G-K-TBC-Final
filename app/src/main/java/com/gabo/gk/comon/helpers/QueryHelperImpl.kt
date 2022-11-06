@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class QueryHelperImpl @Inject constructor() : QueryHelper {
-    override suspend fun queryHelper(
+    override suspend fun productQueryHelper(
         error: String,
         query: (suspend () -> QuerySnapshot)?
     ) = flow {
