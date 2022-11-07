@@ -14,8 +14,7 @@ import javax.inject.Inject
 class ActiveSellingViewModel @Inject constructor(
     private val getSortedProductsUseCase: GetSortedProductsUseCase,
     private val auth: FirebaseAuth
-) :
-    BaseViewModel<List<ProductModelUi>>() {
+) : BaseViewModel<List<ProductModelUi>>() {
     fun getSortedProducts(field: String) {
         viewModelScope.launch {
             getData(

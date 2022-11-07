@@ -49,8 +49,7 @@ class ActiveSellingFragment :
                         requireContext(),
                         it.msg,
                         Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    ).show()
                     !it.data.isNullOrEmpty() -> productsAdapter.submitList(it.data)
                 }
             }
