@@ -2,6 +2,7 @@ package com.gabo.gk.domain.repository
 
 import com.gabo.gk.comon.response.Resource
 import com.gabo.gk.domain.model.ProductModelDomain
+import com.gabo.gk.notification.model.product.ProductPushNotification
 import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
@@ -18,9 +19,16 @@ interface ProductRepository {
         equalsTo: Any?
     ): Flow<Resource<List<ProductModelDomain>>>
 
-    suspend fun searchProducts(field: String, query: String): Flow<Resource<List<ProductModelDomain>>>
-    suspend fun getSavedProducts(): Flow<List<ProductModelDomain>>
-    suspend fun saveProduct(product: ProductModelDomain)
-    suspend fun deleteProduct(id: String)
-    suspend fun updateProduct(newProduct: ProductModelDomain): Flow<String?>
+    suspend fun searchProducts(
+        field: String,
+        query: String
+    ): Flow<Resource<List<ProductModelDomain>>>
+
+    suspend fun getSavedProductsFromDb(): Flow<List<ProductModelDomain>>
+    suspend fun saveProductToDb(product: ProductModelDomain)
+    suspend fun deleteProductFromDb(id: String)
+    suspend fun updateProduct(newProduct: ProductModelDomain): String
+    suspend fun deleteProduct(newProduct: ProductModelDomain): String
+    suspend fun sendNotification(notification: ProductPushNotification)
+    suspend fun deleteAllProductsFromDb()
 }

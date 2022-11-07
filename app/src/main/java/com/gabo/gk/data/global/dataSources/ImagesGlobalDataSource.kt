@@ -21,8 +21,7 @@ class ImagesGlobalDataSource @Inject constructor(
                     uniqueImageId(uid, filename)
                     firebaseStorage.reference.child(
                         "$IMAGES_STORAGE/$uid/$filename/${uniqueImageId(uid, filename)}"
-                    ).putFile(uri)
-                        .await()
+                    ).putFile(uri).await()
                 }
                 val imgUrls = getImageUrls(filename, uid)
                 when {

@@ -14,31 +14,33 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getProductsUseCase: GetProductsUseCase,
     private val searchProductsUseCase: SearchProductsUseCase,
-    private val saveProductUseCase: SaveProductUseCase,
-    private val deleteProductUseCase: DeleteProductUseCase,
-    private val updateProductUseCase: UpdateProductUseCase
+    private val saveProductToDbUseCase: SaveProductToDbUseCase,
+    private val deleteProductFromDbUseCase: DeleteProductFromDbUseCase,
+    private val updateProductUseCase: UpdateProductUseCase,
 ) : BaseViewModel<List<ProductModelUi>>() {
-
-    fun updateProduct(newProduct: ProductModelUi) {
-        viewModelScope.launch {
-            updateProductUseCase(newProduct.toDomain()).collect {
-                it?.let { _defaultState.value = _defaultState.value.copy(msg = it) }
-            }
-        }.invokeOnCompletion {
-//            getProducts()
-        }
-    }
 
     fun saveProduct(product: ProductModelUi) {
         viewModelScope.launch {
-            saveProductUseCase(product.toDomain())
+            resetDefaultViewState()
+            val result = updateProductUseCase(product.toDomain())
+            if (result == "Product updated successfully") {
+                saveProductToDbUseCase(product.toDomain())
+            }
+            _defaultState.value = _defaultState.value.copy(msg = result)
+
         }
     }
 
-    fun deleteProduct(id: String) {
+    fun deleteProduct(product: ProductModelUi) {
         viewModelScope.launch {
-            deleteProductUseCase(id)
+            resetDefaultViewState()
+            val result = updateProductUseCase(product.toDomain())
+            if (result == "Product updated successfully") {
+                deleteProductFromDbUseCase(product.id)
+            }
+            _defaultState.value = _defaultState.value.copy(msg = result)
         }
+
     }
 
     fun getProducts() {

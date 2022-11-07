@@ -21,7 +21,8 @@ data class ProductModelUi(
     val location: String,
     val sold: Boolean = false,
     val searchList: List<String> = emptyList(),
-    var isSaved: List<String> = emptyList()
+    var isSaved: MutableList<String> = mutableListOf(),
+    val purchasedBy: String = ""
 ) : Parcelable
 
 

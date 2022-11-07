@@ -1,9 +1,9 @@
 package com.gabo.gk.ui.home.products.categories.sorted
 
 import android.annotation.SuppressLint
+import android.util.Log.d
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -16,21 +16,33 @@ import com.gabo.gk.base.BaseFragment
 import com.gabo.gk.comon.constants.FIELD_PRODUCT_CATEGORY
 import com.gabo.gk.comon.constants.PRODUCT_GRID_VIEW
 import com.gabo.gk.comon.constants.PRODUCT_LIST_VIEW
+import com.gabo.gk.comon.constants.TAG
 import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.comon.extensions.txt
 import com.gabo.gk.databinding.FragmentSortedProductsBinding
+import com.gabo.gk.ui.MainActivity
+import com.gabo.gk.ui.MainViewModel
 import com.gabo.gk.ui.adapters.ProductsAdapter
 import com.gabo.gk.ui.model.filter.FilterModelUi
+import com.gabo.gk.ui.model.user.UserModelUi
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SortedProductsFragment :
     BaseFragment<FragmentSortedProductsBinding>(FragmentSortedProductsBinding::inflate) {
     private val viewModel: SortedProductsViewModel by viewModels()
     private val args: SortedProductsFragmentArgs by navArgs()
+    private lateinit var activityViewModel: MainViewModel
+    private lateinit var user: UserModelUi
     private lateinit var productsAdapter: ProductsAdapter
     private var viewControl = true
+
+    @Inject
+    lateinit var auth: FirebaseAuth
     override fun setupView() {
+        activityViewModel = (activity as MainActivity).viewModel
         getSortedProducts()
         setupAppBar()
         setupAdapters()
@@ -58,7 +70,7 @@ class SortedProductsFragment :
                 ivView.setOnClickListener {
                     viewControl = if (viewControl) {
                         ivView.setImageResource(R.drawable.ic_list_view)
-                        binding.rvProducts.layoutManager = GridLayoutManager(requireContext(),2)
+                        binding.rvProducts.layoutManager = GridLayoutManager(requireContext(), 2)
                         productsAdapter.changeView(PRODUCT_GRID_VIEW)
                         false
                     } else {
@@ -126,8 +138,7 @@ class SortedProductsFragment :
         viewLifecycleOwner.launchStarted {
             viewModel.defaultState.collect {
                 binding.swipeRl.isRefreshing = it.loading
-                if (it.msg.isNotEmpty())
-                    Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                if (it.msg.isNotEmpty()) d(TAG, it.msg)
                 it.data?.let { list -> productsAdapter.submitList(list) }
             }
         }
@@ -139,26 +150,22 @@ class SortedProductsFragment :
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setupAdapters() {
-        productsAdapter = ProductsAdapter(itemClick =  {
+        productsAdapter = ProductsAdapter(auth.currentUser!!.uid, itemClick = {
             findNavController().navigate(
                 SortedProductsFragmentDirections.actionSortedProductsFragmentToProductDetailsFragment(
                     it
                 )
             )
         }, heartClick = {
-            if (it.isSaved.contains(it.uid)) {
-                viewModel.deleteProduct(it.id)
-                it.isSaved = it.isSaved.toMutableList()
-                (it.isSaved as MutableList<String>).remove(it.uid)
-                it.isSaved = it.isSaved.toList()
-                viewModel.updateProduct(it)
+            if (it.isSaved.contains(auth.currentUser!!.uid)) {
+                it.isSaved.remove(auth.currentUser!!.uid)
+                viewModel.deleteProduct(it)
+                activityViewModel.updateUser(user)
                 productsAdapter.notifyDataSetChanged()
             } else {
-                it.isSaved = it.isSaved.toMutableList()
-                (it.isSaved as MutableList<String>).add(it.uid)
-                it.isSaved = it.isSaved.toList()
+                it.isSaved.add(auth.currentUser!!.uid)
                 viewModel.saveProduct(it)
-                viewModel.updateProduct(it)
+                activityViewModel.updateUser(user)
                 productsAdapter.notifyDataSetChanged()
             }
         })

@@ -11,11 +11,13 @@ import javax.inject.Inject
 class ProductLocalDataSource @Inject constructor(
     private val database: ProductsDatabase
 ) {
-    suspend fun getSavedProducts(): Flow<List<ProductModelDomain>> {
+    fun getSavedProducts(): Flow<List<ProductModelDomain>> {
         return database.getPurchaseDao.getItems().map { it.map { entity -> entity.toDomain() } }
     }
 
     suspend fun saveProduct(product: ProductModelDomain) { database.getPurchaseDao.saveItem(product.toEntity()) }
 
     suspend fun deleteProduct(id: String) { database.getPurchaseDao.deleteItem(id) }
+
+    suspend fun deleteAll(){ database.getPurchaseDao.deleteAll() }
 }
