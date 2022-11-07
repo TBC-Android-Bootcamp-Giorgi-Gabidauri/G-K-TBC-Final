@@ -21,19 +21,19 @@ How To Use
 -----------
 - to use app user needs to have or create account.
 
-<img src="https://user-images.githubusercontent.com/66998427/200219028-6ef0f0e6-f0f0-4218-ba11-f32eb250a591.png" width="300" height="600"> |
-<img src="https://user-images.githubusercontent.com/66998427/200219142-c262517f-f311-42ea-a669-94801dd48f28.png" width="300" height="600"> |
+<img src="https://user-images.githubusercontent.com/66998427/200219028-6ef0f0e6-f0f0-4218-ba11-f32eb250a591.png" width="200" height="400"> |
+<img src="https://user-images.githubusercontent.com/66998427/200219142-c262517f-f311-42ea-a669-94801dd48f28.png" width="200" height="400"> |
 <img src="https://user-images.githubusercontent.com/66998427/200219150-a7aeca5e-e4b8-4cb9-9ad7-23270bd94827.png"
 
 - from home page you can rapidly navigate to categories selling or to saved products
-![home](https://user-images.githubusercontent.com/66998427/200219482-13fba252-9e9a-4126-8d9d-f1dfe440c2e0.png" width="300" height="600"> |
+![home](https://user-images.githubusercontent.com/66998427/200219482-13fba252-9e9a-4126-8d9d-f1dfe440c2e0.png" width="200" height="400"> |
 
 - you can find many categories and you are able to filter products. 
 
-<img src="https://user-images.githubusercontent.com/66998427/200219795-b5e0b397-acf5-4e21-b765-35e99ab55511.png" width="300" height="600"> |
-<img src="https://user-images.githubusercontent.com/66998427/200219814-f35a1eed-bd8c-40c0-a8ae-c632f07739e2.png" width="300" height="600"> |
-<img src="https://user-images.githubusercontent.com/66998427/200219841-120abf88-4c16-4815-8f05-99f9d494276a.png" width="300" height="600"> |
-<img src="https://user-images.githubusercontent.com/66998427/200219852-d31d4a93-297e-4a84-aec2-eee3e75aed96.png" width="300" height="600"> |
+<img src="https://user-images.githubusercontent.com/66998427/200219795-b5e0b397-acf5-4e21-b765-35e99ab55511.png" width="200" height="400"> |
+<img src="https://user-images.githubusercontent.com/66998427/200219814-f35a1eed-bd8c-40c0-a8ae-c632f07739e2.png" width="200" height="400"> |
+<img src="https://user-images.githubusercontent.com/66998427/200219841-120abf88-4c16-4815-8f05-99f9d494276a.png" width="200" height="400"> |
+<img src="https://user-images.githubusercontent.com/66998427/200219852-d31d4a93-297e-4a84-aec2-eee3e75aed96.png" width="200" height="400"> |
 
 - click selling to add product to sell and monitor active and sold ones.
 
