@@ -1,7 +1,7 @@
 package com.gabo.gk.data.repository
 
 import android.net.Uri
-import com.gabo.gk.data.global.dataSources.ImagesGlobalDataSource
+import com.gabo.gk.data.global.dataSources.images.ImagesGlobalDataSource
 import com.gabo.gk.domain.repository.ImagesRepository
 import javax.inject.Inject
 

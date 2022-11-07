@@ -1,6 +1,6 @@
 package com.gabo.gk.data.repository
 
-import com.gabo.gk.data.global.dataSources.AuthGlobalDataSource
+import com.gabo.gk.data.global.dataSources.auth.AuthGlobalDataSource
 import com.gabo.gk.domain.repository.AuthRepository
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.gabo.gk.data.global.dataSources
+package com.gabo.gk.data.global.dataSources.users
 
 import android.content.Context
 import com.gabo.gk.R
@@ -15,18 +15,18 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class UsersGlobalDataSource @Inject constructor(
+class UsersGlobalDataSourceImpl @Inject constructor(
     private val fireStore: FirebaseFirestore,
     @ApplicationContext private val context: Context,
-) {
-    suspend fun createUser(user: UserDto) = try {
+) : UsersGlobalDataSource{
+    override suspend fun createUser(user: UserDto) = try {
         fireStore.collection(Users_Storage).add(user).await()
         (context.getString(R.string.registered_successfully))
     } catch (e: Exception) {
         (e.message.toString())
     }
 
-    suspend fun getUser(uid: String): Resource<UserModelDomain> {
+    override suspend fun getUser(uid: String): Resource<UserModelDomain> {
         return try {
             var userResult: UserModelDomain? = null
             val result =
@@ -46,7 +46,7 @@ class UsersGlobalDataSource @Inject constructor(
         }
     }
 
-    suspend fun updateUser(user: UserDto): String {
+    override suspend fun updateUser(user: UserDto): String {
         return try {
             var userResult: UserDto? = null
             when (val result = getUser(user.uid)) {

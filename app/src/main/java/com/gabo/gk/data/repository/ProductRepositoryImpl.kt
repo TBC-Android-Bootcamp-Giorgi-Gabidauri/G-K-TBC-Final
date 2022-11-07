@@ -1,6 +1,6 @@
 package com.gabo.gk.data.repository
 
-import com.gabo.gk.data.global.dataSources.ProductGlobalDataSource
+import com.gabo.gk.data.global.dataSources.product.ProductGlobalDataSource
 import com.gabo.gk.data.local.dataSources.ProductLocalDataSource
 import com.gabo.gk.data.transformers.toDto
 import com.gabo.gk.domain.model.ProductModelDomain
