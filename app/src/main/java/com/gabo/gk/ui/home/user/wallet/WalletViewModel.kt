@@ -4,6 +4,8 @@ import android.text.Editable
 import androidx.lifecycle.viewModelScope
 import com.gabo.gk.base.BaseViewModel
 import com.gabo.gk.comon.response.Resource
+import com.gabo.gk.domain.useCases.formatters.FormatCVCUseCase
+import com.gabo.gk.domain.useCases.formatters.FormatCardDateUseCase
 import com.gabo.gk.domain.useCases.formatters.FormatCardNumberUseCase
 import com.gabo.gk.domain.useCases.product.GetTransactionsUseCase
 import com.gabo.gk.domain.useCases.user.FillBalanceScenario
@@ -22,7 +24,9 @@ class WalletViewModel @Inject constructor(
     private val getUserUseCase: GetUserUseCase,
     private val auth: FirebaseAuth,
     private val formatCardNumberUseCase: FormatCardNumberUseCase,
-    private val fillBalanceScenario: FillBalanceScenario
+    private val fillBalanceScenario: FillBalanceScenario,
+    private val formatCVCUseCase: FormatCVCUseCase,
+    private val formatCardDateUseCase: FormatCardDateUseCase
 ) : BaseViewModel<List<TransactionModelUi>>() {
     init {
         getTransactions()
@@ -54,6 +58,14 @@ class WalletViewModel @Inject constructor(
 
     fun formatCardNumber(input: Editable) {
         formatCardNumberUseCase(input)
+    }
+
+    fun formatCVC(input: Editable) {
+        formatCVCUseCase(input)
+    }
+
+    fun formatDate(input: Editable) {
+        formatCardDateUseCase(input)
     }
 
     fun fillBalance(amount: Int) {

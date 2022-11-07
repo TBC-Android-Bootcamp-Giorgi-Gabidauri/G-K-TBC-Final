@@ -1,13 +1,7 @@
 package com.gabo.gk.di
 
-import com.gabo.gk.data.repository.AuthRepositoryImpl
-import com.gabo.gk.data.repository.ImagesRepositoryImpl
-import com.gabo.gk.data.repository.ProductRepositoryImpl
-import com.gabo.gk.data.repository.UserRepositoryImpl
-import com.gabo.gk.domain.repository.AuthRepository
-import com.gabo.gk.domain.repository.ImagesRepository
-import com.gabo.gk.domain.repository.ProductRepository
-import com.gabo.gk.domain.repository.UserRepository
+import com.gabo.gk.data.repository.*
+import com.gabo.gk.domain.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

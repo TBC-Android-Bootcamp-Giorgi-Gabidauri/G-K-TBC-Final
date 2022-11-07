@@ -1,6 +1,7 @@
 package com.gabo.gk.ui.home.user.profile.editProfile
 
 import android.net.Uri
+import android.util.Log.d
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -10,9 +11,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
+import com.gabo.gk.comon.constants.TAG
 import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.comon.extensions.loadImage
-import com.gabo.gk.comon.extensions.snackBar
 import com.gabo.gk.comon.extensions.txt
 import com.gabo.gk.databinding.FragmentEditProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,12 +46,12 @@ class EditProfileFragment :
                     progressBar.isVisible = it.loading
                     when {
                         it.msg == getString(R.string.user_updated_successfully) -> {
-                            root.snackBar(it.msg)
+                            d(TAG,it.msg)
                             findNavController().popBackStack(R.id.userProfileFragment, true)
                             findNavController().navigate(R.id.userProfileFragment)
                         }
                         it.msg.isNotEmpty() -> {
-                            root.snackBar(it.msg)
+                            d(TAG,it.msg)
                         }
                     }
                 }

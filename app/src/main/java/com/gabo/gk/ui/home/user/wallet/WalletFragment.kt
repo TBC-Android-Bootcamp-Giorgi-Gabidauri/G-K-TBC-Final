@@ -2,14 +2,15 @@ package com.gabo.gk.ui.home.user.wallet
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
+import android.util.Log.d
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
+import com.gabo.gk.comon.constants.TAG
 import com.gabo.gk.comon.extensions.launchStarted
-import com.gabo.gk.comon.extensions.snackBar
 import com.gabo.gk.databinding.FragmentWalletBinding
 import com.gabo.gk.ui.adapters.TransactionsAdapter
 import com.google.firebase.auth.FirebaseAuth
@@ -62,7 +63,7 @@ class WalletFragment : BaseFragment<FragmentWalletBinding>(FragmentWalletBinding
                     if (it.isNotEmpty()) binding.tvBalance.text = "$it $"
                 }
                 viewModel.defaultState.collect {
-                    if (it.msg.isNotEmpty()) binding.root.snackBar(it.msg)
+                    if (it.msg.isNotEmpty()) d(TAG, it.msg)
                     it.data?.let { list -> transactionsAdapter.submitList(list) }
 
                     clWallet.visibility = View.VISIBLE

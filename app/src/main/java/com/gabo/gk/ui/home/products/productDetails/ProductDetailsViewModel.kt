@@ -2,28 +2,49 @@ package com.gabo.gk.ui.home.products.productDetails
 
 import androidx.lifecycle.viewModelScope
 import com.gabo.gk.base.BaseViewModel
+import com.gabo.gk.comon.response.Resource
 import com.gabo.gk.domain.useCases.product.*
+import com.gabo.gk.domain.useCases.user.GetUserUseCase
 import com.gabo.gk.ui.model.product.ProductModelUi
+import com.gabo.gk.ui.model.user.UserModelUi
 import com.gabo.gk.ui.modelTransformers.toDomain
 import com.gabo.gk.ui.modelTransformers.toUi
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ProductDetailsViewModel @Inject constructor(
     private val updateProductUseCase: UpdateProductUseCase,
-    private val saveProductUseCase: SaveProductUseCase,
+    private val saveProductToDbUseCase: SaveProductToDbUseCase,
     private val deleteProductFromDbUseCase: DeleteProductFromDbUseCase,
     private val buyProductScenario: BuyProductScenario,
     private val getSortedProductsUseCase: GetSortedProductsUseCase,
     private val deleteProductUseCase: DeleteProductUseCase,
-    private val markProductAsSoldUseCase: MarkProductAsSoldUseCase
+    private val markProductAsSoldUseCase: MarkProductAsSoldUseCase,
+    private val getUserUseCase: GetUserUseCase
 ) : BaseViewModel<List<ProductModelUi>>() {
+    private val _user: MutableStateFlow<UserModelUi> = MutableStateFlow(UserModelUi())
+    val user = _user.asStateFlow()
+
     fun markAsSold(product: ProductModelUi) {
         viewModelScope.launch {
             val result = markProductAsSoldUseCase(product.toDomain())
             _defaultState.value = _defaultState.value.copy(msg = result)
+        }
+    }
+
+    fun getUser(uid: String) {
+        viewModelScope.launch {
+            when (val result = getUserUseCase(uid)) {
+                is Resource.Success -> {
+                    _user.value = result.data!!.toUi()
+                }
+                is Resource.Error -> _defaultState.value =
+                    _defaultState.value.copy(msg = result.errorMsg!!)
+            }
         }
     }
 
@@ -46,7 +67,7 @@ class ProductDetailsViewModel @Inject constructor(
             resetDefaultViewState()
             val result = updateProductUseCase(product.toDomain())
             if (result == "Product updated successfully") {
-                saveProductUseCase(product.toDomain())
+                saveProductToDbUseCase(product.toDomain())
             }
             _defaultState.value = _defaultState.value.copy(msg = result)
 

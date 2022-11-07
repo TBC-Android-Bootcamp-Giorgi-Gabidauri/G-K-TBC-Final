@@ -1,6 +1,7 @@
 package com.gabo.gk.data.global.dataSources
 
 import android.content.Context
+import android.util.Log
 import com.gabo.gk.R
 import com.gabo.gk.comon.constants.FIELD_SEARCH_LIST
 import com.gabo.gk.comon.constants.FIELD_TITLE
@@ -11,6 +12,8 @@ import com.gabo.gk.comon.response.Resource
 import com.gabo.gk.data.global.dto.ProductDto
 import com.gabo.gk.data.transformers.toDto
 import com.gabo.gk.domain.model.ProductModelDomain
+import com.gabo.gk.notification.apis.ProductNotificationApi
+import com.gabo.gk.notification.model.product.ProductPushNotification
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -23,6 +26,7 @@ class ProductGlobalDataSource @Inject constructor(
     private val fireStore: FirebaseFirestore,
     private val queryHelper: QueryHelper,
     private val auth: FirebaseAuth,
+    private val productNotificationApi: ProductNotificationApi,
     @ApplicationContext private val context: Context
 ) {
     suspend fun uploadProduct(model: ProductModelDomain) = flow {
@@ -35,15 +39,15 @@ class ProductGlobalDataSource @Inject constructor(
     }
 
     suspend fun getProducts() =
-        queryHelper.queryHelper { fireStore.collection(PRODUCTS_STORAGE).get().await() }
+        queryHelper.productQueryHelper { fireStore.collection(PRODUCTS_STORAGE).get().await() }
 
     suspend fun sortProducts(field: String, equalsTo: String) =
-        queryHelper.queryHelper {
+        queryHelper.productQueryHelper {
             fireStore.collection(PRODUCTS_STORAGE).whereEqualTo(field, equalsTo).get().await()
         }
 
     suspend fun sortForCurrentUser(uid: String, field: String, equalsTo: Any?) =
-        queryHelper.queryHelper {
+        queryHelper.productQueryHelper {
             fireStore.collection(PRODUCTS_STORAGE).whereEqualTo(FIELD_UID, uid)
                 .whereEqualTo(field, equalsTo).get().await()
         }
@@ -53,7 +57,7 @@ class ProductGlobalDataSource @Inject constructor(
         query: String
     ): Flow<Resource<List<ProductModelDomain>>> {
         val fieldPath: String = if (field == FIELD_TITLE) FIELD_SEARCH_LIST else field
-        return queryHelper.queryHelper {
+        return queryHelper.productQueryHelper {
             query.isNotEmpty().let {
                 fireStore.collection(PRODUCTS_STORAGE)
                     .whereArrayContainsAny(fieldPath, listOf(query)).get().await()
@@ -74,6 +78,7 @@ class ProductGlobalDataSource @Inject constructor(
             (e.message.toString())
         }
     }
+
     suspend fun deleteProduct(product: ProductDto): String {
         return try {
             if (!auth.currentUser?.uid.isNullOrEmpty()) {
@@ -87,4 +92,15 @@ class ProductGlobalDataSource @Inject constructor(
         }
     }
 
+    suspend fun sendNotification(notification: ProductPushNotification) {
+        try {
+            val response = productNotificationApi.postNotification(notification)
+            if (response.isSuccessful) {
+            } else {
+                Log.e("notnotnot", response.errorBody().toString())
+            }
+        } catch (e: Exception) {
+            Log.e("notnotnot", e.toString())
+        }
+    }
 }

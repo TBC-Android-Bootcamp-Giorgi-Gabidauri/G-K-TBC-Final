@@ -215,5 +215,15 @@
     <string name="change_your_contact_number">Change your contact number</string>
     <string name="change_your_profile_picture">Change your profile picture</string>
     <string name="set_changes">Set Changes</string>
+    <string name="could_not_get_token">Could not get token</string>
+    <string name="notifications">Notifications</string>
+    <string name="message_sent">Message Sent</string>
+    <string name="messages">Messages</string>
+    <string name="type_a_message">Type a message</string>
+    <string name="product_title">Product Title</string>
+    <string name="descriptionText">askdjbfaskdjbfashdfbkashjfbalsdhfbaskdjbfaskdjbfashdfbkashjfbalsdhfbaskdjbfaskdjbfashdfbkashjfbalsdhfb</string>
+    <string name="not_implemented_yet">Not implemented yet</string>
+    <string name="add_product">Add Product</string>
+    <string name="wellcome_n_sign_in_to_continue">Wellcome,\nSign in to continue</string>
 
 </resources>

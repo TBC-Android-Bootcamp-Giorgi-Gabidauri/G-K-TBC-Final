@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@drawable/bg_search"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dimen_10dp"
-    android:padding="@dimen/dimen_10dp"
-    app:cardCornerRadius="@dimen/dimen_15dp">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:padding="@dimen/dimen_10dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="120dp"
@@ -38,7 +34,7 @@
             android:layout_width="@dimen/dimen_0dp"
             android:textColor="?colorOnPrimaryContainer"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@id/ivSettings"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="@dimen/dimen_10dp"
             android:text="@string/name"
             app:layout_constraintBottom_toTopOf="@id/tvCondition"
@@ -49,9 +45,8 @@
             android:id="@+id/tvCondition"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/md_theme_dark_onSecondaryContainer"
             android:layout_marginStart="@dimen/dimen_10dp"
-            app:layout_constraintEnd_toStartOf="@id/ivSettings"
+            app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/condition"
             app:layout_constraintBottom_toTopOf="@id/tvPrice"
             app:layout_constraintStart_toEndOf="@id/cvPoster"
@@ -62,23 +57,11 @@
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/md_theme_dark_onSecondaryContainer"
             android:layout_marginStart="@dimen/dimen_10dp"
             android:text="@string/_400"
             app:layout_constraintBottom_toBottomOf="@id/cvPoster"
             app:layout_constraintStart_toEndOf="@id/cvPoster"
             app:layout_constraintTop_toBottomOf="@id/tvCondition" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:id="@+id/ivSettings"
-            android:layout_marginEnd="@dimen/dimen_20dp"
-            android:contentDescription="@string/icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_details" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -91,6 +74,4 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_heart" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

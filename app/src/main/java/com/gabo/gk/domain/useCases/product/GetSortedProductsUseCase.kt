@@ -10,6 +10,6 @@ import javax.inject.Inject
 class GetSortedProductsUseCase @Inject constructor(private val productRepository: ProductRepository) :
     BaseUseCase<Pair<String,String>, Flow<Resource<List<ProductModelDomain>>>> {
     override suspend fun invoke(params: Pair<String,String>): Flow<Resource<List<ProductModelDomain>>> {
-        return productRepository.sortProducts(params.first,params.second)
+       return productRepository.sortProducts(params.first,params.second)
     }
 }

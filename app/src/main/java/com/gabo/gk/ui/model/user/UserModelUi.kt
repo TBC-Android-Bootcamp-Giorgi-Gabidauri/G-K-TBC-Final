@@ -1,6 +1,7 @@
 package com.gabo.gk.ui.model.user
 
 import android.os.Parcelable
+import com.gabo.gk.domain.model.NotificationModel
 import com.gabo.gk.ui.model.product.ProductModelUi
 import kotlinx.parcelize.Parcelize
 
@@ -17,5 +18,8 @@ data class UserModelUi(
     val availableAmount: Int = 1000,
     val searchList: List<String> = emptyList(),
     val soldProducts: MutableList<ProductModelUi> = mutableListOf(),
-    val purchasedProducts: MutableList<ProductModelUi> = mutableListOf()
-): Parcelable
+    val purchasedProducts: MutableList<ProductModelUi> = mutableListOf(),
+    val token: String = "",
+    val savedProducts: MutableList<ProductModelUi> = mutableListOf(),
+    val notifications: MutableList<NotificationModel> = mutableListOf(),
+) : Parcelable

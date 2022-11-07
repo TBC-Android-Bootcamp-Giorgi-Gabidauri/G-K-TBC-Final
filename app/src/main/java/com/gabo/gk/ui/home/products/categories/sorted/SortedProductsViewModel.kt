@@ -15,7 +15,7 @@ import javax.inject.Inject
 class SortedProductsViewModel @Inject constructor(
     private val getSortedProductsUseCase: GetSortedProductsUseCase,
     private val getFilteredProductsUseCase: GetFilteredProductsUseCase,
-    private val saveProductUseCase: SaveProductUseCase,
+    private val saveProductToDbUseCase: SaveProductToDbUseCase,
     private val deleteProductFromDbUseCase: DeleteProductFromDbUseCase,
     private val updateProductUseCase: UpdateProductUseCase,
 ) : BaseViewModel<List<ProductModelUi>>() {
@@ -24,7 +24,7 @@ class SortedProductsViewModel @Inject constructor(
             resetDefaultViewState()
             val result = updateProductUseCase(product.toDomain())
             if (result == "Product updated successfully") {
-                saveProductUseCase(product.toDomain())
+                saveProductToDbUseCase(product.toDomain())
             }
             _defaultState.value = _defaultState.value.copy(msg = result)
 

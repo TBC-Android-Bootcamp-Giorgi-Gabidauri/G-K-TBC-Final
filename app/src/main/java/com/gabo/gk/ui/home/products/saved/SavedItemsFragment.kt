@@ -15,8 +15,11 @@ import com.gabo.gk.comon.constants.PRODUCT_LIST_VIEW
 import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.comon.extensions.txt
 import com.gabo.gk.databinding.FragmentSavedItemsBinding
+import com.gabo.gk.ui.MainActivity
+import com.gabo.gk.ui.MainViewModel
 import com.gabo.gk.ui.adapters.ProductsAdapter
 import com.gabo.gk.ui.model.filter.FilterModelUi
+import com.gabo.gk.ui.model.user.UserModelUi
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -26,11 +29,14 @@ class SavedItemsFragment :
     BaseFragment<FragmentSavedItemsBinding>(FragmentSavedItemsBinding::inflate) {
     private val viewModel: SavedItemsViewModel by viewModels()
     private lateinit var productsAdapter: ProductsAdapter
+    private lateinit var activityViewModel :MainViewModel
+    private lateinit var user: UserModelUi
     private var viewControl = true
 
     @Inject
     lateinit var auth: FirebaseAuth
     override fun setupView() {
+        activityViewModel = (activity as MainActivity).viewModel
         setupObservers()
         setupAppBar()
         setupAdapters()
@@ -58,7 +64,9 @@ class SavedItemsFragment :
             val list = it.isSaved.toMutableList()
             list.remove(auth.currentUser!!.uid)
             it.isSaved = list
+            user.savedProducts.remove(it)
             viewModel.deleteProduct(it)
+            activityViewModel.updateUser(user)
             productsAdapter.notifyDataSetChanged()
         })
         with(binding) {
@@ -154,6 +162,11 @@ class SavedItemsFragment :
                     productsAdapter.submitList(it.data)
                     productsAdapter.notifyDataSetChanged()
                 }
+            }
+        }
+        viewLifecycleOwner.launchStarted {
+            activityViewModel.defaultState.collect{
+                it.data?.let { userModelUi -> user = userModelUi }
             }
         }
     }
