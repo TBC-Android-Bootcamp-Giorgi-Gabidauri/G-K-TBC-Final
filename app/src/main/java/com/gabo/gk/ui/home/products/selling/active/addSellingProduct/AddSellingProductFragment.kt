@@ -55,7 +55,7 @@ class AddSellingProductFragment :
                     etPrice.setText("")
                 } else tilPrice.visibility = View.VISIBLE
             }
-            btnUpload.setOnClickListener { uploadProduct() }
+            btnUpload.setOnClickListener {  uploadProduct() }
             appBar.ivArrowBack.setOnClickListener { findNavController().navigateUp() }
         }
     }

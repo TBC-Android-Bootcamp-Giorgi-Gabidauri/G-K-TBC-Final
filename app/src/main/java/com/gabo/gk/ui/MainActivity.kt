@@ -1,5 +1,6 @@
 package com.gabo.gk.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log.d
 import android.view.View
@@ -101,6 +102,11 @@ class MainActivity : AppCompatActivity() {
                 nav.findDestination(R.id.editProfileFragment)-> {
                     ivDrawerMenu.visibility = View.GONE
                     root.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                }
+                nav.findDestination(R.id.userProfileFragment) -> {
+                    ivDrawerMenu.visibility = View.VISIBLE
+                    ivDrawerMenu.setImageResource(R.drawable.ic_arrow_back)
+                    ivDrawerMenu.setOnClickListener { nav.navigateUp() }
                 }
                 else -> {
                     ivDrawerMenu.visibility = View.VISIBLE

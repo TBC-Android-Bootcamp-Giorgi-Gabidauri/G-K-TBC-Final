@@ -6,11 +6,11 @@ import com.bumptech.glide.request.RequestOptions
 import com.gabo.gk.R
 
 fun ImageView.loadImage(imgUrl: Any) {
-    Glide.with(this).load(imgUrl).placeholder(R.drawable.ic_launcher_background).into(this)
+    Glide.with(this).load(imgUrl).placeholder(R.drawable.ic_place_holder).into(this)
 }
 
 fun ImageView.loadImageDecreasedQuality(img: Any) {
-    Glide.with(this).load(img).placeholder(R.drawable.ic_launcher_background)
+    Glide.with(this).load(img).placeholder(R.drawable.ic_place_holder)
         .apply(
             RequestOptions()
                 .override(350, 240)

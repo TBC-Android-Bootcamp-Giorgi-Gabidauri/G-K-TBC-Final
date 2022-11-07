@@ -224,5 +224,6 @@
     <string name="descriptionText">askdjbfaskdjbfashdfbkashjfbalsdhfbaskdjbfaskdjbfashdfbkashjfbalsdhfbaskdjbfaskdjbfashdfbkashjfbalsdhfb</string>
     <string name="not_implemented_yet">Not implemented yet</string>
     <string name="add_product">Add Product</string>
+    <string name="wellcome_n_sign_in_to_continue">Wellcome,\nSign in to continue</string>
 
 </resources>

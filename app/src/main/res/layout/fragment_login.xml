@@ -7,9 +7,19 @@
     android:paddingStart="@dimen/dimen_10dp"
     android:paddingEnd="@dimen/dimen_10dp"
     android:padding="@dimen/dimen_10dp"
-    android:background="@drawable/sign_in_screen"
     tools:context=".ui.auth.login.LoginFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center|start"
+        android:textSize="@dimen/dimen_24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/dimen_150dp"
+        android:text="@string/wellcome_n_sign_in_to_continue"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmail"
@@ -54,7 +64,6 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:text="@string/sign_in"
-        android:textColor="?colorOnSecondaryContainer"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
