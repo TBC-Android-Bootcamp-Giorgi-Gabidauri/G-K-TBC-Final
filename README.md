@@ -17,7 +17,7 @@ in this app you can:
 - when product is sold, you get a notification.
 - you can see your information on user profile and edit it.
 
-How To Use
+## How To Use
 -----------
 # to use app user needs to have or create account.
 
@@ -80,5 +80,4 @@ Used
 - viewPager2
 - navigation components
 - glide
-
 
