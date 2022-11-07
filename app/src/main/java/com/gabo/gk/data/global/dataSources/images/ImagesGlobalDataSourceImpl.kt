@@ -1,4 +1,4 @@
-package com.gabo.gk.data.global.dataSources
+package com.gabo.gk.data.global.dataSources.images
 
 import android.content.Context
 import android.net.Uri
@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class ImagesGlobalDataSource @Inject constructor(
+class ImagesGlobalDataSourceImpl @Inject constructor(
     private val firebaseStorage: FirebaseStorage,
     @ApplicationContext private val context: Context
-) {
-    suspend fun uploadImage(filename: String, uid: String, imgUris: List<Uri>?) = flow {
+) : ImagesGlobalDataSource {
+    override suspend fun uploadImage(filename: String, uid: String, imgUris: List<Uri>?) = flow {
         try {
             imgUris?.let {
                 it.forEach { uri -> //upload
@@ -34,7 +34,7 @@ class ImagesGlobalDataSource @Inject constructor(
         }
     }
 
-    suspend fun getImageUrls(filename: String, uid: String): MutableList<String> {
+    override suspend fun getImageUrls(filename: String, uid: String): MutableList<String> {
         val imgUrls = mutableListOf<String>()
         val images = firebaseStorage.reference.child("$IMAGES_STORAGE/").child(uid)
             .child(filename).listAll().await() // get list of photos

@@ -1,4 +1,4 @@
-package com.gabo.gk.data.global.dataSources
+package com.gabo.gk.data.global.dataSources.product
 
 import android.content.Context
 import android.util.Log
@@ -22,14 +22,14 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class ProductGlobalDataSource @Inject constructor(
+class ProductGlobalDataSourceImpl @Inject constructor(
     private val fireStore: FirebaseFirestore,
     private val queryHelper: QueryHelper,
     private val auth: FirebaseAuth,
     private val productNotificationApi: ProductNotificationApi,
     @ApplicationContext private val context: Context
-) {
-    suspend fun uploadProduct(model: ProductModelDomain) = flow {
+) :ProductGlobalDataSource{
+    override suspend fun uploadProduct(model: ProductModelDomain) = flow {
         try {
             fireStore.collection(PRODUCTS_STORAGE).add(model.toDto()).await()
             emit(context.getString(R.string.uploaded_successfully))
@@ -38,21 +38,21 @@ class ProductGlobalDataSource @Inject constructor(
         }
     }
 
-    suspend fun getProducts() =
+    override suspend fun getProducts() =
         queryHelper.productQueryHelper { fireStore.collection(PRODUCTS_STORAGE).get().await() }
 
-    suspend fun sortProducts(field: String, equalsTo: String) =
+    override  suspend fun sortProducts(field: String, equalsTo: String) =
         queryHelper.productQueryHelper {
             fireStore.collection(PRODUCTS_STORAGE).whereEqualTo(field, equalsTo).get().await()
         }
 
-    suspend fun sortForCurrentUser(uid: String, field: String, equalsTo: Any?) =
+    override suspend fun sortForCurrentUser(uid: String, field: String, equalsTo: Any?) =
         queryHelper.productQueryHelper {
             fireStore.collection(PRODUCTS_STORAGE).whereEqualTo(FIELD_UID, uid)
                 .whereEqualTo(field, equalsTo).get().await()
         }
 
-    suspend fun searchProducts(
+    override suspend fun searchProducts(
         field: String,
         query: String
     ): Flow<Resource<List<ProductModelDomain>>> {
@@ -65,7 +65,7 @@ class ProductGlobalDataSource @Inject constructor(
         }
     }
 
-    suspend fun updateProduct(product: ProductDto): String {
+    override suspend fun updateProduct(product: ProductDto): String {
         return try {
             if (!auth.currentUser?.uid.isNullOrEmpty()) {
                 fireStore.collection(PRODUCTS_STORAGE).document(product.id).set(product)
@@ -79,7 +79,7 @@ class ProductGlobalDataSource @Inject constructor(
         }
     }
 
-    suspend fun deleteProduct(product: ProductDto): String {
+    override suspend fun deleteProduct(product: ProductDto): String {
         return try {
             if (!auth.currentUser?.uid.isNullOrEmpty()) {
                 fireStore.collection(PRODUCTS_STORAGE).document(product.id).delete().await()
@@ -92,7 +92,7 @@ class ProductGlobalDataSource @Inject constructor(
         }
     }
 
-    suspend fun sendNotification(notification: ProductPushNotification) {
+    override suspend fun sendNotification(notification: ProductPushNotification) {
         try {
             val response = productNotificationApi.postNotification(notification)
             if (response.isSuccessful) {
