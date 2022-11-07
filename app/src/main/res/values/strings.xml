@@ -1,8 +1,229 @@
 <resources>
     <string name="app_name">G&amp;K</string>
     <string name="nav_home">Home</string>
-    <string name="username">username</string>
+    <string name="username">Username</string>
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="icon">icon</string>
+    <string name="name">Name</string>
+    <string name="condition">Condition</string>
+    <string name="brand">Brand</string>
+    <string name="_400">$ 400</string>
+    <string name="log_in_with_google">Log In With Google</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_in_with_google">Log In With Google</string>
+    <string name="sign_in">Sign In</string>
+    <string name="type_your_email">Type Your Email</string>
+    <string name="type_your_password">Type Your Password</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="type_your_repeat_password">Type Your Repeat Password</string>
+    <string name="type_your_firstname">Type Your FirstName</string>
+    <string name="type_your_lastname">Type Your LastName</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="search">Search</string>
+    <string name="add_button">Add Button</string>
+    <string name="all_categories">All categories</string>
+    <string name="category">Category</string>
+    <string name="sell_online">Sell online</string>
+    <string name="make_easy_to_find">make it easy for clients to find your product</string>
+    <string name="show_us_your_product">show us your product</string>
+    <string name="upload_pictures">Upload pictures</string>
+    <string name="details">Details</string>
+    <string name="second_hand">Second-hand</string>
+    <string name="like_a_new">Like a new</string>
+    <string name="brand_new">Brand New</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="contact_information">Contact Information</string>
+    <string name="negotiable_price">Negotiable Price</string>
+    <string name="price">Price</string>
+    <string name="location">Location</string>
+    <string name="phone_number">Phone number</string>
+    <string name="any_location">Any Location</string>
+    <string name="upload_product">Upload Product</string>
+    <string name="seller_name">Seller Name</string>
+    <string name="any">Any</string>
+    <string name="selling">Selling</string>
+    <string name="product_type">Product Type</string>
+    <string name="saved">Saved</string>
+    <string name="categories">Categories</string>
+    <string name="filter">Filter</string>
+    <string name="productCategory">productCategory</string>
+    <string name="Selling">Selling</string>
+    <string name="uid">uid</string>
+    <string name="sold">Sold</string>
+    <string name="search_title">title</string>
+    <string name="image">image</string>
+    <string name="art">Art</string>
+    <string name="server_error">server error</string>
+    <string name="something_went_wrong">something went wrong</string>
+    <string name="logged_in_successfully">LoggedIn Successfully</string>
+    <string name="registered_successfully">Registered Successfully</string>
+    <string name="images_uploaded_successfully">images uploaded successfully</string>
+    <string name="uploaded_successfully">Uploaded Successfully</string>
+    <string name="low_price">Low Price</string>
+    <string name="show_first">Show First</string>
+    <string name="view">View</string>
+    <string name="all">All</string>
+    <string name="only_seller">Only Seller</string>
+    <string name="only_shop">Only Shop</string>
+    <string name="type">Type</string>
+    <string name="status">Status</string>
+    <string name="almost_new">Almost New</string>
+    <string name="only_with_price">Only with price</string>
+    <string name="from">From</string>
+    <string name="till">Till</string>
+    <string name="poti">Poti</string>
+    <string name="gori">Gori</string>
+    <string name="batumi">Batumi</string>
+    <string name="kutaisi">Kutaisi</string>
+    <string name="tbilisi">Tbilisi</string>
+    <string name="high_price">High Price</string>
+    <string name="adjust_filter">Adjust Filter</string>
+    <string name="any_price">Any Price</string>
+    <string name="product_description">Product Description</string>
+    <string name="choose_correct_price_range">Choose correct price range</string>
+    <string name="similar_products">Similar Products</string>
+    <string name="location_not_defined">Location Not Defined</string>
+    <string name="condition_not_defined">Condition Not Defined</string>
+    <string name="saved_products">Saved Products</string>
+    <string name="_72_00">72.00 $</string>
+    <string name="text_seller">Text Seller</string>
+    <string name="buy_now">Buy Now</string>
+
+    <string-array name="ProductCategory">
+        <item>All Categories</item>
+        <item>Antiques</item>
+        <item>Art</item>
+        <item>Baby</item>
+        <item>Books</item>
+        <item>Business And Industrial</item>
+        <item>Camera</item>
+        <item>Phones And Accessories</item>
+        <item>Clothes</item>
+        <item>Coins And PaperMoney</item>
+        <item>Collectibles</item>
+        <item>Computers And TableTs</item>
+        <item>Consumer Electronics</item>
+        <item>Crafts</item>
+        <item>Dolls</item>
+        <item>Movies</item>
+        <item>Entertainment</item>
+        <item>Gift Cards</item>
+        <item>Health And Beauty</item>
+        <item>Home And Garden</item>
+        <item>Jewelry And Watches</item>
+        <item>Music</item>
+        <item>Musical Instruments</item>
+        <item>Pet Supplies</item>
+        <item>Pottery And Glass</item>
+        <item>Real Estate</item>
+        <item>Specialty Services</item>
+        <item>Sporting Goods</item>
+        <item>Sports Mem Cards And FanShop</item>
+        <item>Stamps</item>
+        <item>Tickets And Experiences</item>
+        <item>Toys And Hobbies</item>
+        <item>Travel</item>
+        <item>Video Games</item>
+    </string-array>
+
+    <string-array name="Location">
+        <item>Any Location</item>
+        <item>Tbilisi</item>
+        <item>Rustavi</item>
+        <item>Kutaisi</item>
+        <item>Batumi</item>
+        <item>Poti</item>
+    </string-array>
+
+    <string-array name="ProductType">
+        <item>Selling</item>
+        <item>Rent</item>
+        <item>Service</item>
+    </string-array>
+
+    <string-array name="ShowFirst">
+        <item>Any</item>
+        <item>Low Price</item>
+        <item>High Price</item>
+    </string-array>
+    <string name="or_sign_up_as_company" />
+    <string name="retype_your_password">Retype Your Password</string>
+    <string name="already_registered_sign_in">Already Registered , Sign In !</string>
+    <string name="not_registered_yet_sign_up">Not Registered Yet , Sign Up !</string>
+    <string name="welcome">welcome</string>
+    <string name="passwords_dont_match">passwords do not match</string>
+    <string name="product_update_successfully">Product updated successfully</string>
+    <string name="userprofile">UserProfile</string>
+    <string name="contact_number">Contact number</string>
+    <string name="let_users_contact_you_through_the_phone_number">Let users contact you through the phone number</string>
+    <string name="how_should_we_call_you">How should we call you?</string>
+    <string name="register_this_account_as_a_person_or_a_shop">register this account as a person or a shop?</string>
+    <string name="as_a_person">As a Person</string>
+    <string name="as_a_shop">As a Shop</string>
+    <string name="set_your_profile_picture">Set your profile picture</string>
+    <string name="get_started">Get Started</string>
+    <string name="email">Email</string>
+    <string name="basics">Basics</string>
+    <string name="create_account">Create Account</string>
+    <string name="person">person</string>
+    <string name="shop">shop</string>
+    <string name="choose_profile_pic">Choose profile picture</string>
+    <string name="saved_successfully">Saved successfully</string>
+    <string name="deleted_successfully">Deleted successfully</string>
+    <string name="product_does_not_exist">Product does not exist</string>
+    <string name="user_is_not_exist">user is not exist</string>
+    <string name="_120_000_00">120 000.00 $</string>
+    <string name="fill">Fill</string>
+    <string name="my_balance">My balance</string>
+    <string name="transaction_history">Transaction history</string>
+    <string name="wallet">Wallet</string>
+    <string name="mark_as_sold">Mark as sold</string>
+    <string name="delete_product">Delete product</string>
+    <string name="could_not_find_user">Could not find user</string>
+    <string name="user_updated_successfully">User updated successfully</string>
+    <string name="product_bought_successfully">Product bought successfully</string>
+    <string name="plus400">+ 400 $</string>
+    <string name="bought">Bought</string>
+    <string name="purchased">Purchased</string>
+    <string name="amount">Amount: $ </string>
+    <string name="dollar">$</string>
+    <string name="pay_by_card">Pay By Card</string>
+    <string name="card_number">Card Number</string>
+    <string name="cvc_cvv">CVC/CVV</string>
+    <string name="expiration_date">Expiration Date</string>
+    <string name="pay">Pay</string>
+    <string name="fill_balance">Fill Balance</string>
+    <string name="amount_without_dollar">Amount</string>
+    <string name="balance_filled_successfully">Balance filled successfully</string>
+    <string name="amount_must_be_more_than_0">Amount must be more than 0</string>
+    <string name="purchases">Purchases</string>
+    <string name="password_must_be_more_than_6">Password length must be at least 6 digits</string>
+    <string name="username_empty_error">username must not be empty</string>
+    <string name="password_empty_error">password must not be empty</string>
+    <string name="email_empty_error">email must not be empty</string>
+    <string name="product_deleted_successfully">Product deleted successfully</string>
+    <string name="sell_product">Sell Product</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="my_balance_120_000_00">My Balance: 120 000.00 $</string>
+    <string name="gabida">Gabida</string>
+    <string name="giorgi_gabidauri">Giorgi Gabidauri</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="change_your_username">Change your username</string>
+    <string name="change_your_contact_number">Change your contact number</string>
+    <string name="change_your_profile_picture">Change your profile picture</string>
+    <string name="set_changes">Set Changes</string>
+    <string name="could_not_get_token">Could not get token</string>
+    <string name="notifications">Notifications</string>
+    <string name="message_sent">Message Sent</string>
+    <string name="messages">Messages</string>
+    <string name="type_a_message">Type a message</string>
+    <string name="product_title">Product Title</string>
+    <string name="descriptionText">askdjbfaskdjbfashdfbkashjfbalsdhfbaskdjbfaskdjbfashdfbkashjfbalsdhfbaskdjbfaskdjbfashdfbkashjfbalsdhfb</string>
+    <string name="not_implemented_yet">Not implemented yet</string>
+    <string name="add_product">Add Product</string>
+    <string name="wellcome_n_sign_in_to_continue">Wellcome,\nSign in to continue</string>
+
 </resources>

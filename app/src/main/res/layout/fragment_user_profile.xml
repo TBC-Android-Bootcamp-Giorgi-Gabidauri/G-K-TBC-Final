@@ -1,13 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.home.user.profile.UserProfileFragment">
+    android:layout_height="wrap_content">
 
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:id="@+id/clProfile"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvSignOut"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_0dp"
+                android:layout_marginStart="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:layout_marginEnd="@dimen/dimen_15dp"
+                android:background="@drawable/bg_search"
+                android:paddingHorizontal="@dimen/dimen_13dp"
+                android:paddingVertical="@dimen/dimen_4dp"
+                android:text="@string/sign_out"
+                android:textColor="?colorOnBackground"
+                android:textSize="@dimen/dimen_14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:backgroundTint="?colorOnBackground"
+                app:cardCornerRadius="@dimen/dimen_100dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSignOut">
+
+                <ImageView
+                    android:id="@+id/ivImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/image"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/ic_person" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:text="@string/gabida"
+                android:textSize="@dimen/dimen_20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvImage" />
+
+            <TextView
+                android:id="@+id/tvSellProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_0dp"
+                android:layout_marginStart="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:layout_marginEnd="@dimen/dimen_15dp"
+                android:background="@drawable/bg_search"
+                android:paddingHorizontal="@dimen/dimen_23dp"
+                android:paddingVertical="@dimen/dimen_4dp"
+                android:text="@string/sell_product"
+                android:textColor="?colorOnBackground"
+                android:textSize="@dimen/dimen_20sp"
+                app:layout_constraintEnd_toStartOf="@id/tvEditProfile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvUserName" />
+
+            <TextView
+                android:id="@+id/tvEditProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_0dp"
+                android:layout_marginStart="@dimen/dimen_15dp"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:layout_marginEnd="@dimen/dimen_20dp"
+                android:background="@drawable/bg_search"
+                android:paddingHorizontal="@dimen/dimen_30dp"
+                android:paddingVertical="@dimen/dimen_4dp"
+                android:text="@string/edit_profile"
+                android:textColor="?colorOnBackground"
+                android:textSize="@dimen/dimen_20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvSellProduct"
+                app:layout_constraintTop_toBottomOf="@id/tvUserName" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvWalletBg"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="70dp"
+                android:layout_marginHorizontal="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                app:cardCornerRadius="@dimen/dimen_20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSellProduct">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/ivWalletBg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bg_wallet_card" />
+
+                    <TextView
+                        android:id="@+id/tvBalance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_30dp"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:text="@string/my_balance_120_000_00"
+                        android:textColor="?colorOnBackground"
+                        android:textSize="@dimen/dimen_20sp"
+                        app:layout_constraintStart_toStartOf="@id/ivWalletBg"
+                        app:layout_constraintTop_toTopOf="@id/ivWalletBg" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDirections"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:paddingBottom="@dimen/dimen_100dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvWalletBg"
+                app:spanCount="2"
+                tools:itemCount="6"
+                tools:listitem="@layout/profile_direction_item_view" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="200dp"
+            android:visibility="gone" />
+    </FrameLayout>
+</androidx.core.widget.NestedScrollView>

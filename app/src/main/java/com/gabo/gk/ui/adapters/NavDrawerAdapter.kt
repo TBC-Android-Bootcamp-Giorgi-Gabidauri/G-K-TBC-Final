@@ -7,12 +7,15 @@ import com.gabo.gk.comon.extensions.loadImage
 import com.gabo.gk.databinding.DividerViewBinding
 import com.gabo.gk.databinding.NavMenuItemBinding
 import com.gabo.gk.databinding.UserProfileViewBinding
+import com.gabo.gk.ui.model.navDrawer.DrawerMenuViewType
 import com.gabo.gk.ui.model.navDrawer.MenuItemModel
 import com.gabo.gk.ui.model.navDrawer.NavDrawerModel
 import com.gabo.gk.ui.model.navDrawer.UserProfileModel
-import com.gabo.gk.ui.model.navDrawer.ViewType
 
-class NavDrawerAdapter(private val itemClick: (MenuItemModel) -> Unit) :
+class NavDrawerAdapter(
+    private val itemClick: (MenuItemModel) -> Unit,
+    private val profileClick: (UserProfileModel) -> Unit
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var list: List<NavDrawerModel> = emptyList()
 
@@ -22,8 +25,9 @@ class NavDrawerAdapter(private val itemClick: (MenuItemModel) -> Unit) :
 
     inner class ProfileVH(private val binding: UserProfileViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(model: UserProfileModel) {
+        fun bind(model: UserProfileModel, profileClick: (UserProfileModel) -> Unit) {
             with(binding) {
+                itemView.setOnClickListener { profileClick(model) }
                 model.icon?.let { ivIcon.loadImage(model.icon) }
                 tvUserName.text = model.userName
             }
@@ -80,7 +84,7 @@ class NavDrawerAdapter(private val itemClick: (MenuItemModel) -> Unit) :
 
         when (getItemViewType(position)) {
             USER_PROFILE -> {
-                (holder as ProfileVH).bind(list[position].userProfile!!)
+                (holder as ProfileVH).bind(list[position].userProfile!!, profileClick)
             }
             DIVIDER -> {
                 (holder as DividerVH)
@@ -91,8 +95,8 @@ class NavDrawerAdapter(private val itemClick: (MenuItemModel) -> Unit) :
 
     override fun getItemViewType(position: Int): Int {
         return when (list[position].viewType) {
-            ViewType.User -> USER_PROFILE
-            ViewType.Divider -> DIVIDER
+            DrawerMenuViewType.User -> USER_PROFILE
+            DrawerMenuViewType.Divider -> DIVIDER
             else -> MENU_ITEM
         }
     }

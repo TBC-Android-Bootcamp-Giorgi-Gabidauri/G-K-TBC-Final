@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.gabo.gk.ui.auth.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment"
+            app:popUpTo="@id/navigation" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.gabo.gk.ui.auth.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.gabo.gk.ui.home.user.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.gabo.gk.ui.home.user.notifications.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" >
+        <argument
+            android:name="notification"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/walletFragment"
+        android:name="com.gabo.gk.ui.home.user.wallet.WalletFragment"
+        android:label="fragment_wallet"
+        tools:layout="@layout/fragment_wallet" />
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.gabo.gk.ui.home.products.categories.CategoriesFragment"
+        android:label="fragment_categories"
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_sortedProductsFragment"
+            app:destination="@id/sortedProductsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedItemsFragment"
+        android:name="com.gabo.gk.ui.home.products.saved.SavedItemsFragment"
+        android:label="fragment_saved_items"
+        tools:layout="@layout/fragment_saved_items" >
+        <action
+            android:id="@+id/action_savedItemsFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchasesFragment"
+        android:name="com.gabo.gk.ui.home.products.purchases.PurchasesFragment"
+        android:label="fragment_purchases"
+        tools:layout="@layout/fragment_purchases" >
+        <action
+            android:id="@+id/action_purchasesFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellingFragment"
+        android:name="com.gabo.gk.ui.home.products.selling.SellingFragment"
+        android:label="fragment_selling"
+        tools:layout="@layout/fragment_selling" >
+        <action
+            android:id="@+id/action_sellingFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.gabo.gk.ui.home.user.profile.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile" >
+        <action
+            android:id="@+id/action_userProfileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addSellingProductFragment"
+        android:name="com.gabo.gk.ui.home.products.selling.active.addSellingProduct.AddSellingProductFragment"
+        android:label="fragment_add_selling_product"
+        tools:layout="@layout/fragment_add_selling_product" />
+    <fragment
+        android:id="@+id/sortedProductsFragment"
+        android:name="com.gabo.gk.ui.home.products.categories.sorted.SortedProductsFragment"
+        android:label="fragment_sorted_products"
+        tools:layout="@layout/fragment_sorted_products" >
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_sortedProductsFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.gabo.gk.ui.home.products.productDetails.ProductDetailsFragment"
+        android:label="fragment_product_details"
+        tools:layout="@layout/fragment_product_details" >
+        <argument
+            android:name="productModel"
+            app:argType="com.gabo.gk.ui.model.product.ProductModelUi" />
+        <action
+            android:id="@+id/action_productDetailsFragment_to_sortedProductsFragment"
+            app:destination="@id/sortedProductsFragment" />
+        <action
+            android:id="@+id/action_productDetailsFragment_self"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/fillBalanceFragment"
+        android:name="com.gabo.gk.ui.home.user.wallet.fillBalance.FillBalanceFragment"
+        android:label="fragment_fill_balance"
+        tools:layout="@layout/fragment_fill_balance" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.gabo.gk.ui.home.user.profile.editProfile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <argument
+            android:name="user"
+            app:argType="com.gabo.gk.ui.model.user.UserModelUi" />
+    </fragment>
+</navigation>

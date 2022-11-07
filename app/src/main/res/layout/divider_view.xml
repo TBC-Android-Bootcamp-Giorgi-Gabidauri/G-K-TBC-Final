@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.divider.MaterialDivider xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dividerView"
     android:layout_width="match_parent"
-    android:layout_height="3dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="10dp"
-    app:dividerColor="@color/purple_500"/>
+    android:layout_height="@dimen/dimen_3dp"
+    android:layout_marginStart="@dimen/dimen_10dp"
+    android:layout_marginTop="@dimen/dimen_10dp"
+    android:layout_marginEnd="@dimen/dimen_10dp" />
