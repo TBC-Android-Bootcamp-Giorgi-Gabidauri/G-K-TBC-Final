@@ -26,6 +26,7 @@ How To Use
 <img src="https://user-images.githubusercontent.com/66998427/200219150-a7aeca5e-e4b8-4cb9-9ad7-23270bd94827.png" width="200" height="400"> |
 
 - from home page you can rapidly navigate to categories selling or to saved products
+
 <img src="https://user-images.githubusercontent.com/66998427/200219482-13fba252-9e9a-4126-8d9d-f1dfe440c2e0.png" width="200" height="400"> |
 
 - you can find many categories and you are able to filter products. 
