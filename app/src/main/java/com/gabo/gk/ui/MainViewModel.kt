@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor(
         getUser()
     }
 
-    private fun getUser() {
+    fun getUser() {
         viewModelScope.launch {
             if (auth.currentUser != null){
                 _defaultState.value = _defaultState.value.copy(loading = true)

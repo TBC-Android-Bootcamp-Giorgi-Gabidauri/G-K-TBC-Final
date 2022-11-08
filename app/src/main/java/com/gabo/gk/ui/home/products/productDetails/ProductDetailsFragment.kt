@@ -49,7 +49,22 @@ class ProductDetailsFragment :
     private fun setupObservers() {
         viewLifecycleOwner.launchStarted {
             viewModel.defaultState.collect {
-                if (it.msg.isNotEmpty()) d(TAG, it.msg)
+                when {
+                    it.msg == getString(R.string.product_update_successfully) &&
+                            args.productModel.uid != auth.currentUser!!.uid -> d(TAG, it.msg)
+
+                    it.msg == getString(R.string.product_update_successfully) &&
+                            args.productModel.uid == auth.currentUser!!.uid ->
+                        binding.root.snackBar(it.msg)
+                    it.msg == getString(R.string.product_bought_successfully) -> {
+                        binding.root.snackBar(it.msg)
+                        findNavController().navigateUp()
+                    }
+
+                    it.msg == getString(R.string.product_deleted_successfully) ->
+                        binding.root.snackBar(it.msg)
+                    it.msg.isNotEmpty() -> binding.root.snackBar(it.msg)
+                }
                 it.data?.let { list -> productsAdapter.submitList(list) }
             }
         }
@@ -87,7 +102,7 @@ class ProductDetailsFragment :
     }
 
     private fun getSortedProducts() {
-        viewModel.getSortedProducts(
+        viewModel.getSimilarProducts(
             getString(R.string.productCategory),
             args.productModel.productCategory
         )
@@ -118,7 +133,6 @@ class ProductDetailsFragment :
                 btnTextSeller.text = getString(R.string.mark_as_sold)
                 btnTextSeller.setOnClickListener {
                     viewModel.markAsSold(args.productModel)
-                    findNavController().navigateUp()
                 }
                 btnBuyNow.text = getString(R.string.delete_product)
                 btnBuyNow.setOnClickListener {

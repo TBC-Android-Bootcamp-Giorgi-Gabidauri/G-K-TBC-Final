@@ -2,8 +2,8 @@ package com.gabo.gk.data.global.dataSources.product
 
 import com.gabo.gk.comon.response.Resource
 import com.gabo.gk.data.global.dto.ProductDto
+import com.gabo.gk.data.global.notification.model.product.ProductPushNotification
 import com.gabo.gk.domain.model.ProductModelDomain
-import com.gabo.gk.notification.model.product.ProductPushNotification
 import kotlinx.coroutines.flow.Flow
 
 interface ProductGlobalDataSource {

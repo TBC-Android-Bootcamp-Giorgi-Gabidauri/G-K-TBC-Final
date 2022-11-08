@@ -15,16 +15,16 @@ class UploadProductScenario @Inject constructor(
     override suspend fun invoke(params: Pair<ProductModelDomain, List<Uri>?>): Flow<String> {
         return try {
             var photosUploaded = ""
-            useCases.uploadImagesUseCase(// upload Photos
+            useCases.uploadImagesUseCase(
                 UploadImageModel(params.first.title, params.first.uid, params.second)
             ).collect {
                 photosUploaded = it!!
             }
-            val productModel = params.first.copy(// get and write list of photo Urls in model
+            val productModel = params.first.copy(
                 photos = useCases.getImageUrlsUseCase(Pair(params.first.title, params.first.uid)),
                 searchList = useCases.createSearchSamplesUseCase(params.first.title)
             )
-            if (photosUploaded == useCases.context.getString(R.string.images_uploaded_successfully)) { // upload product
+            if (photosUploaded == useCases.context.getString(R.string.images_uploaded_successfully)) {
                 return useCases.productRepository.uploadProduct(productModel)
             } else {
                 return flow { emit(photosUploaded) }

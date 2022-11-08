@@ -1,4 +1,4 @@
-package com.gabo.gk.notification.service
+package com.gabo.gk.data.global.notification.service
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -80,7 +80,7 @@ class FirebaseService : FirebaseMessagingService() {
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(message.data["title"])
             .setContentText(message.data["message"])
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setSmallIcon(R.mipmap.ic_launcher_round)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .build()

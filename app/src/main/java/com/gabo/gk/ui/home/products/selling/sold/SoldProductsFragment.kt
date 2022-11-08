@@ -1,17 +1,18 @@
 package com.gabo.gk.ui.home.products.selling.sold
 
-import android.util.Log.d
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
-import com.gabo.gk.comon.constants.TAG
 import com.gabo.gk.comon.extensions.launchStarted
+import com.gabo.gk.comon.extensions.snackBar
 import com.gabo.gk.databinding.FragmentSoldProductsBinding
 import com.gabo.gk.ui.adapters.ProductsAdapter
 import com.gabo.gk.ui.home.products.selling.SellingFragmentDirections
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -38,10 +39,10 @@ class SoldProductsFragment :
 
     private fun setupObservers() {
         viewLifecycleOwner.launchStarted {
-            viewModel.defaultState.collect {
+            viewModel.defaultState.collectLatest {
                 binding.swipeRl.isRefreshing = it.loading
                 when {
-                    it.msg.isNotEmpty() -> d(TAG, it.msg)
+                    it.msg.isNotEmpty() -> binding.root.snackBar(getString(R.string.no_products_here))
                     !it.data.isNullOrEmpty() -> productsAdapter.submitList(it.data)
                 }
             }

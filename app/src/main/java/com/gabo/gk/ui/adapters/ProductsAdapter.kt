@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gabo.gk.R
 import com.gabo.gk.comon.constants.PRODUCT_GRID_VIEW
@@ -21,7 +23,6 @@ class ProductsAdapter(
     private val heartClick: (ProductModelUi) -> Unit
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var list: List<ProductModelUi> = emptyList()
     private var viewType = PRODUCT_LIST_VIEW
     fun changeView(view: String) {
         viewType = view
@@ -29,7 +30,8 @@ class ProductsAdapter(
     }
 
     fun submitList(list: List<ProductModelUi>) {
-        this.list = list
+//        this.list = list
+        differ.submitList(list)
         notifyDataSetChanged()
     }
 
@@ -105,11 +107,10 @@ class ProductsAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = list[position]
         when (getItemViewType(position)) {
             GRID_VIEW ->
-                (holder as ProductGridVH).bind(item, itemClick, heartClick)
-            LIST_VIEW -> (holder as ProductListVH).bind(item, itemClick, heartClick)
+                (holder as ProductGridVH).bind(differ.currentList[position], itemClick, heartClick)
+            LIST_VIEW -> (holder as ProductListVH).bind(differ.currentList[position], itemClick, heartClick)
         }
     }
 
@@ -120,7 +121,22 @@ class ProductsAdapter(
         }
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = differ.currentList.size
+
+
+
+    private val differCallback = object : DiffUtil.ItemCallback<ProductModelUi>(){
+        override fun areItemsTheSame(oldItem: ProductModelUi, newItem: ProductModelUi): Boolean {
+            return  oldItem.id == newItem.id
+        }
+
+        @SuppressLint("DiffUtilEquals")
+        override fun areContentsTheSame(oldItem: ProductModelUi, newItem: ProductModelUi): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+    val differ = AsyncListDiffer(this,differCallback)
 
     companion object {
         const val LIST_VIEW = 1

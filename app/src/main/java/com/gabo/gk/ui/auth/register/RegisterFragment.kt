@@ -1,7 +1,6 @@
 package com.gabo.gk.ui.auth.register
 
 import android.net.Uri
-import android.util.Log.d
 import android.view.Gravity
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
@@ -11,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
-import com.gabo.gk.comon.constants.TAG
 import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.comon.extensions.loadImage
 import com.gabo.gk.comon.extensions.snackBar
@@ -48,7 +46,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                     if (it.msg == getString(R.string.registered_successfully)) {
                         findNavController().navigate(R.id.homeFragment)
                     } else {
-                        d(TAG,it.msg)
+                        binding.root.snackBar(it.msg)
                     }
                 }
             }

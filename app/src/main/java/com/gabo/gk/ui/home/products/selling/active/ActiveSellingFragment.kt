@@ -1,12 +1,12 @@
 package com.gabo.gk.ui.home.products.selling.active
 
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
 import com.gabo.gk.comon.extensions.launchStarted
+import com.gabo.gk.comon.extensions.snackBar
 import com.gabo.gk.databinding.FragmentActiveSellingBinding
 import com.gabo.gk.ui.adapters.ProductsAdapter
 import com.gabo.gk.ui.home.products.selling.SellingFragmentDirections
@@ -45,11 +45,7 @@ class ActiveSellingFragment :
             viewModel.defaultState.collect {
                 binding.swipeRl.isRefreshing = it.loading
                 when {
-                    it.msg.isNotEmpty() -> Toast.makeText(
-                        requireContext(),
-                        it.msg,
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    it.msg.isNotEmpty() -> binding.root.snackBar(getString(R.string.no_products_here))
                     !it.data.isNullOrEmpty() -> productsAdapter.submitList(it.data)
                 }
             }

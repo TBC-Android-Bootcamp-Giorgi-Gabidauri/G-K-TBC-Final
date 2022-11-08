@@ -20,6 +20,6 @@ data class UserModelUi(
     val soldProducts: MutableList<ProductModelUi> = mutableListOf(),
     val purchasedProducts: MutableList<ProductModelUi> = mutableListOf(),
     val token: String = "",
-    val savedProducts: MutableList<ProductModelUi> = mutableListOf(),
+    var savedProducts: MutableList<ProductModelUi> = mutableListOf(),
     val notifications: MutableList<NotificationModel> = mutableListOf(),
 ) : Parcelable

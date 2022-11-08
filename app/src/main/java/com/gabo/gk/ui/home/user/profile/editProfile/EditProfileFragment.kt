@@ -14,6 +14,7 @@ import com.gabo.gk.base.BaseFragment
 import com.gabo.gk.comon.constants.TAG
 import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.comon.extensions.loadImage
+import com.gabo.gk.comon.extensions.snackBar
 import com.gabo.gk.comon.extensions.txt
 import com.gabo.gk.databinding.FragmentEditProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,7 +47,7 @@ class EditProfileFragment :
                     progressBar.isVisible = it.loading
                     when {
                         it.msg == getString(R.string.user_updated_successfully) -> {
-                            d(TAG,it.msg)
+                            root.snackBar(getString(R.string.user_updated_successfully))
                             findNavController().popBackStack(R.id.userProfileFragment, true)
                             findNavController().navigate(R.id.userProfileFragment)
                         }

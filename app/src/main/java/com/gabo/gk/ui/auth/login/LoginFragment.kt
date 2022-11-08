@@ -1,12 +1,11 @@
 package com.gabo.gk.ui.auth.login
 
-import android.util.Log.d
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
-import com.gabo.gk.comon.constants.TAG
 import com.gabo.gk.comon.extensions.launchStarted
+import com.gabo.gk.comon.extensions.snackBar
 import com.gabo.gk.comon.extensions.txt
 import com.gabo.gk.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +22,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         viewLifecycleOwner.launchStarted {
             viewModel.defaultState.collect {
                 if (it.msg.isNotEmpty()) {
-                    d(TAG,it.msg)
+                    binding.root.snackBar(it.msg)
                     if (it.msg == getString(R.string.logged_in_successfully)) {
                         findNavController().navigate(R.id.homeFragment)
                     }

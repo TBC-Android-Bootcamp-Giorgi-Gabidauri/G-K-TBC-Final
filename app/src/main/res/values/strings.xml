@@ -225,5 +225,9 @@
     <string name="not_implemented_yet">Not implemented yet</string>
     <string name="add_product">Add Product</string>
     <string name="wellcome_n_sign_in_to_continue">Wellcome,\nSign in to continue</string>
+    <string name="no_products_here">No products here</string>
+    <string name="no_notifications_here">No notifications here</string>
+    <string name="click_to_See_all_notifications">Click to see all notifications</string>
+    <string name="not_enough_money">You don\'t have enough money</string>
 
 </resources>

@@ -10,10 +10,10 @@ import com.gabo.gk.comon.constants.PRODUCTS_STORAGE
 import com.gabo.gk.comon.helpers.QueryHelper
 import com.gabo.gk.comon.response.Resource
 import com.gabo.gk.data.global.dto.ProductDto
+import com.gabo.gk.data.global.notification.apis.ProductNotificationApi
+import com.gabo.gk.data.global.notification.model.product.ProductPushNotification
 import com.gabo.gk.data.transformers.toDto
 import com.gabo.gk.domain.model.ProductModelDomain
-import com.gabo.gk.notification.apis.ProductNotificationApi
-import com.gabo.gk.notification.model.product.ProductPushNotification
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.qualifiers.ApplicationContext

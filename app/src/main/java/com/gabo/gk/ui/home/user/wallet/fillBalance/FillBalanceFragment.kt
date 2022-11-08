@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import com.gabo.gk.R
 import com.gabo.gk.comon.constants.TAG
 import com.gabo.gk.comon.extensions.launchStarted
-import com.gabo.gk.comon.extensions.snackBar
 import com.gabo.gk.comon.extensions.txt
 import com.gabo.gk.databinding.FragmentFillBalanceBinding
 import com.gabo.gk.ui.home.user.wallet.WalletViewModel
@@ -35,13 +34,14 @@ class FillBalanceFragment : BottomSheetDialogFragment() {
         viewLifecycleOwner.launchStarted {
             viewModel.defaultState.collect {
                 binding!!.progressBar.isVisible = it.loading
-                if (it.msg.isNotEmpty()) {
-                    d(TAG, it.msg)
-                    binding!!.root.snackBar(it.msg)
-                }
-                if (it.msg == getString(R.string.balance_filled_successfully)) {
-                    findNavController().popBackStack(R.id.walletFragment, true)
-                    findNavController().navigate(R.id.walletFragment)
+                when {
+                    it.msg == getString(R.string.balance_filled_successfully) -> {
+                        findNavController().popBackStack(R.id.walletFragment, true)
+                        findNavController().navigate(R.id.walletFragment)
+                    }
+                    it.msg.isNotEmpty() -> {
+                        d(TAG, it.msg)
+                    }
                 }
             }
         }

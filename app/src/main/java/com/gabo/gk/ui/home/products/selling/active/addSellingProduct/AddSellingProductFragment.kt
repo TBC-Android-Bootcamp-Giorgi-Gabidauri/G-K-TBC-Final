@@ -1,7 +1,6 @@
 package com.gabo.gk.ui.home.products.selling.active.addSellingProduct
 
 import android.net.Uri
-import android.util.Log.d
 import android.view.View
 import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResultLauncher
@@ -12,8 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
-import com.gabo.gk.comon.constants.TAG
 import com.gabo.gk.comon.extensions.launchStarted
+import com.gabo.gk.comon.extensions.snackBar
 import com.gabo.gk.comon.extensions.txt
 import com.gabo.gk.databinding.FragmentAddSellingProductBinding
 import com.gabo.gk.ui.adapters.AddImagesAdapter
@@ -142,7 +141,10 @@ class AddSellingProductFragment :
         viewLifecycleOwner.launchStarted {
             viewModel.defaultState.collect {
                 binding.progressBar.isVisible = it.loading
-                if (it.msg.isNotEmpty()) d(TAG, it.msg)
+                if (it.msg == getString(R.string.uploaded_successfully)) {
+                    binding.root.snackBar(it.msg)
+                    findNavController().navigateUp()
+                }
             }
         }
     }

@@ -21,10 +21,10 @@ class ProductDetailsViewModel @Inject constructor(
     private val saveProductToDbUseCase: SaveProductToDbUseCase,
     private val deleteProductFromDbUseCase: DeleteProductFromDbUseCase,
     private val buyProductScenario: BuyProductScenario,
-    private val getSortedProductsUseCase: GetSortedProductsUseCase,
     private val deleteProductUseCase: DeleteProductUseCase,
     private val markProductAsSoldUseCase: MarkProductAsSoldUseCase,
-    private val getUserUseCase: GetUserUseCase
+    private val getUserUseCase: GetUserUseCase,
+    private val getSimilarProductsUseCase: GetSimilarProductsUseCase
 ) : BaseViewModel<List<ProductModelUi>>() {
     private val _user: MutableStateFlow<UserModelUi> = MutableStateFlow(UserModelUi())
     val user = _user.asStateFlow()
@@ -86,10 +86,10 @@ class ProductDetailsViewModel @Inject constructor(
 
     }
 
-    fun getSortedProducts(field: String, equalsTo: String) {
+    fun getSimilarProducts(field: String, equalsTo: String) {
         viewModelScope.launch {
             getData(
-                flow = (getSortedProductsUseCase(Pair(field, equalsTo))),
+                flow = (getSimilarProductsUseCase(Pair(field, equalsTo))),
                 mapper = { it.map { domain -> domain.toUi() } },
                 success = null, error = null
             )

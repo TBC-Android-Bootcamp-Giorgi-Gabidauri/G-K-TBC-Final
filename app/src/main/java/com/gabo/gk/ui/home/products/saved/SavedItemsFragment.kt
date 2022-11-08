@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ArrayAdapter
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,7 +16,6 @@ import com.gabo.gk.comon.constants.PRODUCT_LIST_VIEW
 import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.comon.extensions.txt
 import com.gabo.gk.databinding.FragmentSavedItemsBinding
-import com.gabo.gk.ui.MainActivity
 import com.gabo.gk.ui.MainViewModel
 import com.gabo.gk.ui.adapters.ProductsAdapter
 import com.gabo.gk.ui.model.filter.FilterModelUi
@@ -29,14 +29,13 @@ class SavedItemsFragment :
     BaseFragment<FragmentSavedItemsBinding>(FragmentSavedItemsBinding::inflate) {
     private val viewModel: SavedItemsViewModel by viewModels()
     private lateinit var productsAdapter: ProductsAdapter
-    private lateinit var activityViewModel :MainViewModel
+    private val activityViewModel: MainViewModel by activityViewModels()
     private lateinit var user: UserModelUi
     private var viewControl = true
 
     @Inject
     lateinit var auth: FirebaseAuth
     override fun setupView() {
-        activityViewModel = (activity as MainActivity).viewModel
         setupObservers()
         setupAppBar()
         setupAdapters()
@@ -64,7 +63,9 @@ class SavedItemsFragment :
             val list = it.isSaved.toMutableList()
             list.remove(auth.currentUser!!.uid)
             it.isSaved = list
-            user.savedProducts.remove(it)
+            if (user.savedProducts.contains(it)){
+                user.savedProducts.remove(it)
+            }
             viewModel.deleteProduct(it)
             activityViewModel.updateUser(user)
             productsAdapter.notifyDataSetChanged()
@@ -165,8 +166,8 @@ class SavedItemsFragment :
             }
         }
         viewLifecycleOwner.launchStarted {
-            activityViewModel.defaultState.collect{
-                it.data?.let { userModelUi -> user = userModelUi }
+            viewModel.user.collect {
+                user = it
             }
         }
     }

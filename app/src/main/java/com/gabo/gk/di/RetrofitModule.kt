@@ -1,7 +1,7 @@
 package com.gabo.gk.di
 
 import com.gabo.gk.comon.constants.BASE_URL
-import com.gabo.gk.notification.apis.ProductNotificationApi
+import com.gabo.gk.data.global.notification.apis.ProductNotificationApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

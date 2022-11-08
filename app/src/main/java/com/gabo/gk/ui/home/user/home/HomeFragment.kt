@@ -3,6 +3,7 @@ package com.gabo.gk.ui.home.user.home
 import android.annotation.SuppressLint
 import android.util.Log.d
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +14,6 @@ import com.gabo.gk.comon.constants.TAG
 import com.gabo.gk.comon.extensions.launchStarted
 import com.gabo.gk.comon.extensions.txt
 import com.gabo.gk.databinding.FragmentHomeBinding
-import com.gabo.gk.ui.MainActivity
 import com.gabo.gk.ui.MainViewModel
 import com.gabo.gk.ui.adapters.ProductsAdapter
 import com.gabo.gk.ui.model.user.UserModelUi
@@ -25,13 +25,13 @@ import javax.inject.Inject
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var productsAdapter: ProductsAdapter
-    private lateinit var activityViewModel: MainViewModel
+    private val activityViewModel: MainViewModel by activityViewModels()
     private var user: UserModelUi? = null
 
     @Inject
     lateinit var auth: FirebaseAuth
     override fun setupView() {
-        activityViewModel = (activity as MainActivity).viewModel
+        activityViewModel.getUser()
         setupAdapters()
         setupListeners()
         getProducts()
@@ -83,8 +83,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
         }
         viewLifecycleOwner.launchStarted {
-            activityViewModel.defaultState.collect {
-                it.data?.let { userModelUi -> user = userModelUi }
+            viewModel.user.collect {
+                user = it
             }
         }
     }
@@ -98,13 +98,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }, heartClick = {
             if (it.isSaved.contains(auth.currentUser!!.uid)) {
                 it.isSaved.remove(auth.currentUser!!.uid)
-                user?.savedProducts?.remove(it)
+                if (user?.savedProducts?.contains(it)!!){
+                    user?.savedProducts?.remove(it)
+                }
                 viewModel.deleteProduct(it)
                 activityViewModel.updateUser(user!!)
                 productsAdapter.notifyDataSetChanged()
             } else {
                 it.isSaved.add(auth.currentUser!!.uid)
-                user?.savedProducts?.add(it)
+                if (!user?.savedProducts?.contains(it)!!){
+                    user?.savedProducts?.add(it)
+                }
                 viewModel.saveProduct(it)
                 activityViewModel.updateUser(user!!)
                 productsAdapter.notifyDataSetChanged()

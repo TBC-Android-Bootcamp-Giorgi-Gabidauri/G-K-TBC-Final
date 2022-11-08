@@ -7,7 +7,13 @@ import javax.inject.Inject
 class AuthRepositoryImpl @Inject constructor(
     private val authGlobalDataSource: AuthGlobalDataSource
 ) : AuthRepository {
-    override suspend fun logIn(email: String, password: String) = authGlobalDataSource.logIn(email, password)
-    override suspend fun register(email: String, password: String) = authGlobalDataSource.register(email, password)
-    override suspend fun logOut(){ authGlobalDataSource.logOut() }
+    override suspend fun logIn(email: String, password: String) =
+        authGlobalDataSource.logIn(email, password)
+
+    override suspend fun register(email: String, password: String) =
+        authGlobalDataSource.register(email, password)
+
+    override suspend fun logOut() {
+        authGlobalDataSource.logOut()
+    }
 }

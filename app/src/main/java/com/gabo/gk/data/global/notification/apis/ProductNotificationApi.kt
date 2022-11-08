@@ -1,8 +1,8 @@
-package com.gabo.gk.notification.apis
+package com.gabo.gk.data.global.notification.apis
 
 import com.gabo.gk.comon.constants.CONTENT_TYPE
 import com.gabo.gk.comon.constants.SERVER_KEY
-import com.gabo.gk.notification.model.product.ProductPushNotification
+import com.gabo.gk.data.global.notification.model.product.ProductPushNotification
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body

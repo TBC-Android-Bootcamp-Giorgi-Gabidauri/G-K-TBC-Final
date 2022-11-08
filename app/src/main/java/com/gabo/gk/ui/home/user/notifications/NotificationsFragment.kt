@@ -1,15 +1,14 @@
 package com.gabo.gk.ui.home.user.notifications
 
 import android.content.SharedPreferences
-import android.util.Log.d
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gabo.gk.R
 import com.gabo.gk.base.BaseFragment
-import com.gabo.gk.comon.constants.TAG
 import com.gabo.gk.comon.extensions.launchStarted
+import com.gabo.gk.comon.extensions.snackBar
 import com.gabo.gk.databinding.FragmentNotificationsBinding
 import com.gabo.gk.ui.adapters.NotificationsAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,7 +51,7 @@ class NotificationsFragment :
                     rvNotifications.isVisible = !it.loading
                     it.data?.let { list -> notificationsAdapter.submitList(list) }
                     when {
-                        it.msg.isNotEmpty() -> d(TAG, it.msg)
+                        it.msg.isNotEmpty() -> binding.root.snackBar(getString(R.string.no_notifications_here))
                     }
                 }
             }
